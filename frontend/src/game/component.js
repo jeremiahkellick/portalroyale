@@ -21,6 +21,7 @@ class Component {
       this.start();
     }
     this.update();
+    if (this.syncronizer !== undefined) this.syncronizer.update();
   }
 
   start() {}
