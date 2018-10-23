@@ -1,3 +1,5 @@
+import { randomInt } from './game/util'; 
+
 class Vector {
   constructor(x, y) {
     this.x = x;
@@ -14,6 +16,12 @@ class Vector {
 
   static fromPOJO(pojo) {
     return new Vector(pojo.x, pojo.y);
+  }
+
+  static random(map) {
+    const x = randomInt(0, map.width); 
+    const y = randomInt(0, map.height); 
+    return new Vector(x, y); 
   }
 
   plus(otherVector) {
