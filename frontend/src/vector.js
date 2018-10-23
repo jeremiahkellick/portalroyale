@@ -38,6 +38,10 @@ class Vector {
     return new Vector(this.x - otherVector.x, this.y - otherVector.y);
   };
 
+  dotProduct(otherVector) {
+    return this.x * otherVector.x + this.y * otherVector.y;
+  }
+
   magnitude() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
   };
