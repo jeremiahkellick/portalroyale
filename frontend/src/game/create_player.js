@@ -22,6 +22,7 @@ const createPlayer = ({ id, owned, position }) => {
   if (owned) {
     player.addComponent(new Input());
     player.addComponent(new Camera());
+    
   }
   return player;
 };
