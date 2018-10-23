@@ -6,7 +6,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>portfol.io</h1>
-          <canvas id="canvas"></canvas>
+          <canvas id="canvas" width="1000" height="563"></canvas>
         </header>
       </div>
     );

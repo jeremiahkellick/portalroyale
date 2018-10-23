@@ -12,6 +12,10 @@ class Vector {
     return new Vector(1, 1);
   }
 
+  static fromPOJO(pojo) {
+    return new Vector(pojo.x, pojo.y);
+  }
+
   plus(otherVector) {
     return new Vector(this.x + otherVector.x, this.y + otherVector.y);
   };
@@ -47,6 +51,10 @@ class Vector {
   normalized() {
     return this.dividedBy(this.magnitude());
   };
+
+  toPOJO() {
+    return { x: this.x, y: this.y };
+  }
 }
 
 export default Vector;
