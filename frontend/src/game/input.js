@@ -12,10 +12,8 @@ class Input extends Component {
     return movement.normalized();
   }
   
-  shootBullet() {
-    if ( key.isPressed('space')) {
-      
-    }
+  shouldShoot() {
+    return key.isPressed('space'); 
   }
 }
 

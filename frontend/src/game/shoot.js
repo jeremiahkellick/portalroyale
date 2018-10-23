@@ -1,7 +1,8 @@
 import Component from './component';
 import Input from './input';
 import Transform from './transform';
-import Time from './time';
+import Game from './game'; 
+import Vector from '../vector'; 
 
 class Shoot extends Component {
 
@@ -12,8 +13,13 @@ class Shoot extends Component {
 
   update() {
     if (this.input) {
-      // const movement = this.input.getMovement().times(300 * Time.deltaTime);
-      // const shoot = this.shootBullet(); 
+      if ( this.input.shouldShoot()) {
+        let options = {
+          type: "bullet", 
+          position: this.transform.position.plus( new Vector( 200, 0) ), 
+        }
+        Game.game.sendCreateToServer( options, true ); 
+      } 
     }
   }
 }
