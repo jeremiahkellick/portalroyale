@@ -16,6 +16,11 @@ class Vector {
     return new Vector(pojo.x, pojo.y);
   }
 
+  static lerp(a, b, factor) {
+    if (factor < 0 || factor >= 1) return b.clone();
+    return a.plus(b.minus(a).times(factor));
+  }
+
   plus(otherVector) {
     return new Vector(this.x + otherVector.x, this.y + otherVector.y);
   };
@@ -49,11 +54,16 @@ class Vector {
   };
 
   normalized() {
+    if (this.magnitude() === 0) return Vector.zero();
     return this.dividedBy(this.magnitude());
   };
 
   toPOJO() {
     return { x: this.x, y: this.y };
+  }
+
+  clone() {
+    return new Vector(this.x, this.y);
   }
 }
 
