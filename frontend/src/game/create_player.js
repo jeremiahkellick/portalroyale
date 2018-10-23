@@ -7,14 +7,19 @@ import Input from './input';
 import Movement from './movement';
 import Camera from './camera'; 
 import Shoot from './shoot';
+import Collider from './collider';
+import Circle from './circle';
 
-const createPlayer = ({ id, owned, map }) => {
+
+const createPlayer = ({ id, owned, position }) => {
   const player = new GameObject(id, 1);
-  const transform = new Transform( Vector.random(map) );
+  const transform = new Transform(Vector.fromPOJO(position));
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
   player.addComponent(new PlayerRenderer());
   player.addComponent(new Movement());
+  player.addComponent(new Collider(new Circle(50)));
+
   if (owned) {
     player.addComponent(new Input());
     player.addComponent(new Shoot()); 

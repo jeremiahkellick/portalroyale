@@ -17,7 +17,7 @@ class BulletRenderer extends Renderer {
     ctx.lineWidth = 0; 
 
     ctx.fillRect(x, y, x+150, 5); 
-    ctx.closePath();
+    ctx.closePath(); 
   }
 
 }

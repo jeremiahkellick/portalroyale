@@ -15,6 +15,7 @@ class Vector {
   }
 
   static fromPOJO(pojo) {
+    if (pojo === undefined) return Vector.zero();
     return new Vector(pojo.x, pojo.y);
   }
 
@@ -36,6 +37,10 @@ class Vector {
   minus(otherVector) {
     return new Vector(this.x - otherVector.x, this.y - otherVector.y);
   };
+
+  dotProduct(otherVector) {
+    return this.x * otherVector.x + this.y * otherVector.y;
+  }
 
   magnitude() {
     return Math.sqrt(this.x * this.x + this.y * this.y);
