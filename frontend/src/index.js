@@ -49,9 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = new Map(2500, 2500); 
     window.game = game;
     sendCreateToServer({ type: 'player', map }, true);
-    for ( let i = 0; i < 5; i++ ) {
-      sendCreateToServer({ type: 'tree', map }, false);
-    }
   });
   
   socket.on('create', options => {

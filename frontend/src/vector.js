@@ -15,6 +15,7 @@ class Vector {
   }
 
   static fromPOJO(pojo) {
+    if (pojo === undefined) return Vector.zero();
     return new Vector(pojo.x, pojo.y);
   }
 

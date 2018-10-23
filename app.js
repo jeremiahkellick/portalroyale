@@ -4,6 +4,7 @@ const users = require('./routes/api/users');
 const bodyParser = require('body-parser');
 const http = require('http');
 const socketIO = require('socket.io');
+const getId = require('./get_id');
 
 const app = express();
 const server = http.Server(app);
@@ -22,8 +23,29 @@ app.get('/', (req, res) => res.send('Hello, world!'));
 
 server.listen(port, () => console.log(`Server is running on port ${port}`));
 
+getId.base = '.';
+
+const randomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const randomVectorInMap = () => {
+  const x = randomInt(0, 2500);
+  const y = randomInt(0, 2500);
+  return { x, y };
+};
+
 const objectsByOwnerId = {};
 let objectCreationOptions = [];
+
+for (let i = 0; i < 10; i++) {
+  objectCreationOptions.push(
+    { id: getId(), type: 'tree', position: randomVectorInMap() }
+  );
+}
+
 let state = { data: {}, actions: [] };
 const clearState = () => (state = { data: {}, actions: [] });
 io.on('connection', function(socket) {
@@ -46,14 +68,17 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', () => {
-    let newObjectCreationOptions = [];
-    objectCreationOptions.forEach(options => {
-      if (!objectsByOwnerId[socket.id].includes(options.id)) {
-        newObjectCreationOptions.push(options);
-      }
-    });
-    objectCreationOptions = newObjectCreationOptions;
-    io.sockets.emit('destroy', objectsByOwnerId[socket.id]);
+    if (objectsByOwnerId[socket.id] !== undefined &&
+        objectsByOwnerId[socket.id].length > 0) {
+      let newObjectCreationOptions = [];
+      objectCreationOptions.forEach(options => {
+        if (!objectsByOwnerId[socket.id].includes(options.id)) {
+          newObjectCreationOptions.push(options);
+        }
+      });
+      objectCreationOptions = newObjectCreationOptions;
+      io.sockets.emit('destroy', objectsByOwnerId[socket.id]);
+    }
   });
 });
 
