@@ -4,7 +4,7 @@ import TreeRenderer from './renderers/tree_renderer';
 import Vector from '../vector'; 
 
 const createTree = ({ id, position }) => {
-  const tree = new GameObject(id);
+  const tree = new GameObject(id, 3);
   const transform = new Transform(Vector.fromPOJO(position));
   tree.addComponent(transform);
   tree.addComponent(new TreeRenderer());

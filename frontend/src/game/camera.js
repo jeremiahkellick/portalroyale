@@ -36,8 +36,10 @@ class Camera extends Component {
     
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
     
-    const gameObjects = Object.values(Game.game.gameObjects); 
-  
+    const gameObjects = Object.values(Game.game.gameObjects)
+      .sort( (a, b) => a.sort - b.sort ); 
+    
+    // need to dermine order 
     gameObjects.forEach( obj => {
       //render background /other objects in game
       const renderer = obj.getComponent(Renderer);

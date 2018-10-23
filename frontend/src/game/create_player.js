@@ -8,7 +8,7 @@ import Movement from './movement';
 import Camera from './camera'; 
 
 const createPlayer = ({ id, owned, position }) => {
-  const player = new GameObject(id);
+  const player = new GameObject(id, 1);
   const transform = new Transform(Vector.fromPOJO(position));
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
