@@ -4,7 +4,7 @@ class GameObject {
   constructor(id, sort) {
     this.id = id;
     this.components = [];
-    this.sort = 0; 
+    this.sort = sort || 0; 
   }
 
   addComponent(component) {
