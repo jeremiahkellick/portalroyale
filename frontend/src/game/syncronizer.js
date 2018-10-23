@@ -22,12 +22,20 @@ class Syncronizer {
     this.actions.push(action);
   }
 
+  destroy() {
+    Syncronizer.destroy(this.id);
+  }
+
   static find(id) {
     return Syncronizer.byId[id];
   }
 
   static all() {
     return Object.values(Syncronizer.byId);
+  }
+
+  static destroy(syncronizerId) {
+    delete Syncronizer.byId[syncronizerId];
   }
 }
 
