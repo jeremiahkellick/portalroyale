@@ -5,6 +5,7 @@ import PlayerRenderer from './renderers/player_renderer';
 import Vector from '../vector'; 
 import Input from './input';
 import Movement from './movement';
+import Collider from './collider';
 
 const createPlayer = ({ id, owned, map }) => {
   const player = new GameObject();
@@ -14,6 +15,7 @@ const createPlayer = ({ id, owned, map }) => {
   player.addComponent(new PlayerRenderer());
   if (owned) player.addComponent(new Input());
   player.addComponent(new Movement());
+  player.addComponent(new Collider());
   return player;
 };
 

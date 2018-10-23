@@ -1,4 +1,4 @@
-const vector = require('vector');
+import Vector from '../vector';
 
 class CollisionDetection {
   constructor(shape1, shape2) {
