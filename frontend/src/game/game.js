@@ -1,9 +1,11 @@
 import Syncronizer from './syncronizer';
 import Renderer from './renderers/renderer';
 import Time from './time';
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 
 class Game {
   constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
+    Game.game = this;
     this.ctx = ctx;
     this.clientId = clientId;
     this.updateServerCallback = updateServerCallback;
@@ -53,7 +55,7 @@ class Game {
 
   update() {
     Time.update();
-    this.ctx.clearRect(0, 0, 1000, 563);
+    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     Object.values(this.gameObjects).forEach(gameObject => {
       gameObject.components.forEach(component => {
         component.handleUpdating();
@@ -70,5 +72,7 @@ class Game {
     this.createOnServerCallback(options, shouldOwn);
   }
 }
+
+Game.game = null;
 
 export default Game;

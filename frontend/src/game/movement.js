@@ -8,12 +8,18 @@ class Movement extends Component {
   start() {
     this.input = this.gameObject.getComponent(Input);
     this.transform = this.requireComponent(Transform);
+    this.collider = this.gameObject.getComponent(Collider);
   }
 
   update() {
     if (this.input) {
       const movement = this.input.getMovement().times(300 * Time.deltaTime);
-      this.transform.position = this.transform.position.plus(movement);
+      const newPos = this.transform.position.plus(movement);
+      const person = {pos: newPos, radius: 50};
+      console.log(this.collider.checkAllCollisions(person));
+      if (!this.collider.checkAllCollisions(person)) {
+        this.transform.position = newPos;
+      }
     }
   }
 }
