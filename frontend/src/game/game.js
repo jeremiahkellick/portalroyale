@@ -71,6 +71,18 @@ class Game {
   sendCreateToServer(options, shouldOwn = false) {
     this.createOnServerCallback(options, shouldOwn);
   }
+
+  destroy(gameObjectId) {
+    const gameObject = this.gameObjects[gameObjectId];
+    if (gameObject !== undefined) {
+      gameObject.components.forEach(component => {
+        if (component.syncronizer !== undefined) {
+          component.syncronizer.destroy();
+        }
+      });
+    }
+    delete this.gameObjects[gameObjectId];
+  }
 }
 
 Game.game = null;

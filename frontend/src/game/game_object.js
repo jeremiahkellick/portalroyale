@@ -1,5 +1,8 @@
+import Game from './game';
+
 class GameObject {
-  constructor() {
+  constructor(id) {
+    this.id = id;
     this.components = [];
   }
 
@@ -12,6 +15,10 @@ class GameObject {
     return this.components.find(component => 
       component instanceof componentClass
     );
+  }
+
+  destroy() {
+    Game.game.destroy(this.id);
   }
 }
 

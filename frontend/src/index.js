@@ -8,10 +8,13 @@ import Game from './game/game';
 import getId from './game/get_id';
 import rootCreator from './game/root_creator';
 import Map from './game/map'; 
+import Syncronizer from './game/syncronizer';
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<App />, document.getElementById('root'));
   serviceWorker.unregister();
+
+  window.Syncronizer = Syncronizer;
 
   const socket = io();
   const ctx = document.getElementById("canvas").getContext("2d");
@@ -72,10 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   socket.on('destroy', objectIds => {
-    console.log(objectIds);
     if (objectIds) {
       objectIds.forEach(id => {
-        delete game.gameObjects[id];
+        game.destroy(id);
       });
     }
   });

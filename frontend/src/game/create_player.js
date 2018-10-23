@@ -7,7 +7,7 @@ import Input from './input';
 import Movement from './movement';
 
 const createPlayer = ({ id, owned, map }) => {
-  const player = new GameObject();
+  const player = new GameObject(id);
   const transform = new Transform( Vector.random(map) );
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
