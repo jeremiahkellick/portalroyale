@@ -6,7 +6,8 @@ import Vector from '../vector';
 import Input from './input';
 import Movement from './movement';
 import Collider from './collider';
-import Camera from './camera'; 
+import Camera from './camera';
+import Circle from './circle';
 
 
 const createPlayer = ({ id, owned, map }) => {
@@ -17,7 +18,7 @@ const createPlayer = ({ id, owned, map }) => {
   player.addComponent(new PlayerRenderer());
   if (owned) player.addComponent(new Input());
   player.addComponent(new Movement());
-  player.addComponent(new Collider());
+  player.addComponent(new Collider(new Circle(50)));
   player.addComponent(new Camera()); 
 
   if ( owned  ) {

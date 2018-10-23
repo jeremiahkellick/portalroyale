@@ -15,9 +15,7 @@ class Movement extends Component {
     if (this.input) {
       const movement = this.input.getMovement().times(300 * Time.deltaTime);
       const newPos = this.transform.position.plus(movement);
-      const person = {pos: newPos, radius: 50};
-      console.log(this.collider.checkAllCollisions(person));
-      if (!this.collider.checkAllCollisions(person)) {
+      if (!this.collider.checkAllCollisions(newPos)) {
         this.transform.position = newPos;
       }
     }
