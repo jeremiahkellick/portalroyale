@@ -1,5 +1,7 @@
 import Syncronizer from './syncronizer';
 import Renderer from './renderer';
+import Time from './time';
+import Transform from './transform';
 
 class Game {
   constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
@@ -9,7 +11,8 @@ class Game {
     this.createOnServerCallback = createOnServerCallback;
     this.gameObjects = []; // not an array because they need to be keyed by id
     setInterval(this.sendUpdateToServer.bind(this), 100);
-    window.requestAnimationFrame(this.draw.bind(this));
+    Time.update();
+    window.requestAnimationFrame(this.update.bind(this));
   }
   
   sendUpdateToServer() {
@@ -49,7 +52,8 @@ class Game {
     });
   }
 
-  draw() {
+  update() {
+    Time.update();
     this.ctx.clearRect(0, 0, 1000, 563);
     this.gameObjects.forEach(gameObject => {
       gameObject.components.forEach(component => {
@@ -60,7 +64,7 @@ class Game {
         renderer.draw(this.ctx);
       }
     });
-    window.requestAnimationFrame(this.draw.bind(this));
+    window.requestAnimationFrame(this.update.bind(this));
   }
 
   sendCreateToServer(options, shouldOwn = false) {
