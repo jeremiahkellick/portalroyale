@@ -6,7 +6,7 @@ import Vector from '../vector';
 import Movement from './movement';
 
 const createBullet = ({id, owned}) => {
-  const bullet = new GameObject(id);
+  const bullet = new GameObject(id, 2);
   const transform = new Transform( new Vector(50, 50 ) );
   bullet.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);

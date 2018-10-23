@@ -1,9 +1,10 @@
 import Game from './game';
 
 class GameObject {
-  constructor(id) {
+  constructor(id, sort) {
     this.id = id;
     this.components = [];
+    this.sort = sort || 0; 
   }
 
   addComponent(component) {
