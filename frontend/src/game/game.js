@@ -60,16 +60,24 @@ class Game {
       gameObject.components.forEach(component => {
         component.handleUpdating();
       });
-      const renderer = gameObject.getComponent(Renderer);
-      if (renderer !== undefined) {
-        renderer.draw(this.ctx);
-      }
     });
     window.requestAnimationFrame(this.update.bind(this));
   }
 
   sendCreateToServer(options, shouldOwn = false) {
     this.createOnServerCallback(options, shouldOwn);
+  }
+
+  destroy(gameObjectId) {
+    const gameObject = this.gameObjects[gameObjectId];
+    if (gameObject !== undefined) {
+      gameObject.components.forEach(component => {
+        if (component.syncronizer !== undefined) {
+          component.syncronizer.destroy();
+        }
+      });
+    }
+    delete this.gameObjects[gameObjectId];
   }
 }
 

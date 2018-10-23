@@ -6,9 +6,11 @@ import Vector from '../vector';
 import Input from './input';
 import Movement from './movement';
 import Collider from './collider';
+import Camera from './camera'; 
+
 
 const createPlayer = ({ id, owned, map }) => {
-  const player = new GameObject();
+  const player = new GameObject(id);
   const transform = new Transform( Vector.random(map) );
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
@@ -16,6 +18,11 @@ const createPlayer = ({ id, owned, map }) => {
   if (owned) player.addComponent(new Input());
   player.addComponent(new Movement());
   player.addComponent(new Collider());
+  player.addComponent(new Camera()); 
+
+  if ( owned  ) {
+    window.playerTransform = player.getComponent(Transform);  
+  }
   return player;
 };
 
