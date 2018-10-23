@@ -19,20 +19,20 @@ class Camera extends Component {
     let translateX = x - ( CANVAS_WIDTH / 2 ); 
     let translateY = y - ( CANVAS_HEIGHT / 2 ); 
     
-    // // check for top left corner
-    // if ( translateX <= 0) {
-    //   translateX = 0; 
-    // }
-    // if ( translateX <= 0 ) {
-    //   translateY = 0; 
-    // }
-    // // check for bottom right corner
-    // if ( width - x <= CANVAS_WIDTH ) {
-    //   translateX = width - CANVAS_WIDTH; 
-    // }
-    // if ( height - y <= CANVAS_HEIGHT ) {
-    //   translateY = height - CANVAS_HEIGHT; 
-    // }
+    // check for top left corner
+    if ( translateX <= 0) {
+      translateX = 0; 
+    }
+    if ( translateY <= 0 ) {
+      translateY = 0; 
+    }
+    // check for bottom right corner
+    if ( translateX + CANVAS_WIDTH > width ) {
+      translateX = width - CANVAS_WIDTH; 
+    }
+    if (translateY + CANVAS_HEIGHT > height ) {
+      translateY = height - CANVAS_HEIGHT; 
+    }
     
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
     // ctx.translate(translateX, translateY); 
