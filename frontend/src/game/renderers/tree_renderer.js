@@ -16,8 +16,6 @@ class TreeRenderer extends Renderer {
   drawSpiral( ctx, transform, offset, spikes, innerRadius, outerRadius, lineWidth, strokeStyle, fillStyle ) {
     
     const { x, y } = transform.position.minus(offset); 
-    // console.log(x, y); 
-    // const { position: { x, y } } = transform;
 
     let rot = Math.PI/(spikes/2); 
     const step = Math.PI/(spikes); 
