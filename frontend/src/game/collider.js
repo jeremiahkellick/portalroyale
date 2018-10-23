@@ -14,6 +14,7 @@ class Collider extends Component {
 
   checkAllCollisions(newPos) {
     let flag = false;
+    
     Object.values(Game.game.gameObjects).forEach( (object) => 
       { 
         const objectPos = object.getComponent(Transform).position;
