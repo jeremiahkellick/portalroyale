@@ -1,5 +1,5 @@
 import Syncronizer from './syncronizer';
-import Renderer from './renderer';
+import Renderer from './renderers/renderer';
 import Time from './time';
 
 class Game {

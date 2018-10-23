@@ -7,6 +7,7 @@ import io from 'socket.io-client';
 import Game from './game/game';
 import getId from './game/get_id';
 import rootCreator from './game/root_creator';
+import Map from './game/map'; 
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<App />, document.getElementById('root'));
@@ -42,8 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('connect', () => {
     getId.base = socket.id;
     game = new Game(ctx, socket.id, sendUpdateToServer, sendCreateToServer);
+    const map = new Map(2500, 2500); 
     window.game = game;
-    sendCreateToServer({ type: 'player' }, true);
+    sendCreateToServer({ type: 'player', map }, true);
+    for ( let i = 0; i < 5; i++ ) {
+      sendCreateToServer({ type: 'tree', map }, false);
+    }
   });
   
   socket.on('create', options => {
