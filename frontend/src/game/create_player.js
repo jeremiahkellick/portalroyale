@@ -6,6 +6,7 @@ import Vector from '../vector';
 import Input from './input';
 import Movement from './movement';
 import Camera from './camera'; 
+import Shoot from './shoot';
 
 const createPlayer = ({ id, owned, map }) => {
   const player = new GameObject(id, 1);
@@ -16,6 +17,7 @@ const createPlayer = ({ id, owned, map }) => {
   player.addComponent(new Movement());
   if (owned) {
     player.addComponent(new Input());
+    player.addComponent(new Shoot()); 
     player.addComponent(new Camera());
   }
   return player;

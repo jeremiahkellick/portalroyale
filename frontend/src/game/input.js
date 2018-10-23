@@ -11,6 +11,12 @@ class Input extends Component {
     if (key.isPressed('D')) movement.x += 1;
     return movement.normalized();
   }
+  
+  shootBullet() {
+    if ( key.isPressed('space')) {
+      
+    }
+  }
 }
 
 export default Input;
