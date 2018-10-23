@@ -82,7 +82,7 @@ class CollisionDetection {
     const ydelta = y1src-y0src;
     const p,q,r;
 
-    for(int edge=0; edge<4; edge++) {   // Traverse through left, right, bottom, top edges.
+    for(let edge=0; edge<4; edge++) {   // Traverse through left, right, bottom, top edges.
         if (edge==0) {  p = -xdelta;    q = -(edgeLeft-x0src);  }
         if (edge==1) {  p = xdelta;     q =  (edgeRight-x0src); }
         if (edge==2) {  p = -ydelta;    q = -(edgeBottom-y0src);}
