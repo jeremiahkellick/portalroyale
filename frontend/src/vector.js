@@ -1,3 +1,5 @@
+import { randomInt } from './game/util'; 
+
 class Vector {
   constructor(x, y) {
     this.x = x;
@@ -16,6 +18,12 @@ class Vector {
     return new Vector(pojo.x, pojo.y);
   }
 
+  static random(map) {
+    const x = randomInt(0, map.width); 
+    const y = randomInt(0, map.height); 
+    return new Vector(x, y); 
+  }
+  
   static lerp(a, b, factor) {
     if (factor < 0 || factor >= 1) return b.clone();
     return a.plus(b.minus(a).times(factor));

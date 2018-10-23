@@ -1,5 +1,5 @@
-import Component from './component';
-import Transform from './transform';
+import Component from '../component';
+import Transform from '../transform';
 
 class Renderer extends Component {
   start() {
