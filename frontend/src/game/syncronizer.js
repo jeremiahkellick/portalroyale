@@ -8,6 +8,8 @@ class Syncronizer {
     Syncronizer.byId[this.id] = this;
   }
 
+  update() {}
+
   pack() {
     return null;
   }

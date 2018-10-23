@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     options.id = getId();
     socket.emit('create', options);
     const obj = create(options);
-    if (obj !== undefined) game.gameObjects.push(obj);
+    if (obj !== undefined) game.gameObjects[options.id] = obj;
   };
 
   socket.on('connect', () => {
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('create', options => {
     if (options.sender !== socket.id) {
       const obj = create(options);
-      if (obj !== undefined) game.gameObjects.push(obj);
+      if (obj !== undefined) game.gameObjects[options.id] = obj;
     }
   });
 
@@ -57,12 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
     allOptions.forEach(options => {
       if (options.sender !== socket.id) {
         const obj = create(options);
-        if (obj !== undefined) game.gameObjects.push(obj);
+        if (obj !== undefined) game.gameObjects[options.id] = obj;
       }
     });
   });
 
   socket.on('state', packet => {
     game.receiveUpdateFromServer(packet);
+  });
+
+  socket.on('destroy', objectIds => {
+    console.log(objectIds);
+    if (objectIds) {
+      objectIds.forEach(id => {
+        delete game.gameObjects[id];
+      });
+    }
   });
 });
