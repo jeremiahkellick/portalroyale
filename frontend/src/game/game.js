@@ -60,10 +60,6 @@ class Game {
       gameObject.components.forEach(component => {
         component.handleUpdating();
       });
-      const renderer = gameObject.getComponent(Renderer);
-      if (renderer !== undefined) {
-        renderer.draw(this.ctx);
-      }
     });
     window.requestAnimationFrame(this.update.bind(this));
   }

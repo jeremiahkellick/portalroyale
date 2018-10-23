@@ -2,15 +2,16 @@ import Component from '../component';
 import Transform from '../transform';
 
 class Renderer extends Component {
+
   start() {
     this.transform = this.requireComponent(Transform);
   }
 
-  draw(ctx) {
+  draw(ctx, transform) {
     ctx.beginPath();
     ctx.arc(
-      this.transform.position.x,
-      this.transform.position.y,
+      transform.position.x,
+      transform.position.y,
       32,
       0,
       2 * Math.PI
