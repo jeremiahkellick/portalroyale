@@ -13,13 +13,10 @@ const createPlayer = ({ id, owned, map }) => {
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
   player.addComponent(new PlayerRenderer());
-  if (owned) player.addComponent(new Input());
   player.addComponent(new Movement());
-  
-  player.addComponent(new Camera()); 
-
-  if ( owned  ) {
-    window.playerTransform = player.getComponent(Transform);  
+  if (owned) {
+    player.addComponent(new Input());
+    player.addComponent(new Camera());
   }
   return player;
 };
