@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for ( let i = 0; i < 5; i++ ) {
       sendCreateToServer({ type: 'tree', map }, false);
     }
+    sendCreateToServer({ type: 'bullet'}, true); 
   });
   
   socket.on('create', options => {

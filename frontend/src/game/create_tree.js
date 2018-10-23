@@ -5,8 +5,8 @@ import Collider from './collider';
 import Vector from '../vector';
 import Circle from './circle';
 
-const createTree = ({map}) => {
-  const tree = new GameObject();
+const createTree = ({map, id}) => {
+  const tree = new GameObject(id, 3);
   const transform = new Transform( Vector.random(map) );
   tree.addComponent(transform);
   tree.addComponent(new TreeRenderer());

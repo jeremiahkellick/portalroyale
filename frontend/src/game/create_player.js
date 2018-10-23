@@ -11,18 +11,17 @@ import Circle from './circle';
 
 
 const createPlayer = ({ id, owned, map }) => {
-  const player = new GameObject(id);
+  const player = new GameObject(id, 1);
   const transform = new Transform( Vector.random(map) );
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
   player.addComponent(new PlayerRenderer());
-  if (owned) player.addComponent(new Input());
   player.addComponent(new Movement());
   player.addComponent(new Collider(new Circle(50)));
-  player.addComponent(new Camera()); 
 
-  if ( owned  ) {
-    window.playerTransform = player.getComponent(Transform);  
+  if (owned) {
+    player.addComponent(new Input());
+    player.addComponent(new Camera());
   }
   return player;
 };
