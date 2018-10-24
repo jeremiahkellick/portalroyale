@@ -20,7 +20,8 @@ class Collider extends Component {
     
     Object.values(Game.game.gameObjects).forEach( (object) => 
       { 
-        if (object.getComponent(Collider) === undefined || object.getComponent(Movement)) {
+        if (object.getComponent(Collider) === undefined || 
+            (!this.gameObject.getComponent(BulletRenderer) && object.getComponent(Movement))) {
           return;
         }
         const objectPos = object.getComponent(Transform).position;

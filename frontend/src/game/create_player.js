@@ -22,7 +22,7 @@ const createPlayer = ({ id, owned, position }) => {
   const hitpoint = new Hitpoint(100);
   player.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
-  player.addComponent(new CircleRenderer(22, '#fce5cd'));
+  player.addComponent(new CircleRenderer(radius, '#fce5cd'));
   player.addComponent(new Movement());
   player.addComponent(new Collider(new Circle(radius)));
 

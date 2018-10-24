@@ -1,4 +1,5 @@
 #canvas {
+  background: #93c47dff;
   border: 1px solid black;
-  background: #93c47dff; 
+  cursor: crosshair;
 };
