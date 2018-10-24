@@ -19,9 +19,9 @@ class Vector {
     return new Vector(pojo.x, pojo.y);
   }
 
-  static random(map) {
-    const x = randomInt(0, map.width); 
-    const y = randomInt(0, map.height); 
+  static random(width, height) {
+    const x = randomInt(0, width); 
+    const y = randomInt(0, height); 
     return new Vector(x, y); 
   }
   

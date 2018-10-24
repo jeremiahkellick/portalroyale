@@ -9,8 +9,9 @@ import Vector from '../vector';
 const createBullet = ({id, position, owned}) => {
   const bullet = new GameObject(id, 2);
   const transform = new Transform(  position );
+
   bullet.addComponent(transform);
-  bullet.addComponent(new Collider(new Circle(1)));
+  bullet.addComponent(new Collider(new Circle(5)));
   bullet.addComponent(new BulletRenderer());
   bullet.addComponent(new BulletMovement(400, new Vector(10, 0)) );
   return bullet;
