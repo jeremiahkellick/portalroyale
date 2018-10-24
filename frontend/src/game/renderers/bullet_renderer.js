@@ -15,7 +15,7 @@ class BulletRenderer extends Renderer {
     const rotation = this.rotation; 
 
     ctx.translate(x, y); 
-    // ctx.rotate(rotation); 
+    ctx.rotate(rotation); 
     ctx.beginPath();
     ctx.moveTo(0, 0); 
     
@@ -31,7 +31,7 @@ class BulletRenderer extends Renderer {
     ctx.fillRect(-stretch, 0, stretch, 3); 
     ctx.closePath(); 
 
-    // ctx.rotate(-rotation); 
+    ctx.rotate(-rotation); 
     ctx.setTransform(1, 0, 0, 1, 0, 0); 
   }
 

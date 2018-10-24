@@ -19,6 +19,9 @@ class Shoot extends Component {
         const dir = this.input.shootPosition()
                               .minus(this.transform.position)
                               .normalized();
+                              
+        console.log("direction", dir); 
+        const rotation = Math.acos( dir.x ); 
         let options = {
           type: "bullet",
           position: this.transform.position.plus(dir.times(30)),
