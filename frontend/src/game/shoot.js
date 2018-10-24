@@ -30,6 +30,10 @@ class Shoot extends Component {
           rotation
         };
         Game.game.sendCreateToServer( options, true );
+
+        const sound = new Audio("./sounds/bullet.mp3"); 
+        sound.play(); 
+        
       }
     }
   }
