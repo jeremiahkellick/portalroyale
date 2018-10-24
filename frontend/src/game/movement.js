@@ -16,11 +16,11 @@ class Movement extends Component {
     if (this.input) {
       const movement = this.input.getMovement().times(300 * Time.deltaTime);
       const newXPos = this.transform.position.plus(new Vector(movement.x, 0));
-      if (!this.collider.checkAllCollisions(newXPos)) {
+      if (!this.collider.checkAllCollisions(newXPos, true)) {
         this.transform.position.x += movement.x;
       }
       const newYPos = this.transform.position.plus(new Vector(0, movement.y));
-      if (!this.collider.checkAllCollisions(newYPos)) {
+      if (!this.collider.checkAllCollisions(newYPos, true)) {
         this.transform.position.y += movement.y;
       }
     }

@@ -13,12 +13,12 @@ class Collider extends Component {
     this.shape = shape;
   }
 
-  checkAllCollisions(newPos) {
+  checkAllCollisions(newPos, ignoreMoving = false) {
     let collidedWith = null;
     Object.values(Game.game.gameObjects).forEach( (object) =>
       {
         if (object.getComponent(Collider) === undefined ||
-            object.getComponent(Movement)) {
+            (ignoreMoving && object.getComponent(Movement))) {
 
           return;
         }
