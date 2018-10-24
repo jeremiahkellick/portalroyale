@@ -6,6 +6,7 @@ import Rectangle from './rectangle';
 import Game from './game';
 import Vector from '../vector';
 import Movement from './movement';
+import Hitpoint from './hitpoint';
 
 class Collider extends Component {
   constructor(shape) {
@@ -32,6 +33,7 @@ class Collider extends Component {
           }
           if (this.checkTypeCollision(...shapeArr)) {
             flag = true;
+            this.gameObject.getComponent(Hitpoint).damage(10);
           }
         }
       }
