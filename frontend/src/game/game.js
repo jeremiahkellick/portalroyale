@@ -47,7 +47,7 @@ class Game {
     packet.actions.forEach(action => {
       if (action.sender !== this.clientId) {
         const syncronizer = Syncronizer.find(action.syncronizerId);
-        syncronizer.component.handleAction(action);
+        if (syncronizer !== undefined) syncronizer.component.handleAction(action);
       }
     });
   }

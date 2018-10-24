@@ -1,5 +1,4 @@
 import Transform from './transform';
-import Collider from './collider';
 import Movement from './movement'; 
 
 class BulletMovement extends Movement {
