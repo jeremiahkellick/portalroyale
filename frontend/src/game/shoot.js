@@ -1,8 +1,7 @@
 import Component from './component';
 import Input from './input';
 import Transform from './transform';
-import Game from './game'; 
-import Vector from '../vector'; 
+import Game from './game';
 
 class Shoot extends Component {
 
@@ -14,12 +13,16 @@ class Shoot extends Component {
   update() {
     if (this.input) {
       if ( this.input.shouldShoot()) {
+        const dir = this.input.shootPosition()
+                              .minus(this.transform.position)
+                              .normalized();
         let options = {
-          type: "bullet", 
-          position: this.transform.position.plus( new Vector( 200, 0) ), 
-        }
-        Game.game.sendCreateToServer( options, true ); 
-      } 
+          type: "bullet",
+          position: this.transform.position.plus(dir.times(30)),
+          directionVector: dir
+        };
+        Game.game.sendCreateToServer( options, true );
+      }
     }
   }
 }
