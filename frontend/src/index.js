@@ -11,7 +11,8 @@ import Map from './game/map';
 import Syncronizer from './game/syncronizer';
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  const root = document.getElementById('root')
+  ReactDOM.render(<App />, root);
   serviceWorker.unregister();
 
   window.Syncronizer = Syncronizer;

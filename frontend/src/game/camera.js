@@ -44,7 +44,7 @@ class Camera extends Component {
       //render background /other objects in game
       const renderer = obj.getComponent(Renderer);
       const transform = obj.getComponent(Transform); 
-      if (renderer !== undefined) {
+      if (renderer !== undefined && transform !== undefined ) {
         renderer.draw(ctx, transform, new Vector(translateX, translateY));
       }
 
