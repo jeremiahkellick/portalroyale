@@ -7,6 +7,7 @@ import Game from './game';
 import Vector from '../vector';
 import Movement from './movement';
 import Hitpoint from './hitpoint';
+import BulletRenderer from './renderers/bullet_renderer';
 
 class Collider extends Component {
   constructor(shape) {
@@ -33,7 +34,9 @@ class Collider extends Component {
           }
           if (this.checkTypeCollision(...shapeArr)) {
             flag = true;
-            this.gameObject.getComponent(Hitpoint).damage(10);
+            if (this.gameObject.getComponent(BulletRenderer) && object.getComponent(Hitpoint)) {
+              object.getComponent(Hitpoint).damage(10);
+            }
           }
         }
       }

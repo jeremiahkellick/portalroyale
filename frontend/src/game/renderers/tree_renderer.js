@@ -1,18 +1,47 @@
 import Renderer from './renderer'; 
+import Hitpoint from '../hitpoint';
 
 class TreeRenderer extends Renderer {
 
 
   draw(ctx, transform, offset) {
-
+    const hitpoint = transform.gameObject.getComponent(Hitpoint);
+    let multiplier;
+    if (hitpoint) {
+      multiplier = (hitpoint.health === 0 ? 0 : hitpoint.health/100 * 0.6 + 0.4);
+    } else {
+      multiplier = 1;
+    }
+     
+    
     const BRANCH_COLOR = "#4c3012"; 
     const TREE_COLOR = "#42552Fee"; 
 
-    this.drawSpiral(ctx, transform, offset, 24, 150, 185, 0, "#ffffff00", TREE_COLOR); 
-    this.drawSpiral(ctx, transform, offset, 18, 40, 50, 17, "#000000", BRANCH_COLOR); 
-    
+    this.drawSpiral(
+      ctx,
+      transform,
+      offset,
+      24,
+      80 * multiplier,
+      100 * multiplier,
+      0,
+      "#ffffff00",
+      TREE_COLOR
+    );
+
+    this.drawSpiral(
+      ctx,
+      transform,
+      offset,
+      18,
+      22 * multiplier,
+      30 * multiplier,
+      10,
+      "#000000",
+      BRANCH_COLOR
+    ); 
   }
-    
+
   drawSpiral( ctx, transform, offset, spikes, innerRadius, outerRadius, lineWidth, strokeStyle, fillStyle ) {
     
     const { x, y } = transform.position.minus(offset); 

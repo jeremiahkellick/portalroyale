@@ -1,16 +1,18 @@
 import GameObject from './game_object';
 import Transform from './transform';
 import BulletRenderer from './renderers/bullet_renderer';
-import Vector from '../vector';
 import Collider from './collider';
 import Circle from './circle';
+import BulletMovement from './bullet_movement'; 
+import Vector from '../vector';
 
-const createBullet = ({id, owned}) => {
+const createBullet = ({id, position, owned}) => {
   const bullet = new GameObject(id, 2);
-  const transform = new Transform( new Vector(50, 50));
+  const transform = new Transform(  position );
   bullet.addComponent(transform);
   bullet.addComponent(new Collider(new Circle(5)));
   bullet.addComponent(new BulletRenderer());
+  bullet.addComponent(new BulletMovement(400, new Vector(10, 0)) );
   return bullet;
 };
 

@@ -1,5 +1,4 @@
 import Syncronizer from './syncronizer';
-import Renderer from './renderers/renderer';
 import Time from './time';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 

@@ -31,6 +31,7 @@ class Hitpoint extends Component {
   update() {
     if (this.health === 0) {
       this.death();
+      this.gameObject.destroy();
     }
   }
 

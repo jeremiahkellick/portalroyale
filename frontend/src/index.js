@@ -7,11 +7,13 @@ import io from 'socket.io-client';
 import Game from './game/game';
 import getId from './game/get_id';
 import rootCreator from './game/root_creator';
-import Map from './game/map'; 
 import Syncronizer from './game/syncronizer';
+import { MAP_WIDTH, MAP_HEIGHT } from './game/util';
+import Vector from './vector';
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  const root = document.getElementById('root')
+  ReactDOM.render(<App />, root);
   serviceWorker.unregister();
 
   window.Syncronizer = Syncronizer;
@@ -46,9 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
   socket.on('connect', () => {
     getId.base = socket.id;
     game = new Game(ctx, socket.id, sendUpdateToServer, sendCreateToServer);
-    const map = new Map(2500, 2500); 
     window.game = game;
-    sendCreateToServer({ type: 'player', map }, true);
+    sendCreateToServer(
+      {
+        type: 'player',
+        position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO()
+      },
+      true
+    );
   });
   
   socket.on('create', options => {

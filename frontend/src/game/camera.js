@@ -1,4 +1,4 @@
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from './util'; 
+import { CANVAS_WIDTH, CANVAS_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from './util'; 
 import Game from './game'; 
 import Component from './component';
 import Transform from './transform';
@@ -14,7 +14,7 @@ class Camera extends Component {
   update() {
     const ctx = Game.game.ctx; 
     const { x,  y } = this.playerTransform.position;  
-    const [ width, height ] = [ 2500, 2500 ];   
+    const [ width, height ] = [ MAP_WIDTH, MAP_HEIGHT ];   
 
     let translateX = x - ( CANVAS_WIDTH / 2 ); 
     let translateY = y - ( CANVAS_HEIGHT / 2 ); 
@@ -44,7 +44,7 @@ class Camera extends Component {
       //render background /other objects in game
       const renderer = obj.getComponent(Renderer);
       const transform = obj.getComponent(Transform); 
-      if (renderer !== undefined) {
+      if (renderer !== undefined && transform !== undefined ) {
         renderer.draw(ctx, transform, new Vector(translateX, translateY));
       }
 
