@@ -13,10 +13,17 @@ class BulletMovement extends Movement {
   update() {
     const oldPos = this.transform.position
     const newPos = oldPos.plus(this.speed.times(Time.deltaTime));
-    if ( this.distanceTraveled <= this.range && !this.collider.checkAllCollisions(newPos)) {
+    const collision = this.collider.checkAllCollisions(newPos); 
+    if ( this.distanceTraveled <= this.range && !collision ) {
       this.transform.position = newPos;
       this.distanceTraveled += oldPos.distanceTo(newPos);
     } else {
+
+      if ( collision ){
+        const sound = new Audio("./sounds/impact.mp3"); 
+        sound.play(); 
+      }
+
       this.gameObject.destroy();
     }
   }
