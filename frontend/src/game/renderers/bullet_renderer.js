@@ -1,16 +1,22 @@
 import Renderer from './renderer';
+import BulletMovement from '../bullet_movement';
 
 class BulletRenderer extends Renderer {
-
   constructor(rotation) {
     super();
     this.rotation = rotation;
   }
+
   draw(ctx, transform, offset) {
+    const bulletMovement = this.gameObject.getComponent(BulletMovement);
 
     const { x, y } = transform.position.minus(offset);
 
-    const stretch = 150;
+    let stretch = 300;
+    if (bulletMovement) {
+      stretch = bulletMovement.length;
+    }
+
     const rotation = this.rotation;
 
     ctx.translate(x, y);

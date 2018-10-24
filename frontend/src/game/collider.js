@@ -6,7 +6,6 @@ import Rectangle from './rectangle';
 import Game from './game';
 import Vector from '../vector';
 import Movement from './movement';
-import BulletRenderer from './renderers/bullet_renderer';
 
 class Collider extends Component {
   constructor(shape) {
@@ -19,7 +18,7 @@ class Collider extends Component {
     Object.values(Game.game.gameObjects).forEach( (object) =>
       {
         if (object.getComponent(Collider) === undefined ||
-            (!this.gameObject.getComponent(BulletRenderer) && object.getComponent(Movement))) {
+            object.getComponent(Movement)) {
 
           return;
         }
