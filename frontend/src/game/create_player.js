@@ -5,8 +5,9 @@ import CircleRenderer from './renderers/circle_renderer';
 import Vector from '../vector'; 
 import Input from './input';
 import Movement from './movement';
+import Camera from './camera'; 
+import Shoot from './shoot';
 import Collider from './collider';
-import Camera from './camera';
 import Circle from './circle';
 
 
@@ -22,8 +23,8 @@ const createPlayer = ({ id, owned, position }) => {
 
   if (owned) {
     player.addComponent(new Input());
+    player.addComponent(new Shoot()); 
     player.addComponent(new Camera());
-    
   }
   return player;
 };

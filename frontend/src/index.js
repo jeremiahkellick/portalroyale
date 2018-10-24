@@ -12,7 +12,8 @@ import { MAP_WIDTH, MAP_HEIGHT } from './game/util';
 import Vector from './vector';
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  const root = document.getElementById('root')
+  ReactDOM.render(<App />, root);
   serviceWorker.unregister();
 
   window.Syncronizer = Syncronizer;
