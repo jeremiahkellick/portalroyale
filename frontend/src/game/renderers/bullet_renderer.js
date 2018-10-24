@@ -1,5 +1,4 @@
-import Renderer from './renderer'; 
-import Movement from '../movement';
+import Renderer from './renderer';
 
 class BulletRenderer extends Renderer {
 
@@ -23,9 +22,9 @@ class BulletRenderer extends Renderer {
     gradient.addColorStop(0, "#fce5cd00"); 
     gradient.addColorStop(1, "#fce5cdff");
 
-    ctx.fillStyle = gradient; 
-    ctx.strokeStyle = "#00000000"; 
-    ctx.lineWidth = 0; 
+    ctx.fillStyle = gradient;
+    ctx.strokeStyle = "#00000000";
+    ctx.lineWidth = 0;
 
     ctx.fillRect( 0, 0, stretch, 3); 
     ctx.closePath(); 
@@ -35,4 +34,4 @@ class BulletRenderer extends Renderer {
   }
 
 }
-export default BulletRenderer; 
+export default BulletRenderer;
