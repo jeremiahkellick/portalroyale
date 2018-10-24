@@ -1,22 +1,30 @@
 import Component from './component';
 import Vector from '../vector';
 import key from 'keymaster';
+import Transform from './transform';
+import Camera from './camera';
+
+const getMouseCanvasPosition = (canvas, event) => {
+  const rect = event.currentTarget.getBoundingClientRect();
+  return new Vector(event.clientX - rect.left, event.clientY - rect.top);
+}
 
 class Input extends Component {
-
   constructor() {
-    super(); 
-    this.canShoot = false; 
-    document.getElementById('root').addEventListener('mousedown', (e) => {
-      this.mousePosition = new Vector( e.x, e.y);
-      // console.log(this.mousePosition); 
-      this.canShoot = true;
-      setTimeout( () => {
-        this.canShoot = false; 
-      }, 10)  
-    }); 
+    super();
+    this.mouseWasClicked = false;
+    document.getElementById('canvas').addEventListener('mousedown', e => {
+      const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e)
+      this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
+      console.log(this.mousePosition);
+      this.mouseWasClicked = true;
+    });
   }
-  
+
+  start() {
+    this.camera = Camera.camera.gameObject.getComponent(Transform);
+  }
+
   getMovement() {
     const movement = Vector.zero();
     if (key.isPressed('W')) movement.y -= 1;
@@ -25,22 +33,16 @@ class Input extends Component {
     if (key.isPressed('D')) movement.x += 1;
     return movement.normalized();
   }
-  
-  shouldShoot() {
 
-    return this.canShoot; 
-    // if ( this.canShoot ) {
-    //   if ( key.isPressed('space') ) {
-    //     this.canShoot = false; 
-    //     setTimeout( () => {
-    //       this.canShoot = true; 
-    //     }, 100); 
-    //     return true; 
-    //   }
-    // }
-    // return false; 
+  shouldShoot() {
+    const returnVal = this.mouseWasClicked;
+    this.mouseWasClicked = false;
+    return returnVal;
   }
 
+  shootPosition() {
+    return this.mousePosition;
+  }
 }
 
 export default Input;
