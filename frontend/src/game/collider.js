@@ -6,7 +6,6 @@ import Rectangle from './rectangle';
 import Game from './game';
 import Vector from '../vector';
 import Movement from './movement';
-import Hitpoint from './hitpoint';
 import BulletRenderer from './renderers/bullet_renderer';
 
 class Collider extends Component {
@@ -16,11 +15,10 @@ class Collider extends Component {
   }
 
   checkAllCollisions(newPos) {
-    let flag = false;
-
-    Object.values(Game.game.gameObjects).forEach( (object) => 
-      { 
-        if (object.getComponent(Collider) === undefined || 
+    let collidedWith = null;
+    Object.values(Game.game.gameObjects).forEach( (object) =>
+      {
+        if (object.getComponent(Collider) === undefined ||
             (!this.gameObject.getComponent(BulletRenderer) && object.getComponent(Movement))) {
 
           return;
@@ -34,16 +32,11 @@ class Collider extends Component {
           } else {
             shapeArr = [{pos: newPos, shape: this.shape}, {pos: objectPos, shape: objectShape}]
           }
-          if (this.checkTypeCollision(...shapeArr)) {
-            flag = true;
-            if (this.gameObject.getComponent(BulletRenderer) && object.getComponent(Hitpoint)) {
-              object.getComponent(Hitpoint).damage(10);
-            }
-          }
+          if (this.checkTypeCollision(...shapeArr)) collidedWith = object;
         }
       }
     );
-    return flag;
+    return collidedWith;
   }
 
   checkTypeCollision(shape1, shape2) {
