@@ -10,7 +10,7 @@ const createTree = ({ id, position }) => {
   const transform = new Transform(Vector.fromPOJO(position));
   tree.addComponent(transform);
   tree.addComponent(new TreeRenderer());
-  tree.addComponent(new Collider(new Circle(50)));
+  tree.addComponent(new Collider(new Circle(30)));
   return tree;
 };
 
