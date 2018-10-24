@@ -18,8 +18,8 @@ class Shoot extends Component {
                               .normalized();
         let options = {
           type: "bullet",
-          position: this.transform.position.plus(dir.times(30)),
-          directionVector: dir
+          position: this.transform.position.plus(dir.times(30)).toPOJO(),
+          directionVector: dir.toPOJO()
         };
         Game.game.sendCreateToServer( options, true );
       }
