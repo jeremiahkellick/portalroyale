@@ -41,7 +41,6 @@ class Input extends Component {
     // return false; 
   }
 
-
 }
 
 export default Input;

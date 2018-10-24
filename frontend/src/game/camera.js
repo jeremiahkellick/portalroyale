@@ -12,7 +12,27 @@ class Camera extends Component {
   }
 
   update() {
+    
     const ctx = Game.game.ctx; 
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
+    
+    const gameObjects = Object.values(Game.game.gameObjects)
+      .sort( (a, b) => a.sort - b.sort ); 
+    
+    // need to dermine order 
+    gameObjects.forEach( obj => {
+      //render background /other objects in game
+      const renderer = obj.getComponent(Renderer);
+      const transform = obj.getComponent(Transform); 
+      if (renderer !== undefined && transform !== undefined ) {
+        renderer.draw(ctx, transform, this.getOffset() );
+      }
+
+    });
+  }
+
+  getOffset() {
+  
     const { x,  y } = this.playerTransform.position;  
     const [ width, height ] = [ MAP_WIDTH, MAP_HEIGHT ];   
 
@@ -33,25 +53,10 @@ class Camera extends Component {
     if (translateY + CANVAS_HEIGHT > height ) {
       translateY = height - CANVAS_HEIGHT; 
     }
-    
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT); 
-    
-    const gameObjects = Object.values(Game.game.gameObjects)
-      .sort( (a, b) => a.sort - b.sort ); 
-    
-    // need to dermine order 
-    gameObjects.forEach( obj => {
-      //render background /other objects in game
-      const renderer = obj.getComponent(Renderer);
-      const transform = obj.getComponent(Transform); 
-      if (renderer !== undefined && transform !== undefined ) {
-        renderer.draw(ctx, transform, new Vector(translateX, translateY));
-      }
 
-    }); 
-
+    return new Vector(translateX, translateY);
+    
   }
-  
 
   
 }
