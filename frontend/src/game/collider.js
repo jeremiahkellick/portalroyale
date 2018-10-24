@@ -5,6 +5,7 @@ import Rectangle from './rectangle';
 // import Line from './line';
 import Game from './game';
 import Vector from '../vector';
+import Movement from './movement';
 
 class Collider extends Component {
   constructor(shape) {
@@ -17,6 +18,9 @@ class Collider extends Component {
     
     Object.values(Game.game.gameObjects).forEach( (object) => 
       { 
+        if (object.getComponent(Collider) === undefined || object.getComponent(Movement)) {
+          return;
+        }
         const objectPos = object.getComponent(Transform).position;
         const objectShape = object.getComponent(Collider).shape;
         if (this.gameObject !== object) {

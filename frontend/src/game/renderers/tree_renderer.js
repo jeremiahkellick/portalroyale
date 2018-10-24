@@ -8,11 +8,31 @@ class TreeRenderer extends Renderer {
     const BRANCH_COLOR = "#4c3012"; 
     const TREE_COLOR = "#42552Fee"; 
 
-    this.drawSpiral(ctx, transform, offset, 24, 150, 185, 0, "#ffffff00", TREE_COLOR); 
-    this.drawSpiral(ctx, transform, offset, 18, 40, 50, 17, "#000000", BRANCH_COLOR); 
-    
+    this.drawSpiral(
+      ctx,
+      transform,
+      offset,
+      24,
+      80,
+      100,
+      0,
+      "#ffffff00",
+      TREE_COLOR
+    );
+
+    this.drawSpiral(
+      ctx,
+      transform,
+      offset,
+      18,
+      22,
+      30,
+      10,
+      "#000000",
+      BRANCH_COLOR
+    ); 
   }
-    
+
   drawSpiral( ctx, transform, offset, spikes, innerRadius, outerRadius, lineWidth, strokeStyle, fillStyle ) {
     
     const { x, y } = transform.position.minus(offset); 
