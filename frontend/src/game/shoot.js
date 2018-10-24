@@ -22,7 +22,8 @@ class Shoot extends Component {
         let options = {
           type: "bullet",
           position: this.transform.position.plus(dir.times(30)),
-          directionVector: dir
+          directionVector: dir, 
+          rotation 
         };
         Game.game.sendCreateToServer( options, true );
       }

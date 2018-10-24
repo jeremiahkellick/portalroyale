@@ -3,9 +3,8 @@ import Movement from '../movement';
 
 class BulletRenderer extends Renderer {
 
-  constructor(speed, rotation) {
+  constructor(rotation) {
     super(); 
-    this.speed = speed; 
     this.rotation = rotation; 
   }
   draw(ctx, transform, offset) {
