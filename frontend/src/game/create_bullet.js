@@ -4,8 +4,11 @@ import BulletRenderer from './renderers/bullet_renderer';
 import Collider from './collider';
 import Circle from './circle';
 import BulletMovement from './bullet_movement';
+import Vector from '../vector';
 
-const createBullet = ({ id, position, directionVector, rotation, owned }) => {
+const createBullet = ({ id, position, directionVector, owned }) => {
+  position = Vector.fromPOJO(position);
+  directionVector = Vector.fromPOJO(directionVector);
   const bullet = new GameObject(id, 2);
   const transform = new Transform(  position );
   bullet.addComponent(transform);

@@ -24,9 +24,8 @@ class Shoot extends Component {
         const rotation = Math.acos( dir.x ); 
         let options = {
           type: "bullet",
-          position: this.transform.position.plus(dir.times(30)),
-          directionVector: dir, 
-          rotation 
+          position: this.transform.position.plus(dir.times(30)).toPOJO(),
+          directionVector: dir.toPOJO()
         };
         Game.game.sendCreateToServer( options, true );
       }
