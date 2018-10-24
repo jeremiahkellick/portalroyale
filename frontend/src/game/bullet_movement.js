@@ -27,6 +27,8 @@ class BulletMovement extends Movement {
             hitpoint.damage(10);
           }
         }
+        const sound = new Audio("./sounds/impact.mp3");
+        sound.play();
         this.gameObject.destroy();
       } else {
         this.transform.position = newPos;
