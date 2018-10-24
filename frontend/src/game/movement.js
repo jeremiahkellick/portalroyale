@@ -3,6 +3,7 @@ import Input from './input';
 import Transform from './transform';
 import Time from './time';
 import Collider from './collider';
+import Vector from '../vector';
 
 class Movement extends Component {
   start() {
@@ -14,9 +15,13 @@ class Movement extends Component {
   update() {
     if (this.input) {
       const movement = this.input.getMovement().times(300 * Time.deltaTime);
-      const newPos = this.transform.position.plus(movement);
-      if (!this.collider.checkAllCollisions(newPos)) {
-        this.transform.position = newPos;
+      const newXPos = this.transform.position.plus(new Vector(movement.x, 0));
+      if (!this.collider.checkAllCollisions(newXPos)) {
+        this.transform.position.x += movement.x;
+      }
+      const newYPos = this.transform.position.plus(new Vector(0, movement.y));
+      if (!this.collider.checkAllCollisions(newYPos)) {
+        this.transform.position.y += movement.y;
       }
     }
   }
