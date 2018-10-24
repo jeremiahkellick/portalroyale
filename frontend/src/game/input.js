@@ -17,7 +17,6 @@ class Input extends Component {
       e.preventDefault();
       const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e)
       this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
-      console.log(this.mousePosition);
       this.mouseWasClicked = true;
     });
   }

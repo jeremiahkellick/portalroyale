@@ -17,11 +17,12 @@ class Collider extends Component {
 
   checkAllCollisions(newPos) {
     let flag = false;
-    
+
     Object.values(Game.game.gameObjects).forEach( (object) => 
       { 
         if (object.getComponent(Collider) === undefined || 
             (!this.gameObject.getComponent(BulletRenderer) && object.getComponent(Movement))) {
+
           return;
         }
         const objectPos = object.getComponent(Transform).position;
@@ -48,7 +49,7 @@ class Collider extends Component {
   checkTypeCollision(shape1, shape2) {
     if (shape1.shape instanceof Circle && shape2.shape instanceof Circle) {
       return this.circleCircleCollision(shape1, shape2);
-    } 
+    }
     else if (shape1.shape instanceof Rectangle && shape2.shape instanceof Rectangle) {
       return this.rectRectCollision(shape1, shape2);
     }
@@ -64,9 +65,9 @@ class Collider extends Component {
   }
 
   rectRectCollision(shape1, shape2) {
-    return shape1.pos.x < shape2.pos.x + shape2.width && 
-      shape1.pos.x + shape1.width > shape2.pos.x && 
-      shape1.pos.y < shape2.pos.y + shape2.height && 
+    return shape1.pos.x < shape2.pos.x + shape2.width &&
+      shape1.pos.x + shape1.width > shape2.pos.x &&
+      shape1.pos.y < shape2.pos.y + shape2.height &&
       shape1.pos.y + shape1.height > shape2.pos.y
   }
 
@@ -110,20 +111,20 @@ class Collider extends Component {
     const x1src = this.shape2.pos2.x;
     const y0src = this.shape2.pos1.y;
     const y1src = this.shape2.pos2.y;
-    
-    const t0 = 0.0;
-    const t1 = 1.0;
+
+    let t0 = 0.0;
+    let t1 = 1.0;
     const xdelta = x1src-x0src;
     const ydelta = y1src-y0src;
     let p, q, r;
 
     for(let edge=0; edge<4; edge++) {   // Traverse through left, right, bottom, top edges.
-        if (edge==0) {  p = -xdelta;    q = -(edgeLeft-x0src);  }
-        if (edge==1) {  p = xdelta;     q =  (edgeRight-x0src); }
-        if (edge==2) {  p = -ydelta;    q = -(edgeBottom-y0src);}
-        if (edge==3) {  p = ydelta;     q =  (edgeTop-y0src);   }   
+        if (edge === 0) {  p = -xdelta;    q = -(edgeLeft-x0src);  }
+        if (edge === 1) {  p = xdelta;     q =  (edgeRight-x0src); }
+        if (edge === 2) {  p = -ydelta;    q = -(edgeBottom-y0src);}
+        if (edge === 3) {  p = ydelta;     q =  (edgeTop-y0src);   }
         r = q/p;
-        if(p==0 && q<0) return false;   // Don't draw line at all. (parallel line outside)
+        if(p === 0 && q<0) return false;   // Don't draw line at all. (parallel line outside)
 
         if(p<0) {
             if(r>t1) return false;         // Don't draw line at all.
