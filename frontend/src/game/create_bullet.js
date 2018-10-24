@@ -6,7 +6,7 @@ import Circle from './circle';
 import BulletMovement from './bullet_movement';
 import Vector from '../vector';
 
-const createBullet = ({ id, position, directionVector, owned }) => {
+const createBullet = ({ id, position, directionVector, rotation, owned }) => {
   position = Vector.fromPOJO(position);
   directionVector = Vector.fromPOJO(directionVector);
   const bullet = new GameObject(id, 2);

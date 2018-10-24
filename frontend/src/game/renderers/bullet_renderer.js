@@ -19,8 +19,7 @@ class BulletRenderer extends Renderer {
     ctx.beginPath();
     ctx.moveTo(0, 0); 
     
-    
-    let gradient = ctx.createLinearGradient(-stretch, 0, 0, 0); 
+    let gradient = ctx.createLinearGradient(0, 0, stretch, 0); 
     gradient.addColorStop(0, "#fce5cd00"); 
     gradient.addColorStop(1, "#fce5cdff");
 
@@ -28,7 +27,7 @@ class BulletRenderer extends Renderer {
     ctx.strokeStyle = "#00000000"; 
     ctx.lineWidth = 0; 
 
-    ctx.fillRect(-stretch, 0, stretch, 3); 
+    ctx.fillRect( 0, 0, stretch, 3); 
     ctx.closePath(); 
 
     ctx.rotate(-rotation); 
