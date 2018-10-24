@@ -1,24 +1,23 @@
-import Transform from './transform';
-import Collider from './collider';
-import Movement from './movement'; 
+import Movement from './movement';
+import Time from './time';
 
 class BulletMovement extends Movement {
 
   constructor(range, speed) {
-    super(); 
-    this.range = range; 
-    this.speed = speed; 
-    this.distanceTraveled = 0; 
+    super();
+    this.range = range;
+    this.speed = speed;
+    this.distanceTraveled = 0;
   }
 
-  update() { 
+  update() {
     const oldPos = this.transform.position
-    const newPos = oldPos.plus( this.speed ); 
+    const newPos = oldPos.plus(this.speed.times(Time.deltaTime));
     if ( this.distanceTraveled <= this.range && !this.collider.checkAllCollisions(newPos)) {
       this.transform.position = newPos;
-      this.distanceTraveled += oldPos.distanceTo(newPos);  
+      this.distanceTraveled += oldPos.distanceTo(newPos);
     } else {
-      this.gameObject.destroy(); 
+      this.gameObject.destroy();
     }
   }
 }
