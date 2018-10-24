@@ -2,11 +2,6 @@ import Component from '../component';
 import Transform from '../transform';
 
 class Renderer extends Component {
-
-  start() {
-    this.transform = this.requireComponent(Transform);
-  }
-
   draw(ctx, transform) {
     ctx.beginPath();
     ctx.arc(

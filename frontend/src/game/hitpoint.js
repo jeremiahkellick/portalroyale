@@ -1,8 +1,4 @@
 import Component from './component';
-import Input from './input';
-import Transform from './transform';
-import Time from './time';
-import Collider from './collider';
 
 class Hitpoint extends Component {
   constructor(health) {
