@@ -67,16 +67,12 @@ class Camera extends Component {
     });
   }
 
-  drawGridlines(ctx, offset, width, height) {
+  drawGridlines(ctx, offset) {
     const gridSize = 300; 
 
     ctx.strokeStyle = "#6c953e"; 
     ctx.lineWidth = 1;
     ctx.beginPath();
-    
-    // let x = offset.x - offset.x % gridSize; 
-    // let y = offset.y - offset.y % gridSize; 
-    // console.log(x, y); 
 
     for ( let i = 0; i <= MAP_WIDTH; i+=gridSize) {
       ctx.moveTo(i-offset.x, 0); 
