@@ -46,8 +46,8 @@ class Camera extends Component {
     const offset = this.offset();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    //draw map grid
-    this.drawGridlines(ctx, offset, canvas.width, canvas.height);
+    //draw map grid 
+    this.drawGridlines(ctx, offset); 
 
     const gameObjects = Object.values(Game.game.gameObjects)
       .sort( (a, b) => a.sort - b.sort );
@@ -67,8 +67,8 @@ class Camera extends Component {
     });
   }
 
-  drawGridlines(ctx, offset, width, height) {
-    const gridSize = 300;
+  drawGridlines(ctx, offset) {
+    const gridSize = 300; 
 
     ctx.strokeStyle = "#6c953e";
     ctx.lineWidth = 1;
