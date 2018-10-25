@@ -7,7 +7,12 @@
     "keymaster": "^1.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "socket.io": "^2.1.1"
   },
   "scripts": {
@@ -15,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass:watch" : "sass --watch src/styles/scss:src/styles/css",
+    "sass:watch": "sass --watch src/styles/scss:src/styles/css",
     "sass:build": "sass --update src/styles/scss:src/styles/css"
   },
   "eslintConfig": {
