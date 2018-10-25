@@ -38,28 +38,39 @@ const randomVectorInMap = () => {
 };
 
 const objectsByOwnerId = {};
-let objectCreationOptions = [];
+let objectCreationOptions = {};
 
+let id = getId();
 for (let i = 0; i < 10; i++) {
-  objectCreationOptions.push(
-    { id: getId(), type: 'tree', position: randomVectorInMap() }
-  );
-  objectCreationOptions.push(
-    { id: getId(), type: 'explosiveCircle', position: randomVectorInMap() }
-  );
-  objectCreationOptions.push(
-    { id: getId(), type: 'lootCrate', position: randomVectorInMap() }
-  );
+  id = getId();
+  objectCreationOptions[id] = {
+    id,
+    type: 'tree',
+    position: randomVectorInMap(),
+    health: 100
+  };
+
+  id = getId();
+  objectCreationOptions[id] = {
+    id,
+    type: 'explosiveCircle',
+    position: randomVectorInMap(),
+    health: 50
+  };
+
+  id = getId();
+  objectCreationOptions[id] = {
+    id,
+    type: 'lootCrate',
+    position: randomVectorInMap(),
+    health: 50
+  };
 }
-
-
-
-// objectCreationOptions.push({ id: getId(), type: 'bullet' });
 
 let state = { data: {}, actions: [] };
 const clearState = () => (state = { data: {}, actions: [] });
 io.on('connection', function(socket) {
-  socket.emit('create all', objectCreationOptions);
+  socket.emit('create all', Object.values(objectCreationOptions));
 
   socket.on('create', options => {
     if (options.ownerId !== undefined) {
@@ -69,26 +80,31 @@ io.on('connection', function(socket) {
       objectsByOwnerId[options.ownerId].push(options.id);
     }
     if (options.shouldSave !== false) {
-      objectCreationOptions.push(options);
+      objectCreationOptions[options.id] = options;
     }
     io.sockets.emit('create', options);
   });
 
   socket.on('state', packet => {
     state.data = Object.assign(state.data, packet.data);
+    packet.actions.forEach(action => {
+      const syncronizerId = action.syncronizerId;
+      const objectId = syncronizerId.slice(0, syncronizerId.length - 1);
+      const options = objectCreationOptions[objectId];
+      if (options !== undefined) handleAction(action, options);
+    });
     state.actions = state.actions.concat(packet.actions);
   });
 
   socket.on('disconnect', () => {
     if (objectsByOwnerId[socket.id] !== undefined &&
         objectsByOwnerId[socket.id].length > 0) {
-      let newObjectCreationOptions = [];
-      objectCreationOptions.forEach(options => {
-        if (!objectsByOwnerId[socket.id].includes(options.id)) {
-          newObjectCreationOptions.push(options);
+
+      Object.keys(objectCreationOptions).forEach(id => {
+        if (objectsByOwnerId[socket.id].includes(id)) {
+          delete objectCreationOptions[id];
         }
       });
-      objectCreationOptions = newObjectCreationOptions;
       io.sockets.emit('destroy', objectsByOwnerId[socket.id]);
     }
   });
@@ -98,3 +114,13 @@ setInterval(() => {
   io.sockets.emit('state', state);
   clearState();
 }, 100);
+
+const handleAction = (action, options) => {
+  switch (action.type) {
+    case 'DAMAGE':
+      options.health -= action.damage;
+      if (options.health <= 0) delete objectCreationOptions[options.id];
+      break;
+    default:
+  }
+};

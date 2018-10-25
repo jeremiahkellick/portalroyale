@@ -1,21 +1,44 @@
-import React from 'react'; 
+import React from 'react';
+import { connect } from 'react-redux';
+import { initializeGame } from '../actions/game_actions';
 
-class EnterGame {
-  contructor(props) {
-    super(props); 
+class EnterGame extends React.Component {
+
+  constructor(props) {
+    super(props);
     this.state = {
-      name: "", 
+      name: "",
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.initializeGame(this.state.name);
+    // enter game;
+  }
+
+  update(prop) {
+    return (e) => {
+      this.setState({ [prop]: e.target.value });
     }
   }
 
   render() {
-    <div> 
-      <form> 
-        <input type="text" val={this.state.name}></input>
-        <input type="submit" val="Enter" ></input>
-      </form>
-    </div>
+    return (
+      <div className="enter-game">
+        <form onSubmit={ this.handleSubmit }>
+          <input type="text" onChange={ this.update("name") } value={ this.state.name } />
+          <input type="submit" value="Play" />
+        </form>
+      </div>
+    );
   }
 }
 
-export default EnterGame; 
+
+const mapDispatchToProps = dispatch => ({
+  initializeGame: (name) => dispatch(initializeGame(name))
+});
+
+export default connect( null, mapDispatchToProps )( EnterGame );

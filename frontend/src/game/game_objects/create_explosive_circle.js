@@ -1,11 +1,11 @@
 import GameObject from './game_object';
-import Syncronizer from './syncronizer';
-import Transform from './transform';
-import ExplosiveCircleRenderer from './renderers/explosive_circle_renderer';
-import Collider from './collider';
-import Hitpoint from './hitpoint';
+import Syncronizer from '../syncronizer';
+import Transform from '../game_components/transform';
+import ExplosiveCircleRenderer from '../renderers/explosive_circle_renderer';
+import Collider from '../game_components/collider';
+import Hitpoint from '../game_components/hitpoint';
 import Vector from '../vector';
-import Circle from './circle';
+import Circle from '../shapes/circle';
 
 const createExplosiveCircle = ({ id, position }) => {
   const explosiveCircle = new GameObject(id, 5);

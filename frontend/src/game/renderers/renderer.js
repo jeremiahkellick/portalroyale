@@ -1,6 +1,11 @@
-import Component from '../component';
+import Component from '../game_components/component';
 
 class Renderer extends Component {
+  constructor(sort) {
+    super();
+    this.sort = sort || 0;
+  }
+
   draw(ctx, transform) {
     ctx.beginPath();
     ctx.arc(

@@ -1,10 +1,9 @@
-import Game from './game';
+import Game from '../game';
 
 class GameObject {
-  constructor(id, sort) {
+  constructor(id) {
     this.id = id;
     this.components = [];
-    this.sort = sort || 0; 
   }
 
   addComponent(component) {
@@ -13,18 +12,19 @@ class GameObject {
   }
 
   getComponent(componentClass) {
-    return this.components.find(component => 
+    return this.components.find(component =>
       component instanceof componentClass
     );
   }
 
   getComponents(componentClass) {
-    return this.components.filter(component => 
+    return this.components.filter(component =>
       component instanceof componentClass
     );
   }
 
   destroy() {
+    this.components.forEach(component => component.onDestroy());
     Game.game.destroy(this.id);
   }
 }

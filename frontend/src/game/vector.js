@@ -1,4 +1,4 @@
-import { randomInt } from './game/util'; 
+import { randomInt } from './util';
 
 class Vector {
   constructor(x, y) {
@@ -20,11 +20,11 @@ class Vector {
   }
 
   static random(width, height) {
-    const x = randomInt(0, width); 
-    const y = randomInt(0, height); 
-    return new Vector(x, y); 
+    const x = randomInt(0, width);
+    const y = randomInt(0, height);
+    return new Vector(x, y);
   }
-  
+
   static lerp(a, b, factor) {
     if (factor < 0 || factor >= 1) return b.clone();
     return a.plus(b.minus(a).times(factor));

@@ -1,18 +1,22 @@
 import Syncronizer from './syncronizer';
 import Time from './time';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
+import Camera from './game_components/camera';
 
 class Game {
   constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
     Game.game = this;
     this.ctx = ctx;
+    ctx.font = 'bold 16px Roboto';
+    ctx.textAlign = "center";
     this.clientId = clientId;
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
     this.gameObjects = {};
     setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
-    window.requestAnimationFrame(this.update.bind(this));
+    setInterval(this.update.bind(this), 1000 / 60);
+    window.requestAnimationFrame(this.draw.bind(this));
   }
 
   sendUpdateToServer() {
@@ -54,13 +58,17 @@ class Game {
 
   update() {
     Time.update();
-    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     Object.values(this.gameObjects).forEach(gameObject => {
       gameObject.components.forEach(component => {
         component.handleUpdating();
       });
     });
-    window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    if (Camera.camera !== undefined) Camera.camera.draw(this.ctx);
+    window.requestAnimationFrame(this.draw.bind(this));
   }
 
   sendCreateToServer(options, shouldOwn = false) {

@@ -34,6 +34,8 @@ class Component {
   }
 
   handleAction(action) {}
+
+  onDestroy() {}
 }
 
 class ComponentRequireError extends Error {}

@@ -1,9 +1,7 @@
-import Renderer from './renderer'; 
-import Hitpoint from '../hitpoint';
+import Renderer from './renderer';
+import Hitpoint from '../game_components/hitpoint';
 
 class TreeRenderer extends Renderer {
-
-
   draw(ctx, transform, offset) {
     const hitpoint = transform.gameObject.getComponent(Hitpoint);
     let multiplier;
@@ -12,10 +10,10 @@ class TreeRenderer extends Renderer {
     } else {
       multiplier = 1;
     }
-     
-    
-    const BRANCH_COLOR = "#4c3012"; 
-    const TREE_COLOR = "#42552Fee"; 
+
+
+    const BRANCH_COLOR = "#4c3012";
+    const TREE_COLOR = "#42552Fee";
 
     this.drawSpiral(
       ctx,
@@ -39,47 +37,47 @@ class TreeRenderer extends Renderer {
       10,
       "#000000",
       BRANCH_COLOR
-    ); 
+    );
   }
 
   drawSpiral( ctx, transform, offset, spikes, innerRadius, outerRadius, lineWidth, strokeStyle, fillStyle ) {
-    
-    const { x, y } = transform.position.minus(offset); 
 
-    let rot = Math.PI/(spikes/2); 
-    const step = Math.PI/(spikes); 
-    const midRadius = (innerRadius+outerRadius) / 2 ; 
-    
-    ctx.beginPath(); 
+    const { x, y } = transform.position.minus(offset);
 
-    let [x1, y1, x2, y2] = [0, 0, 0, 0]; 
+    let rot = Math.PI/(spikes/2);
+    const step = Math.PI/(spikes);
+    const midRadius = (innerRadius+outerRadius) / 2 ;
+
+    ctx.beginPath();
+
+    let [x1, y1, x2, y2] = [0, 0, 0, 0];
 
     for ( let i=0; i <= spikes; i++ ) {
 
       if ( i % 2 === 0 ) {
-        x1 = x+Math.cos(rot)*innerRadius; 
-        y1 = y+Math.sin(rot)*innerRadius; 
+        x1 = x+Math.cos(rot)*innerRadius;
+        y1 = y+Math.sin(rot)*innerRadius;
       } else {
-        x1 = x+Math.cos(rot)*outerRadius; 
-        y1 = y+Math.sin(rot)*outerRadius; 
+        x1 = x+Math.cos(rot)*outerRadius;
+        y1 = y+Math.sin(rot)*outerRadius;
       }
-      rot+=step; 
-      
-      x2 = x+Math.cos(rot)*midRadius; 
-      y2 = y+Math.sin(rot)*midRadius; 
-      ctx.quadraticCurveTo( x1, y1, x2, y2 ); 
+      rot+=step;
 
-      rot+=step; 
+      x2 = x+Math.cos(rot)*midRadius;
+      y2 = y+Math.sin(rot)*midRadius;
+      ctx.quadraticCurveTo( x1, y1, x2, y2 );
+
+      rot+=step;
     }
-    ctx.closePath(); 
+    ctx.closePath();
 
-    ctx.strokeStyle = strokeStyle; 
-    ctx.lineWidth = lineWidth; 
-    ctx.stroke(); 
-    ctx.fillStyle = fillStyle;  
-    ctx.fill(); 
+    ctx.strokeStyle = strokeStyle;
+    ctx.lineWidth = lineWidth;
+    ctx.stroke();
+    ctx.fillStyle = fillStyle;
+    ctx.fill();
   }
 
 }
 
-export default TreeRenderer; 
+export default TreeRenderer;
