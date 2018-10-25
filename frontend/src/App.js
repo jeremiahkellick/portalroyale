@@ -12,7 +12,7 @@ const App = ({name}) => (
   </div>
 );
 
-const mapStateToProps = ({ ui: { game: { name } } }) => ({
+const mapStateToProps = ({ game: { name } }) => ({
   name
 });
 

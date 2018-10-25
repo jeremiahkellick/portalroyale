@@ -39,7 +39,7 @@ class Canvas extends React.Component {
 }
 
 
-const mapStateToProps = ({ ui: { game: { name } } }) => ({
+const mapStateToProps = ({ game: { name } } ) => ({
   name
 });
 
