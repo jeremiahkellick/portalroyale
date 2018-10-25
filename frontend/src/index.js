@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     sendCreateToServer(
       {
         type: 'player',
-        position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO()
+        position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO(),
+        health: 100
       },
       true
     );
