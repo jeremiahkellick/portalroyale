@@ -22,6 +22,9 @@ class BulletMovement extends Movement {
       if (this.distanceTraveled > this.range) {
         this.gameObject.destroy();
       } else {
+        this.transform.position = newPos;
+        this.distanceTraveled += oldPos.distanceTo(newPos);
+        this.length = Math.min(300, this.distanceTraveled);
         const collidedWith = this.collider.checkAllCollisions(newPos);
         if (collidedWith) {
           if (this.owned) {
@@ -33,10 +36,6 @@ class BulletMovement extends Movement {
           const sound = new Audio("./sounds/impact.mp3");
           sound.play();
           this.active = false;
-        } else {
-          this.transform.position = newPos;
-          this.distanceTraveled += oldPos.distanceTo(newPos);
-          this.length = Math.min(300, this.distanceTraveled);
         }
       }
     } else {
