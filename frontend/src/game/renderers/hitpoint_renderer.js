@@ -12,15 +12,15 @@ class HitpointRenderer extends Renderer {
     
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 
-    const width = 250;
-    const height = 20;
+    const width = 200;
+    const height = 10;
     const x = 25;
     const y = 25;
 
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.rect( x, y, x + width, y + height);
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'gray';
     ctx.fill();
     ctx.strokeStyle = '#000000';
     ctx.stroke();
@@ -29,7 +29,7 @@ class HitpointRenderer extends Renderer {
     ctx.beginPath();
     ctx.lineWidth = 2;
     ctx.rect( x, y, x + (width * multiplier), y + height);
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = 'white';
     ctx.fill();
     ctx.strokeStyle = '#000000';
     ctx.stroke();
