@@ -26,13 +26,14 @@ class Shoot extends Component {
           type: "bullet",
           position: this.transform.position.plus(dir.times(30)).toPOJO(),
           directionVector: dir.toPOJO(),
-          rotation
+          rotation,
+          shouldSave: false
         };
         Game.game.sendCreateToServer( options, true );
 
-        const sound = new Audio("./sounds/bullet.mp3"); 
-        sound.play(); 
-        
+        const sound = new Audio("./sounds/bullet.mp3");
+        sound.play();
+
       }
     }
   }

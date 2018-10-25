@@ -60,7 +60,9 @@ io.on('connection', function(socket) {
       }
       objectsByOwnerId[options.ownerId].push(options.id);
     }
-    objectCreationOptions.push(options);
+    if (options.shouldSave !== false) {
+      objectCreationOptions.push(options);
+    }
     io.sockets.emit('create', options);
   });
 
