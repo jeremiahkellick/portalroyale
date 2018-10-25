@@ -31,6 +31,7 @@ class Hitpoint extends Component {
         this.health = Math.max(this.health - action.damage, 0);
         this.onDamageFunctions.forEach( func => func() );
         if (this.owned && this.health === 0) this.death();
+        console.log('test1')
         break;
       case 'DEATH':
         this.onDeathFunctions.forEach( func => func() );

@@ -44,6 +44,9 @@ for (let i = 0; i < 10; i++) {
   objectCreationOptions.push(
     { id: getId(), type: 'tree', position: randomVectorInMap() }
   );
+  objectCreationOptions.push(
+    { id: getId(), type: 'explosiveCircle', position: randomVectorInMap() }
+  );
 }
 
 // objectCreationOptions.push({ id: getId(), type: 'bullet' });

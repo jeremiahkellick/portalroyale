@@ -8,7 +8,6 @@ class HitpointRenderer extends Renderer {
   draw(ctx, transform, offset) {
 
     const hitpoint = transform.gameObject.getComponent(Hitpoint);
-    console.log(hitpoint);
     
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 
