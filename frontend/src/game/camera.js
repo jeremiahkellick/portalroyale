@@ -47,7 +47,7 @@ class Camera extends Component {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //draw map grid 
-    this.drawGridlines(ctx, offset, canvas.width, canvas.height); 
+    this.drawGridlines(ctx, offset); 
 
     const gameObjects = Object.values(Game.game.gameObjects)
       .sort( (a, b) => a.sort - b.sort );
