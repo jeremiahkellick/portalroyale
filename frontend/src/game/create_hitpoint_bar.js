@@ -9,14 +9,12 @@ import Input from './input';
 import Movement from './movement';
 import Camera from './camera'; 
 import Shoot from './shoot';
-import Collider from './collider';
 import Hitpoint from './hitpoint';
 import Circle from './circle';
 
 
-const createPlayer = ({ id, owned, position }) => {
-  const radius = 22;
-  const player = new GameObject(id, 1);
+const createHitpointBar = ({ id, owned, position }) => {
+  const player = new GameObject(id, 4);
   const transform = new Transform(Vector.fromPOJO(position));
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
@@ -24,7 +22,7 @@ const createPlayer = ({ id, owned, position }) => {
   player.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
   player.addComponent(new CircleRenderer(radius, '#fce5cd'));
-  player.addComponent(new HitpointRenderer());
+  
   player.addComponent(new Movement());
   player.addComponent(new Collider(new Circle(radius)));
 
@@ -36,4 +34,4 @@ const createPlayer = ({ id, owned, position }) => {
   return player;
 };
 
-export default createPlayer;
+export default createHitpointBar;

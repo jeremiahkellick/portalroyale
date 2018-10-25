@@ -18,6 +18,12 @@ class GameObject {
     );
   }
 
+  getComponents(componentClass) {
+    return this.components.filter(component => 
+      component instanceof componentClass
+    );
+  }
+
   destroy() {
     Game.game.destroy(this.id);
   }
