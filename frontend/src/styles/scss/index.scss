@@ -1,23 +1,63 @@
 body {
-  font-family: Arial, Helvetica, sans-serif; 
-}
-
-h1 {
-  text-align: center; 
-  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  background: #b8d795;
 }
 
 .App {
-  margin: auto; 
-  display: flex; 
+  margin: auto;
+  display: flex;
   flex-direction: column;
-  align-items: center; 
-  position: realtive; 
+  align-items: center;
+  position: realtive;
 }
 
-#canvas {
+.App-header {
+  margin: 10px 0;
+  padding: 10px 0;
+  font-size: 30px;
+  text-align: center;
+}
+
+.enter-game {
+  background: #61726177;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: #6a8f3f;
+  border-radius: 3px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0;
+
+    input {
+      margin: 5px 0;
+      background: white;
+      padding: 10px 5px;
+    }
+
+    input[type="submit"] {
+      background: #8ecc47;
+      text-align: center;
+      border: 1px solid #6a8f3f;
+
+      &:hover {
+        background: #b8d795;
+      }
+    }
+  }
+}
+
+canvas {
   background: #80af49;
   overflow: hidden;
   cursor: crosshair;
-  position: absolute; 
+  position: absolute;
 };
+
+.hidden {
+  display: none;
+}

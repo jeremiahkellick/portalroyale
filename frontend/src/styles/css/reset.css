@@ -13,6 +13,7 @@ form, label, input, textarea, time {
   text-decoration: inherit;
   vertical-align: inherit;
   box-sizing: inherit;
+  border-radius: inherit;
   background: transparent; }
 
 ul {

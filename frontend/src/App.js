@@ -1,12 +1,19 @@
 import React from 'react';
-import Canvas from './components/canvas'; 
-const App = props => (
+import Canvas from './components/canvas';
+import Homepage from './components/homepage'
+import {Switch, Router} from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const App = ({name}) => (
+
   <div className="App">
-    {/* <header className="App-header">
-      <h1>portfol.io</h1>
-    </header> */}
+    { name ? null : <Homepage /> }
     <Canvas />
   </div>
 );
 
-export default App;
+const mapStateToProps = ({ ui: { game: { name } } }) => ({
+  name
+});
+
+export default connect( mapStateToProps, null )( App );
