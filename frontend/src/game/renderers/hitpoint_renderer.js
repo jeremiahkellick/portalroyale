@@ -8,8 +8,7 @@ class HitpointRenderer extends Renderer {
   draw(ctx, transform, offset) {
 
     const hitpoint = transform.gameObject.getComponent(Hitpoint);
-    console.log(hitpoint);
-    
+
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 
     const width = 200;
@@ -33,7 +32,7 @@ class HitpointRenderer extends Renderer {
     ctx.fill();
     ctx.strokeStyle = '#000000';
     ctx.stroke();
-    ctx.closePath(); 
+    ctx.closePath();
   }
 }
 

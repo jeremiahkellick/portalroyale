@@ -46,8 +46,6 @@ for (let i = 0; i < 10; i++) {
   );
 }
 
-// objectCreationOptions.push({ id: getId(), type: 'bullet' });
-
 let state = { data: {}, actions: [] };
 const clearState = () => (state = { data: {}, actions: [] });
 io.on('connection', function(socket) {
