@@ -25,7 +25,7 @@ const createPlayer = ({ id, owned, position }) => {
   new Syncronizer(id+'1', hitpoint);
   player.addComponent(new CircleRenderer(radius, '#f6cb88'));
   player.addComponent(new Movement());
-  player.addComponent(new Collider(new Circle(radius)));
+  player.addComponent(new Collider(new Circle(radius), 'player'));
 
   if (owned) {
     player.addComponent(new Input());

@@ -2,26 +2,31 @@ import Component from './component';
 import Transform from './transform';
 import Circle from './circle';
 import Rectangle from './rectangle';
-// import Line from './line';
 import Game from './game';
 import Vector from '../vector';
-import Movement from './movement';
+
+const layers = {
+  'player': new Set(['obstacle', 'bullet']),
+  'bullet': new Set(['obstacle', 'player']),
+  'obstacle': new Set(['obstacle', 'player', 'bullet'])
+}
 
 class Collider extends Component {
-  constructor(shape) {
+  constructor(shape, layer) {
     super();
     this.shape = shape;
+    this.layer = layer;
   }
 
   checkAllCollisions(newPos, ignoreMoving = false) {
     let collidedWith = null;
     Object.values(Game.game.gameObjects).forEach( (object) =>
       {
-        if (object.getComponent(Collider) === undefined ||
-            (ignoreMoving && object.getComponent(Movement))) {
-
-          return;
-        }
+        const otherCollider = object.getComponent(Collider);
+        if (otherCollider === undefined) return;
+        const useLayers = this.layer !== undefined
+                          && otherCollider.layer !== undefined;
+        if (useLayers && !layers[this.layer].has(otherCollider.layer)) return;
         const objectPos = object.getComponent(Transform).position;
         const objectShape = object.getComponent(Collider).shape;
         if (this.gameObject !== object) {
@@ -129,6 +134,5 @@ class Collider extends Component {
     return true;
   }
 }
-
 
 export default Collider;
