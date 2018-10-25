@@ -1,21 +1,27 @@
-import React from 'react'; 
+import React from 'react';
 
 class EnterGame {
   contructor(props) {
-    super(props); 
+    super(props);
     this.state = {
-      name: "", 
+      name: "",
+    }
+  }
+
+  update(prop) {
+    return (e) => {
+      this.setState({ [prop]: e.target.val });
     }
   }
 
   render() {
-    <div> 
-      <form> 
-        <input type="text" val={this.state.name}></input>
-        <input type="submit" val="Enter" ></input>
+    <div className="name-form-container">
+      <form>
+        <input type="text" onChange={ update("name") } val={this.state.name}></input>
+        <input type="submit" val="Play" ></input>
       </form>
     </div>
   }
 }
 
-export default EnterGame; 
+export default EnterGame;
