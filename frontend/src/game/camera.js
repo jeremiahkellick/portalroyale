@@ -16,8 +16,8 @@ class Camera extends Component {
   }
 
   offset() {
-    const canvas = document.getElementById("canvas"); 
-    const [ CANVAS_WIDTH, CANVAS_HEIGHT ] = [ canvas.width, canvas.height]; 
+    const canvas = document.getElementById("canvas");
+    const [ CANVAS_WIDTH, CANVAS_HEIGHT ] = [ canvas.width, canvas.height];
 
     const offset = this.playerTransform.position.minus(
       new Vector(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2)
@@ -41,9 +41,9 @@ class Camera extends Component {
 
   update() {
     const ctx = Game.game.ctx;
-    const canvas = document.getElementById("canvas"); 
+    const canvas = document.getElementById("canvas");
 
-    const offset = this.offset(); 
+    const offset = this.offset();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //draw map grid 
@@ -51,7 +51,7 @@ class Camera extends Component {
 
     const gameObjects = Object.values(Game.game.gameObjects)
       .sort( (a, b) => a.sort - b.sort );
-    
+
     // need to dermine order
     gameObjects.forEach( obj => {
       //render background /other objects in game
@@ -70,18 +70,18 @@ class Camera extends Component {
   drawGridlines(ctx, offset) {
     const gridSize = 300; 
 
-    ctx.strokeStyle = "#6c953e"; 
+    ctx.strokeStyle = "#6c953e";
     ctx.lineWidth = 1;
     ctx.beginPath();
 
     for ( let i = 0; i <= MAP_WIDTH; i+=gridSize) {
-      ctx.moveTo(i-offset.x, 0); 
-      ctx.lineTo(i-offset.x, MAP_HEIGHT); 
+      ctx.moveTo(i-offset.x, 0);
+      ctx.lineTo(i-offset.x, MAP_HEIGHT);
       ctx.stroke();
     }
     for ( let i = 0; i <= MAP_HEIGHT; i+=gridSize ) {
-      ctx.moveTo(0, i-offset.y); 
-      ctx.lineTo(MAP_WIDTH, i-offset.y); 
+      ctx.moveTo(0, i-offset.y);
+      ctx.lineTo(MAP_WIDTH, i-offset.y);
       ctx.stroke();
     }
     ctx.closePath();
