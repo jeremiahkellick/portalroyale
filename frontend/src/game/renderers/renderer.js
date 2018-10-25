@@ -1,5 +1,4 @@
 import Component from '../component';
-import Transform from '../transform';
 
 class Renderer extends Component {
   draw(ctx, transform) {
