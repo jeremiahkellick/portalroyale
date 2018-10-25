@@ -8,13 +8,13 @@ import Vector from '../vector';
 import Circle from '../shapes/circle';
 
 const createTree = ({ id, position, health }) => {
-  const tree = new GameObject(id, 3);
+  const tree = new GameObject(id);
   const transform = new Transform(Vector.fromPOJO(position));
   tree.addComponent(transform);
   const hitpoint = new Hitpoint(health);
   tree.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
-  tree.addComponent(new TreeRenderer());
+  tree.addComponent(new TreeRenderer(5));
   tree.addComponent(new Collider(new Circle(30), 'obstacle'));
   return tree;
 };

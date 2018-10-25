@@ -52,22 +52,27 @@ class Camera extends Component {
     //draw map grid
     this.drawGridlines(ctx, offset);
 
-    const gameObjects = Object.values(Game.game.gameObjects)
-      .sort( (a, b) => a.sort - b.sort );
-
-    // need to dermine order
+    const gameObjects = Object.values(Game.game.gameObjects);
+    let objRenderers = [];
     gameObjects.forEach( obj => {
-      //render background /other objects in game
-      const renderers = obj.getComponents(Renderer);
       const transform = obj.getComponent(Transform);
-
-      renderers.forEach ( renderer => {
+      const renderers = obj.getComponents(Renderer);
+      renderers.forEach( renderer => {
         if (renderer !== undefined && transform !== undefined ) {
-          renderer.draw(ctx, transform, offset);
+          objRenderers.push({
+            renderer,
+            transform
+          });
         }
-      })
-
+      });
     });
+
+    objRenderers = objRenderers.sort( (a, b) => a.renderer.sort - b.renderer.sort );
+
+    objRenderers.forEach( ({renderer, transform }) => {
+      renderer.draw(ctx, transform, offset);
+    });
+
   }
 
   drawGridlines(ctx, offset) {

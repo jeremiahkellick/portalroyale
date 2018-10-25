@@ -9,11 +9,11 @@ import Vector from '../vector';
 const createBullet = ({ id, position, directionVector, rotation, owned }) => {
   position = Vector.fromPOJO(position);
   directionVector = Vector.fromPOJO(directionVector);
-  const bullet = new GameObject(id, 2);
+  const bullet = new GameObject(id);
   const transform = new Transform(  position );
   bullet.addComponent(transform);
   bullet.addComponent(new Collider(new Circle(5), 'bullet'));
-  bullet.addComponent(new BulletRenderer(rotation));
+  bullet.addComponent(new BulletRenderer(rotation, 2));
   bullet.addComponent(
     new BulletMovement(1200, directionVector.normalized().times(900), owned)
   );

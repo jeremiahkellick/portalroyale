@@ -3,6 +3,11 @@ import Hitpoint from '../game_components/hitpoint';
 
 class HitpointRenderer extends Renderer {
 
+  constructor(sort) {
+    super();
+    this.sort = sort || 0;
+  }
+
   draw(ctx, transform, offset) {
 
     const hitpoint = transform.gameObject.getComponent(Hitpoint);

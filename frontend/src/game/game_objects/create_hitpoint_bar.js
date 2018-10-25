@@ -14,7 +14,7 @@ import Circle from '../shapes/circle';
 
 
 const createHitpointBar = ({ id, owned, position }) => {
-  const player = new GameObject(id, 4);
+  const player = new GameObject(id);
   const transform = new Transform(Vector.fromPOJO(position));
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
