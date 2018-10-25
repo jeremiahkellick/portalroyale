@@ -12,9 +12,10 @@ import Shoot from '../game_components/shoot';
 import Collider from '../game_components/collider';
 import Hitpoint from '../game_components/hitpoint';
 import Circle from '../shapes/circle';
+import NameRenderer from '../renderers/name_renderer';
 
 
-const createPlayer = ({ id, owned, position, health }) => {
+const createPlayer = ({ id, owned, position, health, name }) => {
   const radius = 22;
   const player = new GameObject(id);
   const transform = new Transform(Vector.fromPOJO(position));
@@ -32,7 +33,10 @@ const createPlayer = ({ id, owned, position, health }) => {
     player.addComponent(new Shoot());
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
+  } else {
+    player.addComponent(new NameRenderer(name));
   }
+
   return player;
 };
 
