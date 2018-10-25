@@ -6,7 +6,7 @@ import Game from '../game';
 import Vector from '../vector';
 
 const layers = {
-  'player': new Set(['obstacle', 'bullet']),
+  'player': new Set(['obstacle']),
   'bullet': new Set(['obstacle', 'player']),
   'obstacle': new Set(['obstacle', 'player', 'bullet'])
 }
