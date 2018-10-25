@@ -14,7 +14,7 @@ class Game {
     Time.update();
     window.requestAnimationFrame(this.update.bind(this));
   }
-  
+
   sendUpdateToServer() {
     const packet = {};
 
@@ -30,7 +30,7 @@ class Game {
         action.sender = this.clientId;
         packet.actions.push(action);
       });
-      syncronizer.actions = [];
+      syncronizer.clearActions();
     });
 
     this.updateServerCallback(packet);

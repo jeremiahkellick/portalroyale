@@ -3,10 +3,10 @@ import Transform from './transform';
 import TransformSyncronizer from './transform_syncronizer';
 import Syncronizer from './syncronizer';
 import CircleRenderer from './renderers/circle_renderer';
-import Vector from '../vector'; 
+import Vector from '../vector';
 import Input from './input';
 import Movement from './movement';
-import Camera from './camera'; 
+import Camera from './camera';
 import Shoot from './shoot';
 import Collider from './collider';
 import Hitpoint from './hitpoint';
@@ -19,7 +19,7 @@ const createPlayer = ({ id, owned, position }) => {
   const transform = new Transform(Vector.fromPOJO(position));
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
-  const hitpoint = new Hitpoint(100);
+  const hitpoint = new Hitpoint(100, owned);
   player.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
   player.addComponent(new CircleRenderer(radius, '#fce5cd'));
@@ -28,7 +28,7 @@ const createPlayer = ({ id, owned, position }) => {
 
   if (owned) {
     player.addComponent(new Input());
-    player.addComponent(new Shoot()); 
+    player.addComponent(new Shoot());
     player.addComponent(new Camera());
   }
   return player;
