@@ -2,9 +2,11 @@ import Renderer from './renderer';
 import BulletMovement from '../game_components/bullet_movement';
 
 class BulletRenderer extends Renderer {
-  constructor(rotation) {
+
+  constructor(rotation, sort) {
     super();
     this.rotation = rotation;
+    this.sort = sort || 0;
   }
 
   draw(ctx, transform, offset) {

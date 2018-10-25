@@ -17,14 +17,14 @@ import NameRenderer from '../renderers/name_renderer';
 
 const createPlayer = ({ id, owned, position, health, name }) => {
   const radius = 22;
-  const player = new GameObject(id, 1);
+  const player = new GameObject(id);
   const transform = new Transform(Vector.fromPOJO(position));
   player.addComponent(transform);
   new TransformSyncronizer(id + '0', transform, owned);
   const hitpoint = new Hitpoint(health);
   player.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
-  player.addComponent(new CircleRenderer(radius, '#f6cb88'));
+  player.addComponent(new CircleRenderer(radius, '#f6cb88', 1));
   player.addComponent(new Movement());
   player.addComponent(new Collider(new Circle(radius), 'player'));
 
@@ -32,7 +32,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new Input());
     player.addComponent(new Shoot());
     player.addComponent(new Camera());
-    player.addComponent(new HitpointRenderer());
+    player.addComponent(new HitpointRenderer(10));
   } else {
     player.addComponent(new NameRenderer(name));
   }
