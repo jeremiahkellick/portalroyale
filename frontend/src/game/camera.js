@@ -55,11 +55,14 @@ class Camera extends Component {
     // need to dermine order
     gameObjects.forEach( obj => {
       //render background /other objects in game
-      const renderer = obj.getComponent(Renderer);
+      const renderers = obj.getComponents(Renderer);
       const transform = obj.getComponent(Transform);
-      if (renderer !== undefined && transform !== undefined ) {
-        renderer.draw(ctx, transform, offset);
-      }
+
+      renderers.forEach ( renderer => {
+        if (renderer !== undefined && transform !== undefined ) {
+          renderer.draw(ctx, transform, offset);
+        }
+      })
 
     });
   }
