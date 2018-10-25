@@ -1,11 +1,12 @@
 import Component from './component';
 
 class Hitpoint extends Component {
-  constructor(health) {
+  constructor(health, owned = false) {
     super();
     this.onDamageFunctions = [];
     this.onDeathFunctions = [];
     this.health = health;
+    this.owned = owned;
   }
 
   onDamage(func) {
@@ -24,21 +25,16 @@ class Hitpoint extends Component {
     this.dispatch({ type: 'DEATH'});
   }
 
-  update() {
-    if (this.health === 0) {
-      this.death();
-      this.gameObject.destroy();
-    }
-  }
-
   handleAction(action) {
     switch (action.type) {
       case 'DAMAGE':
         this.health = Math.max(this.health - action.damage, 0);
         this.onDamageFunctions.forEach( func => func() );
+        if (this.owned && this.health === 0) this.death();
         break;
       case 'DEATH':
         this.onDeathFunctions.forEach( func => func() );
+        this.gameObject.destroy();
         break;
       default:
     }

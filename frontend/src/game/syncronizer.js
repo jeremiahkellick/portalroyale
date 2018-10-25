@@ -5,6 +5,7 @@ class Syncronizer {
     component.syncronizer = this;
     this.owned = owned;
     this.actions = [];
+    this.shouldBeDestroyed = false;
     Syncronizer.byId[this.id] = this;
   }
 
@@ -23,7 +24,18 @@ class Syncronizer {
   }
 
   destroy() {
-    Syncronizer.destroy(this.id);
+    if (this.actions.length === 0) {
+      Syncronizer.destroy(this.id);
+    } else {
+      this.shouldBeDestroyed = true;
+    }
+  }
+
+  clearActions() {
+    this.actions = [];
+    if (this.shouldBeDestroyed) {
+      Syncronizer.destroy(this.id);
+    }
   }
 
   static find(id) {
