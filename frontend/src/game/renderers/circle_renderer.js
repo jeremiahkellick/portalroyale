@@ -2,7 +2,7 @@ import Renderer from './renderer';
 
 class CircleRenderer extends Renderer {
   constructor(radius, fillColor, stroke, strokeColor, sort) {
-    super();
+    super(sort);
     this.radius = radius;
     this.fillColor = fillColor;
     this.stroke = stroke;
