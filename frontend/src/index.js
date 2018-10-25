@@ -53,12 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
     sendCreateToServer(
       {
         type: 'player',
-        position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO()
+        position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO(),
+        health: 100
       },
       true
     );
   });
-  
+
   socket.on('create', options => {
     if (options.sender !== socket.id) {
       const obj = create(options);
