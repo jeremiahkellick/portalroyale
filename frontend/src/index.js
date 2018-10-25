@@ -7,10 +7,10 @@ import * as serviceWorker from './serviceWorker';
 import io from 'socket.io-client';
 import Game from './game/game';
 import getId from './game/get_id';
-import rootCreator from './game/root_creator';
+import rootCreator from './game/game_objects/root_creator';
 import Syncronizer from './game/syncronizer';
 import { MAP_WIDTH, MAP_HEIGHT } from './game/util';
-import Vector from './vector';
+import Vector from './game/vector';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')

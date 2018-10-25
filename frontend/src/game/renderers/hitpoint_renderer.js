@@ -1,7 +1,7 @@
-import Component from '../component';
-import Transform from '../transform';
+import Component from '../game_components/component';
+import Transform from '../game_components/transform';
 import Renderer from './renderer';
-import Hitpoint from '../hitpoint';
+import Hitpoint from '../game_components/hitpoint';
 
 class HitpointRenderer extends Renderer {
 

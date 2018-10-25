@@ -1,11 +1,11 @@
 import GameObject from './game_object';
-import Syncronizer from './syncronizer';
-import Transform from './transform';
-import TreeRenderer from './renderers/tree_renderer';
-import Collider from './collider';
-import Hitpoint from './hitpoint';
+import Syncronizer from '../syncronizer';
+import Transform from '../game_components/transform';
+import TreeRenderer from '../renderers/tree_renderer';
+import Collider from '../game_components/collider';
+import Hitpoint from '../game_components/hitpoint';
 import Vector from '../vector';
-import Circle from './circle';
+import Circle from '../shapes/circle';
 
 const createTree = ({ id, position, health }) => {
   const tree = new GameObject(id, 3);

@@ -1,5 +1,5 @@
 import Syncronizer from './syncronizer';
-import Vector from '../vector';
+import Vector from './vector';
 
 class TransformSyncronizer extends Syncronizer {
   constructor(id, component, owned = false) {

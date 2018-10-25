@@ -9,7 +9,7 @@ class CollisionDetection {
   checkCollision() {
     if (this.shape1 instanceof Circle && this.shape2 instanceof Circle) {
       return this.circleCircleCollision();
-    } 
+    }
     else if (this.shape1 instanceof Rectangle && this.shape2 instanceof Rectangle) {
       return this.rectRectCollision();
     }
@@ -25,9 +25,9 @@ class CollisionDetection {
   }
 
   rectRectCollision() {
-    return shape1.pos.x < shape2.pos.x + shape2.width && 
-      shape1.pos.x + shape1.width > shape2.pos.x && 
-      shape1.pos.y < shape2.pos.y + shape2.height && 
+    return shape1.pos.x < shape2.pos.x + shape2.width &&
+      shape1.pos.x + shape1.width > shape2.pos.x &&
+      shape1.pos.y < shape2.pos.y + shape2.height &&
       shape1.pos.y + shape1.height > shape2.pos.y
   }
 
@@ -75,7 +75,7 @@ class CollisionDetection {
     const x1src = this.shape2.pos2.x;
     const y0src = this.shape2.pos1.y;
     const y1src = this.shape2.pos2.y;
-    
+
     const t0 = 0.0;
     const t1 = 1.0;
     const xdelta = x1src-x0src;
@@ -86,7 +86,7 @@ class CollisionDetection {
         if (edge==0) {  p = -xdelta;    q = -(edgeLeft-x0src);  }
         if (edge==1) {  p = xdelta;     q =  (edgeRight-x0src); }
         if (edge==2) {  p = -ydelta;    q = -(edgeBottom-y0src);}
-        if (edge==3) {  p = ydelta;     q =  (edgeTop-y0src);   }   
+        if (edge==3) {  p = ydelta;     q =  (edgeTop-y0src);   }
         r = q/p;
         if(p==0 && q<0) return false;   // Don't draw line at all. (parallel line outside)
 
