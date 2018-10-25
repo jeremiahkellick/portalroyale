@@ -1,7 +1,7 @@
 import Component from './component';
-import Vector from '../../vector';
+import Vector from '../vector';
 import key from 'keymaster';
-import Transform from '../transform';
+import Transform from './transform';
 import Camera from './camera';
 
 const getMouseCanvasPosition = (canvas, event) => {

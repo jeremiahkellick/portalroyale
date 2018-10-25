@@ -1,5 +1,5 @@
 import Renderer from './renderer';
-import BulletMovement from '../bullet_movement';
+import BulletMovement from '../game_components/bullet_movement';
 
 class BulletRenderer extends Renderer {
   constructor(rotation) {

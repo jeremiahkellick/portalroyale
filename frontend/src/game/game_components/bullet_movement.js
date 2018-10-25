@@ -1,5 +1,5 @@
 import Movement from './movement';
-import Time from './time';
+import Time from '../time';
 import Hitpoint from './hitpoint';
 
 class BulletMovement extends Movement {
