@@ -1,4 +1,4 @@
-import { CANVAS_WIDTH, CANVAS_HEIGHT, MAP_WIDTH, MAP_HEIGHT } from './util';
+import { MAP_WIDTH, MAP_HEIGHT } from './util';
 import Game from './game';
 import Component from './component';
 import Transform from './transform';
@@ -16,6 +16,9 @@ class Camera extends Component {
   }
 
   offset() {
+    const canvas = document.getElementById("canvas"); 
+    const [ CANVAS_WIDTH, CANVAS_HEIGHT ] = [ canvas.width, canvas.height]; 
+
     const offset = this.playerTransform.position.minus(
       new Vector(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2)
     );
@@ -38,25 +41,54 @@ class Camera extends Component {
 
   update() {
     const ctx = Game.game.ctx;
+    const canvas = document.getElementById("canvas"); 
 
-    const { x: translateX, y: translateY } = this.offset();
+    const offset = this.offset(); 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    //draw map grid 
+    this.drawGridlines(ctx, offset, canvas.width, canvas.height); 
 
     const gameObjects = Object.values(Game.game.gameObjects)
       .sort( (a, b) => a.sort - b.sort );
-
+    
     // need to dermine order
     gameObjects.forEach( obj => {
       //render background /other objects in game
       const renderers = obj.getComponents(Renderer);
       const transform = obj.getComponent(Transform);
+
       renderers.forEach ( renderer => {
         if (renderer !== undefined && transform !== undefined ) {
-          renderer.draw(ctx, transform, new Vector(translateX, translateY));
+          renderer.draw(ctx, transform, offset);
         }
       })
+
     });
+  }
+
+  drawGridlines(ctx, offset, width, height) {
+    const gridSize = 300; 
+
+    ctx.strokeStyle = "#6c953e"; 
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    
+    // let x = offset.x - offset.x % gridSize; 
+    // let y = offset.y - offset.y % gridSize; 
+    // console.log(x, y); 
+
+    for ( let i = 0; i <= MAP_WIDTH; i+=gridSize) {
+      ctx.moveTo(i-offset.x, 0); 
+      ctx.lineTo(i-offset.x, MAP_HEIGHT); 
+      ctx.stroke();
+    }
+    for ( let i = 0; i <= MAP_HEIGHT; i+=gridSize ) {
+      ctx.moveTo(0, i-offset.y); 
+      ctx.lineTo(MAP_WIDTH, i-offset.y); 
+      ctx.stroke();
+    }
+    ctx.closePath();
   }
 }
 

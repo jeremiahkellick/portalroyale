@@ -1,16 +1,11 @@
 import React from 'react';
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from './game/util'; 
-
+import Canvas from './components/canvas'; 
 const App = props => (
   <div className="App">
-    <header className="App-header">
+    {/* <header className="App-header">
       <h1>portfol.io</h1>
-      <canvas
-        id="canvas"
-        width={`${CANVAS_WIDTH}px`}
-        height={`${CANVAS_HEIGHT}px`}>
-      </canvas>
-    </header>
+    </header> */}
+    <Canvas />
   </div>
 );
 
