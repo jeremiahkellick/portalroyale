@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,EAAG;EACD,WAAW,EAAE,UAAU",
-"sources": ["../scss/app.scss"],
-"names": [],
-"file": "app.css"
-}

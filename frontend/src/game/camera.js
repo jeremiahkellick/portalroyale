@@ -65,10 +65,10 @@ class Camera extends Component {
   }
 
   drawGridlines(ctx, offset, width, height) {
-    const gridSize = 250; 
+    const gridSize = 300; 
 
-    ctx.strokeStyle = "#779b4d"; 
-    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#6c953e"; 
+    ctx.lineWidth = 1;
     ctx.beginPath();
     
     // let x = offset.x - offset.x % gridSize; 
