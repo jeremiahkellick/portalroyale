@@ -22,10 +22,6 @@ class Canvas extends React.Component {
     });
   }
 
-  resize() {
-
-  }
-
   render() {
     return (
       <canvas
