@@ -35,7 +35,6 @@ class Camera extends Component {
     if (offset.y + CANVAS_HEIGHT > MAP_HEIGHT) {
       offset.y = MAP_HEIGHT - CANVAS_HEIGHT;
     }
-
     return offset;
   }
 
@@ -43,7 +42,7 @@ class Camera extends Component {
     const ctx = Game.game.ctx;
     const canvas = document.getElementById("canvas"); 
 
-    const offset = this.offset(); 
+    const offset = this.offset();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //draw map grid 

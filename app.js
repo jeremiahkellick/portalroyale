@@ -47,7 +47,12 @@ for (let i = 0; i < 10; i++) {
   objectCreationOptions.push(
     { id: getId(), type: 'explosiveCircle', position: randomVectorInMap() }
   );
+  objectCreationOptions.push(
+    { id: getId(), type: 'lootCrate', position: randomVectorInMap() }
+  );
 }
+
+
 
 // objectCreationOptions.push({ id: getId(), type: 'bullet' });
 

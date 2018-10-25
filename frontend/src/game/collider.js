@@ -57,10 +57,10 @@ class Collider extends Component {
   }
 
   rectRectCollision(shape1, shape2) {
-    return shape1.pos.x < shape2.pos.x + shape2.width &&
-      shape1.pos.x + shape1.width > shape2.pos.x &&
-      shape1.pos.y < shape2.pos.y + shape2.height &&
-      shape1.pos.y + shape1.height > shape2.pos.y
+    return shape1.pos.x < shape2.pos.x + shape2.shape.width &&
+      shape1.pos.x + shape1.shape.width > shape2.pos.x &&
+      shape1.pos.y < shape2.pos.y + shape2.shape.height &&
+      shape1.pos.y + shape1.shape.height > shape2.pos.y
   }
 
   circleCircleCollision(shape1, shape2) {
@@ -71,20 +71,22 @@ class Collider extends Component {
   }
 
   circleRectCollision(circle, rect) {
-    let rectX = rect.pos.x + rect.width/2;
-    let rectY = rect.pos.y + rect.height/2;
-    let circleDistanceX = Math.abs(circle.pos.x - rectX);
-    let circleDistanceY = Math.abs(circle.pos.y - rectY);
-
-    if (circleDistanceX > (rect.width/2 + circle.radius)) return false;
-    else if (circleDistanceY > (rect.height/2 + circle.radius)) return false;
-    else if (circleDistanceX <= rect.width/2) return true;
-    else if (circleDistanceX <= rect.height/2) return true;
-    else {
-      let cornerDistanceSq = (circleDistanceX - rect.width/2) ** 2 +
-                              (circleDistanceY - rect.height/2) ** 2;
-      return cornerDistanceSq <= (circle.radius ** 2);
-    }
+    let cx = Math.abs(circle.pos.x - rect.pos.x - rect.shape.width/2);
+    let xDist = rect.shape.width/2 + circle.shape.radius;
+    if (cx > xDist)
+        return false;
+    let cy = Math.abs(circle.pos.y - rect.pos.y - rect.shape.height/2);
+    let yDist = rect.shape.height/2 + circle.shape.radius;
+    if (cy > yDist)
+        return false;
+    if (cx <= rect.shape.width/2 || cy <= rect.shape.height/2)
+        return true;
+    let xCornerDist = cx - rect.shape.width/2;
+    let yCornerDist = cy - rect.shape.height/2;
+    let xCornerDistSq = xCornerDist * xCornerDist;
+    let yCornerDistSq = yCornerDist * yCornerDist;
+    let maxCornerDistSq = circle.shape.radius * circle.shape.radius;
+    return xCornerDistSq + yCornerDistSq <= maxCornerDistSq;
   }
 
   circleLineCollision(circle, line) {

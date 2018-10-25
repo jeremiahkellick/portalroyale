@@ -13,7 +13,7 @@ const createExplosiveCircle = ({ id, position }) => {
   explosiveCircle.addComponent(transform);
   const hitpoint = new Hitpoint(100);
   explosiveCircle.addComponent(hitpoint);
-  new Syncronizer(id+'3', hitpoint);
+  new Syncronizer(id+'1', hitpoint);
   explosiveCircle.addComponent(new ExplosiveCircleRenderer());
   explosiveCircle.addComponent(new Collider(new Circle(30)));
   return explosiveCircle;
