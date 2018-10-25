@@ -1,11 +1,11 @@
 import GameObject from './game_object';
-import Syncronizer from './syncronizer';
-import Transform from './transform';
-import LootCrateRenderer from './renderers/loot_crate_renderer';
-import Collider from './collider';
-import Hitpoint from './hitpoint';
+import Syncronizer from '../syncronizer';
+import Transform from '../game_components/transform';
+import LootCrateRenderer from '../renderers/loot_crate_renderer';
+import Collider from '../game_components/collider';
+import Hitpoint from '../game_components/hitpoint';
 import Vector from '../vector';
-import Rectangle from './rectangle';
+import Rectangle from '../shapes/rectangle';
 
 const createLootCrate = ({ id, position }) => {
   const lootCrate = new GameObject(id, 6);

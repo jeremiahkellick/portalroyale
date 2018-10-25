@@ -1,5 +1,5 @@
 import Renderer from './renderer';
-import Hitpoint from '../hitpoint'
+import Hitpoint from '../game_components/hitpoint'
 
 class LootCrateRenderer extends Renderer {
   
