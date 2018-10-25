@@ -13,12 +13,20 @@ class Input extends Component {
   constructor() {
     super();
     this.mouseWasClicked = false;
-    document.getElementById('canvas').addEventListener('mousedown', e => {
-      e.preventDefault();
-      const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e)
-      this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
-      this.mouseWasClicked = true;
-    });
+    this.handleClick = this.handleClick.bind(this);
+    this.canvas = document.getElementById('canvas');
+    this.canvas.addEventListener('mousedown', this.handleClick);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e)
+    this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
+    this.mouseWasClicked = true;
+  }
+
+  onDestroy() {
+    this.canvas.removeEventListener('mousedown', this.handleClick);
   }
 
   start() {

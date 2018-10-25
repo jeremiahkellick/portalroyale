@@ -1,8 +1,8 @@
 import Renderer from './renderer';
 
 class NameRenderer extends Renderer {
-  constructor(name) {
-    super();
+  constructor(name, sort) {
+    super(sort);
     this.name = name;
   }
 

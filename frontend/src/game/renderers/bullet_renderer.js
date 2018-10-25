@@ -4,9 +4,8 @@ import BulletMovement from '../game_components/bullet_movement';
 class BulletRenderer extends Renderer {
 
   constructor(rotation, sort) {
-    super();
+    super(sort);
     this.rotation = rotation;
-    this.sort = sort || 0;
   }
 
   draw(ctx, transform, offset) {
