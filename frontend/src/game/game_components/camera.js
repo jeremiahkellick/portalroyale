@@ -1,8 +1,8 @@
-import { MAP_WIDTH, MAP_HEIGHT } from './util';
-import Game from './game';
+import { MAP_WIDTH, MAP_HEIGHT } from '../util';
+import Game from '../game';
 import Component from './component';
 import Transform from './transform';
-import Renderer from './renderers/renderer';
+import Renderer from '../renderers/renderer';
 import Vector from '../vector';
 
 class Camera extends Component {

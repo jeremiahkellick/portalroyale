@@ -1,8 +1,8 @@
 import Component from './component';
 import Transform from './transform';
-import Circle from './circle';
-import Rectangle from './rectangle';
-import Game from './game';
+import Circle from '../shapes/circle';
+import Rectangle from '../shapes/rectangle';
+import Game from '../game';
 import Vector from '../vector';
 
 const layers = {

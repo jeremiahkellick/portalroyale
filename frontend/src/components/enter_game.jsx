@@ -1,16 +1,16 @@
-import React from 'react'; 
+import React from 'react';
 
 class EnterGame {
   contructor(props) {
-    super(props); 
+    super(props);
     this.state = {
-      name: "", 
+      name: "",
     }
   }
 
   render() {
-    <div> 
-      <form> 
+    <div>
+      <form>
         <input type="text" val={this.state.name}></input>
         <input type="submit" val="Enter" ></input>
       </form>
@@ -18,4 +18,4 @@ class EnterGame {
   }
 }
 
-export default EnterGame; 
+export default EnterGame;

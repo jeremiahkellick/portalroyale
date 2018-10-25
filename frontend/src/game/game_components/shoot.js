@@ -2,7 +2,7 @@ import Component from './component';
 import Input from './input';
 import Transform from './transform';
 import Camera from './camera';
-import Game from './game';
+import Game from '../game';
 
 class Shoot extends Component {
 

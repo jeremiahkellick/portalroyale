@@ -1,17 +1,17 @@
 import GameObject from './game_object';
-import Transform from './transform';
-import TransformSyncronizer from './transform_syncronizer';
-import Syncronizer from './syncronizer';
-import CircleRenderer from './renderers/circle_renderer';
-import HitpointRenderer from './renderers/hitpoint_renderer';
+import Transform from '../game_components/transform';
+import TransformSyncronizer from '../transform_syncronizer';
+import Syncronizer from '../syncronizer';
+import CircleRenderer from '../renderers/circle_renderer';
+import HitpointRenderer from '../renderers/hitpoint_renderer';
 import Vector from '../vector';
-import Input from './input';
-import Movement from './movement';
-import Camera from './camera';
-import Shoot from './shoot';
-import Collider from './collider';
-import Hitpoint from './hitpoint';
-import Circle from './circle';
+import Input from '../game_components/input';
+import Movement from '../game_components/movement';
+import Camera from '../game_components/camera';
+import Shoot from '../game_components/shoot';
+import Collider from '../game_components/collider';
+import Hitpoint from '../game_components/hitpoint';
+import Circle from '../shapes/circle';
 
 
 const createPlayer = ({ id, owned, position }) => {

@@ -1,4 +1,4 @@
-import Component from '../component';
+import Component from '../game_components/component';
 
 class Renderer extends Component {
   draw(ctx, transform) {
