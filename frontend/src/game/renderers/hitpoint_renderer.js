@@ -1,5 +1,3 @@
-import Component from '../game_components/component';
-import Transform from '../game_components/transform';
 import Renderer from './renderer';
 import Hitpoint from '../game_components/hitpoint';
 
@@ -11,13 +9,13 @@ class HitpointRenderer extends Renderer {
 
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 
-    let color ; 
+    let color ;
     if ( multiplier < .2 ) {
-      color = "#FF6347cc"; 
+      color = "#FF6347cc";
     } else if ( multiplier < .5 ) {
-      color = "#FFD700cc"; 
+      color = "#FFD700cc";
     } else {
-      color = "#ffffffcc"; 
+      color = "#ffffffcc";
     }
 
     const width = 200;
@@ -29,7 +27,7 @@ class HitpointRenderer extends Renderer {
     ctx.rect( x, y, x + width, y + height);
     ctx.fillStyle = '#BEBEBE55';
     ctx.fill();
-    ctx.lineWidth = 2; 
+    ctx.lineWidth = 2;
     ctx.strokeStyle = '#00000022';
     ctx.stroke();
     ctx.closePath();
@@ -39,7 +37,7 @@ class HitpointRenderer extends Renderer {
     ctx.rect( x, y, x + (width * multiplier), y + height);
     ctx.fillStyle = color ;
     ctx.fill();
-    ctx.lineWidth = 2; 
+    ctx.lineWidth = 2;
     ctx.strokeStyle = '#00000022';
     ctx.stroke();
     ctx.closePath();

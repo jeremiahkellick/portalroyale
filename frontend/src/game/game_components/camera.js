@@ -11,8 +11,8 @@ class Camera extends Component {
     Camera.camera = this;
   }
 
-  start() {
-    this.playerTransform = this.requireComponent(Transform);
+  onDestroy() {
+    if (Camera.camera === this) Camera.camera = undefined;
   }
 
   offset() {
@@ -39,15 +39,18 @@ class Camera extends Component {
     return offset;
   }
 
-  update() {
-    const ctx = Game.game.ctx;
+  draw(ctx) {
+    this.playerTransform = this.playerTransform
+                           || this.gameObject.getComponent(Transform);
+    if (this.playerTransform === undefined) return;
+
     const canvas = document.getElementById("canvas");
 
     const offset = this.offset();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    //draw map grid 
-    this.drawGridlines(ctx, offset); 
+    //draw map grid
+    this.drawGridlines(ctx, offset);
 
     const gameObjects = Object.values(Game.game.gameObjects)
       .sort( (a, b) => a.sort - b.sort );
@@ -68,7 +71,7 @@ class Camera extends Component {
   }
 
   drawGridlines(ctx, offset) {
-    const gridSize = 300; 
+    const gridSize = 300;
 
     ctx.strokeStyle = "#6c953e";
     ctx.lineWidth = 1;
