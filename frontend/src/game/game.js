@@ -7,6 +7,8 @@ class Game {
   constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
     Game.game = this;
     this.ctx = ctx;
+    ctx.font = 'bold 16px Roboto';
+    ctx.textAlign = "center";
     this.clientId = clientId;
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;

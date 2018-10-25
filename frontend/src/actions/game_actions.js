@@ -9,6 +9,6 @@ const startGame = (name) => ({
 });
 
 export const initializeGame = (name) => dispatch => {
-  GameUtil.initializeGame();
+  GameUtil.initializeGame(name);
   dispatch(startGame(name));
 }

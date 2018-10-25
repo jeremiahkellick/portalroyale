@@ -2,14 +2,10 @@ import io from 'socket.io-client';
 import Game from '../game/game';
 import getId from '../game/get_id';
 import rootCreator from '../game/game_objects/root_creator';
-import Syncronizer from '../game/syncronizer';
 import { MAP_WIDTH, MAP_HEIGHT } from '../game/util';
 import Vector from '../game/vector';
 
-export const initializeGame = () => {
-
-  window.Syncronizer = Syncronizer;
-
+export const initializeGame = name => {
   const socket = io();
   const ctx = document.getElementById("canvas").getContext("2d");
   let game = undefined;
@@ -45,7 +41,8 @@ export const initializeGame = () => {
       {
         type: 'player',
         position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO(),
-        health: 100
+        health: 100,
+        name
       },
       true
     );
