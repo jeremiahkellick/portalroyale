@@ -42,6 +42,17 @@ class Input extends Component {
     return movement.normalized();
   }
 
+  getItemPickup() {
+    if (key.isPressed('F')) return 'pickup';
+    return null;
+  }
+
+  getItemUsed() {
+    let itemUsed;
+    if (key.isPressed('1')) itemUsed = 'medKit';
+    return itemUsed;
+  }
+
   shouldShoot() {
     const returnVal = this.mouseWasClicked;
     this.mouseWasClicked = false;

@@ -7,11 +7,11 @@ import Hitpoint from '../game_components/hitpoint';
 import Vector from '../vector';
 import Circle from '../shapes/circle';
 
-const createExplosiveCircle = ({ id, position }) => {
+const createExplosiveCircle = ({ id, position, health }) => {
   const explosiveCircle = new GameObject(id, 5);
   const transform = new Transform(Vector.fromPOJO(position));
   explosiveCircle.addComponent(transform);
-  const hitpoint = new Hitpoint(100);
+  const hitpoint = new Hitpoint(health);
   explosiveCircle.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
   explosiveCircle.addComponent(new ExplosiveCircleRenderer());
