@@ -24,7 +24,7 @@ body {
 }
 
 .enter-game, .game-over, .lobby {
-  background: #61726177;
+  background: #63676377;
   padding: 10px 20px;
   margin: 20px;
   box-shadow: #6a8f3f;
@@ -48,7 +48,7 @@ body {
       text-align: center;
       border: 1px solid #6a8f3f;
       &:hover {
-        background: #afe66c;
+        background: #96bf63;
       }
     }
   }
@@ -63,6 +63,7 @@ body {
     li {
       background: #afe66c;
       padding: 10px;
+      margin: 10px 0;
     }
   }
 }
