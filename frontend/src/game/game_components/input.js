@@ -14,19 +14,26 @@ class Input extends Component {
     super();
     this.mouseWasClicked = false;
     this.handleClick = this.handleClick.bind(this);
+    this.handleMove = this.handleMove.bind(this);
     this.canvas = document.getElementById('canvas');
     this.canvas.addEventListener('mousedown', this.handleClick);
+    this.canvas.addEventListener('mousemove', this.handleMove);
   }
 
   handleClick(e) {
     e.preventDefault();
-    const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e)
-    this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
     this.mouseWasClicked = true;
+  }
+
+  handleMove(e) {
+    e.preventDefault();
+    const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e);
+    this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
   }
 
   onDestroy() {
     this.canvas.removeEventListener('mousedown', this.handleClick);
+    this.canvas.removeEventListener('mousemove', this.handleMove);
   }
 
   start() {
