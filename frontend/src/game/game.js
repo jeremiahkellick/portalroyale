@@ -21,8 +21,6 @@ class Game {
     Game.game = this;
     this.over = false;
     this.ctx = ctx;
-    ctx.font = 'bold 16px Roboto';
-    ctx.textAlign = "center";
     this.clientId = clientId;
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
