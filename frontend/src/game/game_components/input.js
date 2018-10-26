@@ -3,6 +3,7 @@ import Vector from '../vector';
 import key from 'keymaster';
 import Transform from './transform';
 import Camera from './camera';
+import Game from '../game';
 
 const getMouseCanvasPosition = (canvas, event) => {
   const rect = event.currentTarget.getBoundingClientRect();
@@ -20,6 +21,7 @@ class Input extends Component {
 
   handleClick(e) {
     e.preventDefault();
+    if (Game.game.started === false) return;
     const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e)
     this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
     this.mouseWasClicked = true;

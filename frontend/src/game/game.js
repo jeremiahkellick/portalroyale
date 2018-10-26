@@ -5,6 +5,8 @@ import Camera from './game_components/camera';
 import getId from './get_id';
 import GameObject from './game_objects/game_object';
 import PlayersAliveRenderer from './renderers/players_alive_renderer';
+import ObjectTracker from './game_components/object_tracker';
+import { receivePlayers } from '../actions/player_actions';
 
 class Game {
   constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
@@ -20,6 +22,20 @@ class Game {
     const playerCount = new GameObject(playerCountId);
     playerCount.addComponent(new PlayersAliveRenderer(10));
     this.gameObjects[playerCountId] = playerCount;
+    ObjectTracker.onChange('players', players =>
+      window.store.dispatch(receivePlayers(players))
+    );
+    this.started = false;
+    this.unsubscribe = window.store.subscribe(() => {
+      if (window.store.getState().ui.game.started) {
+        this.unsubscribe();
+        this.start();
+      }
+    });
+  }
+
+  start() {
+    this.started = true;
     setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
     setInterval(this.update.bind(this), 1000 / 60);
