@@ -19,7 +19,11 @@ body {
   text-align: center;
 }
 
-.enter-game {
+.hompage {
+  min-width: 800px;
+}
+
+.enter-game, .game-over {
   background: #61726177;
   padding: 20px;
   margin: 20px;
@@ -49,6 +53,11 @@ body {
       }
     }
   }
+}
+
+
+.game-over {
+
 }
 
 canvas {
