@@ -9,8 +9,12 @@ const enterLobby = (name) => ({
   name
 });
 
-export const initializeGame = (name) => dispatch => {
-  GameUtil.initializeGame(name);
+export const gameOver = () => ({
+  type: GAME_OVER
+});
+
+export const initializeGame = name => dispatch => {
+  GameUtil.initializeGame(name, dispatch);
   dispatch(enterLobby(name));
 }
 

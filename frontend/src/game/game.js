@@ -2,6 +2,7 @@ import Syncronizer from './syncronizer';
 import Time from './time';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 import Camera from './game_components/camera';
+import { gameOver  } from '../actions/game_actions';
 import getId from './get_id';
 import GameObject from './game_objects/game_object';
 import PlayersAliveRenderer from './renderers/players_alive_renderer';
@@ -9,7 +10,7 @@ import ObjectTracker from './game_components/object_tracker';
 import { receivePlayers } from '../actions/player_actions';
 
 class Game {
-  constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
+  constructor(ctx, clientId, updateServerCallback, createOnServerCallback, dispatch) {
     Game.game = this;
     this.ctx = ctx;
     ctx.font = 'bold 16px Roboto';
@@ -18,12 +19,13 @@ class Game {
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
     this.gameObjects = {};
+    this.dispatch = dispatch;
     const playerCountId = getId();
     const playerCount = new GameObject(playerCountId);
     playerCount.addComponent(new PlayersAliveRenderer(10));
     this.gameObjects[playerCountId] = playerCount;
     ObjectTracker.onChange('players', players =>
-      window.store.dispatch(receivePlayers(players))
+      this.dispatch(receivePlayers(players))
     );
     this.started = false;
     this.unsubscribe = window.store.subscribe(() => {
@@ -40,6 +42,10 @@ class Game {
     Time.update();
     setInterval(this.update.bind(this), 1000 / 60);
     window.requestAnimationFrame(this.draw.bind(this));
+  }
+
+  endGame() {
+   this.dispatch(gameOver());
   }
 
   sendUpdateToServer() {

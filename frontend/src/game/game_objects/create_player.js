@@ -13,6 +13,7 @@ import Collider from '../game_components/collider';
 import Hitpoint from '../game_components/hitpoint';
 import Circle from '../shapes/circle';
 import NameRenderer from '../renderers/name_renderer';
+import GameOver from '../game_components/game_over';
 import ObjectTracker from '../game_components/object_tracker';
 
 const createPlayer = ({ id, owned, position, health, name }) => {
@@ -34,6 +35,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new Shoot());
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
+    player.addComponent(new GameOver());
   } else {
     player.addComponent(new NameRenderer(name, 2));
   }

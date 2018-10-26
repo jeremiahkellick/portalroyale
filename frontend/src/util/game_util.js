@@ -5,7 +5,8 @@ import rootCreator from '../game/game_objects/root_creator';
 import { MAP_WIDTH, MAP_HEIGHT } from '../game/util';
 import Vector from '../game/vector';
 
-export const initializeGame = name => {
+export const initializeGame = ( name, dispatch ) => {
+
   const socket = io();
   const ctx = document.getElementById("canvas").getContext("2d");
   let game = undefined;
@@ -35,7 +36,7 @@ export const initializeGame = name => {
 
   socket.on('connect', () => {
     getId.base = socket.id;
-    game = new Game(ctx, socket.id, sendUpdateToServer, sendCreateToServer);
+    game = new Game(ctx, socket.id, sendUpdateToServer, sendCreateToServer, dispatch);
     window.game = game;
     sendCreateToServer(
       {

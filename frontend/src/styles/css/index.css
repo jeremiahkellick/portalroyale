@@ -16,27 +16,30 @@ body {
   font-size: 30px;
   text-align: center; }
 
-.enter-game {
+.hompage {
+  min-width: 800px; }
+
+.enter-game, .game-over {
   background: #61726177;
   padding: 20px;
   margin: 20px;
   box-shadow: #6a8f3f;
   border-radius: 3px; }
-  .enter-game form {
+  .enter-game form, .game-over form {
     display: flex;
     flex-direction: column;
     font-size: 20px;
     text-align: center;
     padding: 10px 0; }
-    .enter-game form input {
+    .enter-game form input, .game-over form input {
       margin: 5px 0;
       background: white;
       padding: 10px 5px; }
-    .enter-game form input[type="submit"] {
+    .enter-game form input[type="submit"], .game-over form input[type="submit"] {
       background: #8ecc47;
       text-align: center;
       border: 1px solid #6a8f3f; }
-      .enter-game form input[type="submit"]:hover {
+      .enter-game form input[type="submit"]:hover, .game-over form input[type="submit"]:hover {
         background: #b8d795; }
 
 canvas {
