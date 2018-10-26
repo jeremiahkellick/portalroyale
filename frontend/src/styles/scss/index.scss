@@ -23,9 +23,9 @@ body {
   min-width: 800px;
 }
 
-.enter-game, .game-over {
-  background: #61726177;
-  padding: 20px;
+.enter-game, .game-over, .lobby {
+  background: #63676377;
+  padding: 10px 20px;
   margin: 20px;
   box-shadow: #6a8f3f;
   border-radius: 3px;
@@ -38,26 +38,34 @@ body {
     padding: 10px 0;
 
     input {
-      margin: 5px 0;
+      margin: 10px 0;
       background: white;
       padding: 10px 5px;
     }
 
     input[type="submit"] {
-      background: #8ecc47;
+      background: #8cbf51;
       text-align: center;
       border: 1px solid #6a8f3f;
-
       &:hover {
-        background: #b8d795;
+        background: #96bf63;
       }
     }
   }
 }
 
+.lobby, .game-over {
+  width: 250px;
+}
 
-.game-over {
-
+.lobby {
+  ul {
+    li {
+      background: #afe66c;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  }
 }
 
 canvas {
