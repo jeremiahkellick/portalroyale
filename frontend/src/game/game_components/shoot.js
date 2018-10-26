@@ -15,12 +15,8 @@ class Shoot extends Component {
   update() {
     if (this.input) {
       if ( this.input.shouldShoot()) {
-        const shootPos = this.input.getMousePosition();
-        const playerPos = this.transform.position;
-        const dir = shootPos.minus(playerPos).normalized();
-
-        const sign = playerPos.y < shootPos.y ? 1 : -1
-        const rotation = Math.acos( (dir.x * sign) / dir.magnitude() ) + ( sign === -1 ? Math.PI : 0 ) ;
+        const dir = this.transform.getDirection();
+        const rotation = this.transform.rotation;
 
         let options = {
           type: "bullet",

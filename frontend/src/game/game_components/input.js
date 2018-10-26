@@ -3,7 +3,6 @@ import Vector from '../vector';
 import key from 'keymaster';
 import Transform from './transform';
 import Camera from './camera';
-import Game from '../game';
 
 const getMouseCanvasPosition = (canvas, event) => {
   const rect = event.currentTarget.getBoundingClientRect();
@@ -21,9 +20,14 @@ class Input extends Component {
     this.canvas.addEventListener('mousemove', this.handleMove);
   }
 
+  start() {
+    this.transform = this.gameObject.getComponent(Transform);
+  }
+
   handleClick(e) {
     e.preventDefault();
     this.mouseWasClicked = true;
+    console.log(this.transform.rotation);
   }
 
   handleMove(e) {
@@ -35,10 +39,6 @@ class Input extends Component {
   onDestroy() {
     this.canvas.removeEventListener('mousedown', this.handleClick);
     this.canvas.removeEventListener('mousemove', this.handleMove);
-  }
-
-  start() {
-    this.camera = Camera.camera.gameObject.getComponent(Transform);
   }
 
   getMovement() {
@@ -60,9 +60,6 @@ class Input extends Component {
     return this.mousePosition || Vector.zero();
   }
 
-  getRotation() {
-
-  }
 }
 
 export default Input;

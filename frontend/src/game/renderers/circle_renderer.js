@@ -16,7 +16,7 @@ class CircleRenderer extends Renderer {
     if (transform === undefined) return;
 
     const { x, y } = transform.position.minus(offset);
-    const rotation = transform.rotation+ Math.PI/2;
+    const rotation = transform.rotation;
 
     ctx.translate(x, y);
     ctx.rotate(rotation);
@@ -32,8 +32,8 @@ class CircleRenderer extends Renderer {
     ctx.fillStyle = this.fillColor;
     ctx.fill();
 
-    ctx.moveTo(7, -15)
-    ctx.arc( 0, -15, 7, 0, Math.PI*2, true );
+    ctx.moveTo( 22, 0)
+    ctx.arc( 15, 0, 7, 0, Math.PI*2, true );
     ctx.strokeStyle = "black";
     ctx.lineWidth = 1;
     ctx.stroke();
