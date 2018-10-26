@@ -14,3 +14,8 @@ export const randomInt = (min, max) => {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 };
+
+export const randomFloat = (min, max) => {
+  return Math.random() * (max - min) + min;
+};
+
