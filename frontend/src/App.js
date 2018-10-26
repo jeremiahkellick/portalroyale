@@ -1,19 +1,13 @@
 import React from 'react';
 import Canvas from './components/canvas';
-import Homepage from './components/homepage'
-import {Switch, Router} from 'react-router-dom';
-import { connect } from 'react-redux';
+import Homepage from './components/homepage';
 
-const App = ({name}) => (
+const App = () => (
 
   <div className="App">
-    { name ? null : <Homepage /> }
+    <Homepage />
     <Canvas />
   </div>
 );
 
-const mapStateToProps = ({ game: { name } }) => ({
-  name
-});
-
-export default connect( mapStateToProps, null )( App );
+export default App;
