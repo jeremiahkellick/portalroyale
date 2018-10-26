@@ -3,6 +3,7 @@ import Vector from '../vector';
 import key from 'keymaster';
 import Transform from './transform';
 import Camera from './camera';
+import Game from '../game';
 
 const getMouseCanvasPosition = (canvas, event) => {
   const rect = event.currentTarget.getBoundingClientRect();

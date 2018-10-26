@@ -71,10 +71,9 @@ export const initializeGame = name => {
   socket.on('destroy', objectIds => {
     if (objectIds) {
       objectIds.forEach(id => {
-        game.destroy(id);
+        if (game.gameObjects[id] !== undefined) game.gameObjects[id].destroy();
       });
     }
   });
 
 }
-
