@@ -1,7 +1,6 @@
 import React from 'react';
 import Canvas from './components/canvas';
 import Homepage from './components/homepage'
-import {Switch, Router} from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const App = ({name}) => (

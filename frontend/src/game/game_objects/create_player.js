@@ -34,7 +34,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
   } else {
-    player.addComponent(new NameRenderer(name, 9));
+    player.addComponent(new NameRenderer(name, 2));
   }
 
   return player;
