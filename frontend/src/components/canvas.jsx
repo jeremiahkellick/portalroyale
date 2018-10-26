@@ -28,15 +28,15 @@ class Canvas extends React.Component {
         id="canvas"
         width={`${this.state.width}px`}
         height={`${this.state.height}px`}
-        className={ this.props.name && !this.props.gameOver ? "" : "hidden"} >
+        className={ this.props.started && !this.props.gameOver ? "" : "hidden"} >
       </canvas>
     );
   }
 }
 
 
-const mapStateToProps = ({ game: { name, gameOver } } ) => ({
-  name,
+const mapStateToProps = ({ game: { started, gameOver } } ) => ({
+  started,
   gameOver
 });
 
