@@ -15,7 +15,9 @@ class Shoot extends Component {
   update() {
     if (this.input) {
       if ( this.input.shouldShoot()) {
-        const dir = this.transform.getDirection();
+        const dir = this.input.mousePosition()
+                              .minus(this.transform.position)
+                              .normalized();
         const rotation = this.transform.rotation;
 
         let options = {
