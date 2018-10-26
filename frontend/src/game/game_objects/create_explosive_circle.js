@@ -24,8 +24,7 @@ const createExplosiveCircle = ({ id, position, health }) => {
     return () => {
       let options = {
         type: "explosion",
-        position: transform.position.toPOJO(),
-        health: 100
+        position: transform.position.toPOJO()
       };
       Game.game.sendCreateToServer( options, false );
     }
