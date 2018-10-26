@@ -2,9 +2,8 @@ import Renderer from './renderer';
 import Hitpoint from '../game_components/hitpoint';
 
 class HitpointRenderer extends Renderer {
-  draw(ctx, transform, offset) {
-
-    const hitpoint = transform.gameObject.getComponent(Hitpoint);
+  draw(ctx, offset) {
+    const hitpoint = this.gameObject.getComponent(Hitpoint);
 
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 

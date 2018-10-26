@@ -13,7 +13,7 @@ import Collider from '../game_components/collider';
 import Hitpoint from '../game_components/hitpoint';
 import Circle from '../shapes/circle';
 import NameRenderer from '../renderers/name_renderer';
-
+import Count from '../game_components/count';
 
 const createPlayer = ({ id, owned, position, health, name }) => {
   const radius = 22;
@@ -27,6 +27,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
   player.addComponent(new CircleRenderer(radius, '#f6cb88', 1));
   player.addComponent(new Movement());
   player.addComponent(new Collider(new Circle(radius), 'player'));
+  player.addComponent(new Count('players'));
 
   if (owned) {
     player.addComponent(new Input());
