@@ -68,9 +68,10 @@ class ExplosionRenderer extends Renderer {
   }
 
   drawExplosionLines(ctx, multiplier, numLines ) {
-    let rot = 0;
     const evenSlice =  Math.PI*2 / numLines;
     let left = Math.PI*2;
+    let step = randomFloat( evenSlice/2 , evenSlice*2 ) ;
+    let rot = step;
 
     let [x1, y1, x2, y2] = [0, 0, 0, 0, 0, 0];
     ctx.beginPath();
@@ -88,7 +89,7 @@ class ExplosionRenderer extends Renderer {
       ctx.lineWidth = 1;
       ctx.strokeStyle = "#5e474555";
       ctx.stroke();
-      const step = randomFloat( evenSlice/2 , evenSlice*2 ) ;
+      step = randomFloat( evenSlice/2 , evenSlice*2 ) ;
       rot += step;
       left -= step;
 

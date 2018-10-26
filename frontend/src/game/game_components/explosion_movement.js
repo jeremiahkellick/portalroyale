@@ -13,7 +13,7 @@ class ExplosionMovement extends Movement {
     if ( this.radius < this.maxRange ) {
       const pos = this.transform.position;
       const collidedWith = this.collider.checkAllCollisions(pos);
-      // console.log(collidedWith);
+
       if (collidedWith) {
         const hitpoint = collidedWith.getComponent(Hitpoint);
         if (hitpoint) {
