@@ -10,7 +10,7 @@ class Inventory extends Component {
     }
     this.usedItemTime = null;
   }
-  
+
   start() {
     this.input = this.gameObject.getComponent(Input);
   }
@@ -32,6 +32,8 @@ class Inventory extends Component {
       case 'medKit':
         const health = this.gameObject.getComponent(Hitpoint);
         if (health) health.heal(100);
+        break;
+      default:
     }
   }
 
