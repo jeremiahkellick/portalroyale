@@ -6,7 +6,10 @@ class NameRenderer extends Renderer {
     this.name = name;
   }
 
-  draw(ctx, transform, offset) {
+  draw(ctx, offset) {
+    const transform = this.transform();
+    if(transform === undefined) return;
+
     const { x, y } = transform.position.minus(offset);
     ctx.fillStyle = 'white';
     ctx.shadowColor = 'black';
