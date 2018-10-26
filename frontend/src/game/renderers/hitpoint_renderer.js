@@ -8,9 +8,9 @@ class HitpointRenderer extends Renderer {
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 
     let color ;
-    if ( multiplier < .2 ) {
+    if ( multiplier <= .2 ) {
       color = "#FF6347cc";
-    } else if ( multiplier < .5 ) {
+    } else if ( multiplier <= .5 ) {
       color = "#FFD700cc";
     } else {
       color = "#ffffffcc";
