@@ -31,6 +31,10 @@ class Inventory extends Component {
     if (this.hasItem(item)) this.inventory[item] -= 1;
   }
 
+  applyingItem() {
+    return this.usingItem !== '';
+  }
+
   useItem(item) {
     switch(item) {
       case 'medKit':

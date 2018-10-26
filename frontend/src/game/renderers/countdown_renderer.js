@@ -4,9 +4,12 @@ import Inventory from '../game_components/inventory';
 class countdownRenderer extends Renderer {
   draw(ctx) {
     const inventory = this.gameObject.getComponent(Inventory);
-    if (inventory === undefined || inventory.usingItem === '') return;
+    if (inventory === undefined || !inventory.applyingItem()) return;
 
     const canvas = document.getElementById("canvas");
+    let timer = inventory.timer;
+    let timerString = timer < 10 ? '0' + timer.toString() : timer.toString();
+
     ctx.fillStyle = '#61726177';
     this.drawRoundedRect(
       ctx,
@@ -21,17 +24,22 @@ class countdownRenderer extends Renderer {
     ctx.textBaseline='middle';
     ctx.font = 'bold 24px Roboto';
     ctx.textAlign = "center";
-    let timerString = inventory.timer < 10 ? '0' + inventory.timer.toString() : inventory.timer.toString();
     ctx.fillText('Healing', canvas.width * 0.5, canvas.height * 0.4);
     ctx.textBaseline='alphabetic';
 
+    ctx.beginPath();
+    ctx.arc(canvas.width*0.5, canvas.height*0.3-10, 35, 0, Math.PI*2);
+    ctx.fillStyle = '#61726177';
+    ctx.fill();
+    ctx.closePath();
 
     ctx.beginPath();
+    ctx.arc(canvas.width*0.5, canvas.height*0.3-10, 35, -Math.PI/2, (-timer/25 - 0.5)*Math.PI);
     ctx.strokeStyle='white';
     ctx.lineWidth=4;
-    ctx.arc(canvas.width*0.5, canvas.height*0.3, 35, -Math.PI/2, (-inventory.timer/25 - 0.5)*Math.PI);
-    ctx.fillText(timerString[0]+'.'+timerString[1], canvas.width * 0.5, canvas.height * 0.3+8);
     ctx.stroke();
+    ctx.fillStyle = 'white';
+    ctx.fillText(timerString[0]+'.'+timerString[1], canvas.width * 0.5, canvas.height * 0.3-2);
     ctx.closePath();
   }
 
