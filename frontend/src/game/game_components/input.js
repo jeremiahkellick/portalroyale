@@ -4,9 +4,11 @@ import key from 'keymaster';
 import Transform from './transform';
 import Camera from './camera';
 
-const getMouseCanvasPosition = (canvas, event) => {
-  const rect = event.currentTarget.getBoundingClientRect();
-  return new Vector(event.clientX - rect.left, event.clientY - rect.top);
+const getMouseCanvasPosition = (canvas, mouseX, mouseY) => {
+  const rect = canvas.getBoundingClientRect();
+  return new Vector(mouseX - rect.left, mouseY - rect.top).plus(
+    Camera.camera.offset()
+  );
 }
 
 class Input extends Component {
@@ -27,13 +29,16 @@ class Input extends Component {
   handleClick(e) {
     e.preventDefault();
     this.mouseWasClicked = true;
-    console.log(this.transform.rotation);
   }
 
   handleMove(e) {
     e.preventDefault();
-    const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e);
-    this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
+    this.mouseX = e.clientX;
+    this.mouseY = e.clientY;
+  }
+
+  mousePosition() {
+    return getMouseCanvasPosition(this.canvas, this.mouseX, this.mouseY);
   }
 
   onDestroy() {
@@ -55,11 +60,6 @@ class Input extends Component {
     this.mouseWasClicked = false;
     return returnVal;
   }
-
-  getMousePosition() {
-    return this.mousePosition || Vector.zero();
-  }
-
 }
 
 export default Input;
