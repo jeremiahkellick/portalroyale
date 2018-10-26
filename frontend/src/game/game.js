@@ -2,9 +2,10 @@ import Syncronizer from './syncronizer';
 import Time from './time';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 import Camera from './game_components/camera';
+import { gameOver  } from '../actions/game_actions';
 
 class Game {
-  constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
+  constructor(ctx, clientId, updateServerCallback, createOnServerCallback, dispatch) {
     Game.game = this;
     this.ctx = ctx;
     ctx.font = 'bold 16px Roboto';
@@ -13,10 +14,15 @@ class Game {
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
     this.gameObjects = {};
+    this.dispatch = dispatch;
     setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
     setInterval(this.update.bind(this), 1000 / 60);
     window.requestAnimationFrame(this.draw.bind(this));
+  }
+
+  endGame() {
+   this.dispatch(gameOver());
   }
 
   sendUpdateToServer() {

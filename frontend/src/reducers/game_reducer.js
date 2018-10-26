@@ -3,13 +3,13 @@ import {
   GAME_OVER,
 } from '../actions/game_actions';
 
-const gameReducer = ( state = {}, action ) => {
+const gameReducer = ( state = { gameOver: false }, action ) => {
   Object.freeze(state);
   switch( action.type ) {
     case START_GAME:
-      return { name: action.name };
+      return { name: action.name, gameOver: false };
     case GAME_OVER:
-      return {};
+      return Object.assign( {}, state, { gameOver: true })
     default:
       return state;
   }

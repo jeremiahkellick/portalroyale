@@ -32,6 +32,7 @@ class Hitpoint extends Component {
         if (this.health === 0) this.death();
         break;
       case 'DEATH':
+        console.log("test");
         this.onDeathFunctions.forEach( func => func() );
         this.gameObject.destroy();
         break;

@@ -8,7 +8,11 @@ const startGame = (name) => ({
   name
 });
 
+export const gameOver = () => ({
+  type: GAME_OVER
+});
+
 export const initializeGame = (name) => dispatch => {
-  GameUtil.initializeGame(name);
+  GameUtil.initializeGame(name, dispatch);
   dispatch(startGame(name));
 }
