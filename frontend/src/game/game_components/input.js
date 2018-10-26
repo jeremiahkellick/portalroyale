@@ -56,8 +56,12 @@ class Input extends Component {
     return returnVal;
   }
 
-  shootPosition() {
-    return this.mousePosition;
+  getMousePosition() {
+    return this.mousePosition || Vector.zero();
+  }
+
+  getRotation() {
+
   }
 }
 

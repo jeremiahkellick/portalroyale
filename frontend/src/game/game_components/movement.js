@@ -23,6 +23,16 @@ class Movement extends Component {
       if (!this.collider.checkAllCollisions(newYPos, true)) {
         this.transform.position.y += movement.y;
       }
+
+      const mousePos = this.input.getMousePosition();
+
+      const playerPos = this.transform.position;
+      const dir = mousePos.minus(playerPos).normalized();
+
+      const sign = playerPos.y < mousePos.y ? 1 : -1
+      const rotation = Math.acos( (dir.x * sign) / dir.magnitude() ) + ( sign === -1 ? Math.PI : 0 ) ;
+
+      this.transform.rotation = rotation;
     }
   }
 }

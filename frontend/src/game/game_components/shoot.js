@@ -15,7 +15,7 @@ class Shoot extends Component {
   update() {
     if (this.input) {
       if ( this.input.shouldShoot()) {
-        const shootPos = this.input.shootPosition();
+        const shootPos = this.input.getMousePosition();
         const playerPos = this.transform.position;
         const dir = shootPos.minus(playerPos).normalized();
 
