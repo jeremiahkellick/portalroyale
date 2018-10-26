@@ -1,6 +1,6 @@
 import Renderer from './renderer';
 import Hitpoint from '../game_components/hitpoint'
-import { randomInt } from '../util';
+import { randomInt, randomFloat } from '../util';
 
 class ExplosionRenderer extends Renderer {
 
@@ -19,7 +19,7 @@ class ExplosionRenderer extends Renderer {
 
       this.drawGas( ctx, multiplier );
       this.drawSpikes( ctx, numSpikes, multiplier);
-      this.drawExplosionLines( ctx, multiplier );
+      this.drawExplosionLines( ctx, multiplier, 12 );
 
       ctx.setTransform(1, 0, 0, 1, 0, 0);
     // }
@@ -46,16 +46,16 @@ class ExplosionRenderer extends Renderer {
 
     ctx.beginPath();
 
-    let [x, y, x1, y1, x2, y2] = [0, 0, 0, 0, 0, 0];
+    let [ x1, y1, x2, y2] = [0, 0, 0, 0];
 
     for ( let i=0; i <= spikes; i++ ) {
-      x1 = x+Math.cos(rot)*innerRadius;
-      y1 = y+Math.sin(rot)*innerRadius;
+      x1 = Math.cos(rot)*innerRadius;
+      y1 = Math.sin(rot)*innerRadius;
       ctx.lineTo( x1, y1 );
       rot+=step;
 
-      x2 = x+Math.cos(rot)*outerRadius;
-      y2 = y+Math.sin(rot)*outerRadius;
+      x2 = Math.cos(rot)*outerRadius;
+      y2 = Math.sin(rot)*outerRadius;
       ctx.lineTo( x2, y2);
       rot+=step;
     }
@@ -66,8 +66,34 @@ class ExplosionRenderer extends Renderer {
 
   }
 
-  drawExplosionLines(ctx, multiplier) {
+  drawExplosionLines(ctx, multiplier, numLines ) {
+    let rot = 0;
+    const evenSlice =  Math.PI*2 / numLines;
+    let left = Math.PI*2;
 
+    let [x1, y1, x2, y2] = [0, 0, 0, 0, 0, 0];
+    ctx.beginPath();
+    while ( left > 0 ) {
+      const innerRadius = randomInt(10*multiplier, 40*multiplier);
+      const outerRadius = randomInt(20*multiplier, 70*multiplier);
+
+      x1 = Math.cos(rot)*innerRadius;
+      y1 = Math.sin(rot)*innerRadius;
+      x2 = Math.cos(rot)*outerRadius;
+      y2 = Math.sin(rot)*outerRadius;
+
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.lineWidth = 1;
+      ctx.strokeStye = "#00000055";
+      ctx.stroke();
+      const step = randomFloat( evenSlice/2 , evenSlice*2 ) ;
+      rot += step;
+      left -= step;
+
+    }
+
+    ctx.closePath();
   }
 
 }
