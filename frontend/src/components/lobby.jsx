@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startGame } from '../actions/game_actions';
+import Game from '../game/game';
 
 class Lobby extends React.Component {
   handleSubmit() {
     this.props.startGame();
+    Game.game.start();
   }
 
   render() {

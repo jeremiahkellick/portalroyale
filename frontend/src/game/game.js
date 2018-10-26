@@ -37,12 +37,6 @@ class Game {
       this.dispatch(receivePlayers(players))
     );
     this.started = false;
-    this.unsubscribe = window.store.subscribe(() => {
-      if (window.store.getState().game.started) {
-        this.unsubscribe();
-        this.start();
-      }
-    });
   }
 
   start() {
