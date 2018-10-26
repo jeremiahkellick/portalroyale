@@ -86,7 +86,7 @@ class ExplosionRenderer extends Renderer {
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
       ctx.lineWidth = 1;
-      ctx.strokeStye = "#00000055";
+      ctx.strokeStyle = "#5e474555";
       ctx.stroke();
       const step = randomFloat( evenSlice/2 , evenSlice*2 ) ;
       rot += step;

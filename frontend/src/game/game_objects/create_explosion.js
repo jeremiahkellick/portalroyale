@@ -12,7 +12,7 @@ const createExplosion = ({ id, position, health}) => {
   explosion.addComponent(transform);
   explosion.addComponent(new ExplosionMovement(50, 100));
   explosion.addComponent(new ExplosionRenderer());
-  explosion.addComponent(new Collider(new Circle(50)));
+  explosion.addComponent(new Collider(new Circle(30)));
 
   return explosion;
 };
