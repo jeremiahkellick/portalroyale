@@ -22,7 +22,6 @@ class EnterGame extends React.Component {
   }
 
   render() {
-    console.log(this.props.submitText, this.props.formType);
     const nameInputClass = this.props.formType === "Enter Game" ? "" : "hidden"
     return (
       <div className={ this.props.formType === "Enter Game" ? "enter-game" : "game-over"} >

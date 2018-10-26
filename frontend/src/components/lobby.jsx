@@ -28,7 +28,7 @@ class Lobby extends React.Component {
   }
 }
 
-const mapStateToProps = ({ ui: { players } }) => ({
+const mapStateToProps = ({ players }) => ({
   players: Object.values(players)
 });
 

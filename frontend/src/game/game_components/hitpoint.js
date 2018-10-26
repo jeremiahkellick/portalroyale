@@ -21,7 +21,8 @@ class Hitpoint extends Component {
   }
 
   death() {
-    this.dispatch({ type: 'DEATH'});
+    this.onDeathFunctions.forEach( func => func() );
+    this.gameObject.destroy();
   }
 
   handleAction(action) {
@@ -30,11 +31,6 @@ class Hitpoint extends Component {
         this.health = Math.max(this.health - action.damage, 0);
         this.onDamageFunctions.forEach( func => func() );
         if (this.health === 0) this.death();
-        break;
-      case 'DEATH':
-        console.log("test");
-        this.onDeathFunctions.forEach( func => func() );
-        this.gameObject.destroy();
         break;
       default:
     }

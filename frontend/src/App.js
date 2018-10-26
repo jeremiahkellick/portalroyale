@@ -3,8 +3,6 @@ import Canvas from './components/canvas';
 import Homepage from './components/homepage'
 import Lobby from './components/lobby';
 import { connect } from 'react-redux';
-import Canvas from './components/canvas';
-import Homepage from './components/homepage';
 
 const App = ({ name, gameOver, started }) => (
 

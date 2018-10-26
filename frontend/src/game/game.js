@@ -10,14 +10,23 @@ import ObjectTracker from './game_components/object_tracker';
 import { receivePlayers } from '../actions/player_actions';
 
 class Game {
-  constructor(ctx, clientId, updateServerCallback, createOnServerCallback, dispatch) {
+  constructor(
+    ctx,
+    clientId,
+    updateServerCallback,
+    createOnServerCallback,
+    gameOverCallback,
+    dispatch
+  ) {
     Game.game = this;
+    this.over = false;
     this.ctx = ctx;
     ctx.font = 'bold 16px Roboto';
     ctx.textAlign = "center";
     this.clientId = clientId;
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
+    this.gameOverCallback = gameOverCallback;
     this.gameObjects = {};
     this.dispatch = dispatch;
     const playerCountId = getId();
@@ -29,7 +38,7 @@ class Game {
     );
     this.started = false;
     this.unsubscribe = window.store.subscribe(() => {
-      if (window.store.getState().ui.game.started) {
+      if (window.store.getState().game.started) {
         this.unsubscribe();
         this.start();
       }
@@ -38,13 +47,19 @@ class Game {
 
   start() {
     this.started = true;
-    setInterval(this.sendUpdateToServer.bind(this), 100);
+    this.networkInterval = setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
-    setInterval(this.update.bind(this), 1000 / 60);
+    this.updateInterval = setInterval(this.update.bind(this), 1000 / 60);
     window.requestAnimationFrame(this.draw.bind(this));
   }
 
   endGame() {
+    this.over = true;
+    Object.values(this.gameObjects).forEach(gameObject => gameObject.destroy());
+    clearInterval(this.networkInterval);
+    clearInterval(this.updateInterval);
+    Game.game = null;
+    this.gameOverCallback();
    this.dispatch(gameOver());
   }
 
@@ -80,7 +95,9 @@ class Game {
     packet.actions.forEach(action => {
       if (action.sender !== this.clientId) {
         const syncronizer = Syncronizer.find(action.syncronizerId);
-        if (syncronizer !== undefined) syncronizer.component.handleAction(action);
+        if (syncronizer !== undefined) {
+          syncronizer.component.handleAction(action);
+        }
       }
     });
   }
@@ -95,6 +112,7 @@ class Game {
   }
 
   draw() {
+    if (this.over) return;
     this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     if (Camera.camera !== undefined) Camera.camera.draw(this.ctx);
     window.requestAnimationFrame(this.draw.bind(this));

@@ -36,12 +36,20 @@ export const initializeGame = ( name, dispatch ) => {
 
   socket.on('connect', () => {
     getId.base = socket.id;
-    game = new Game(ctx, socket.id, sendUpdateToServer, sendCreateToServer, dispatch);
+    game = new Game(
+      ctx,
+      socket.id,
+      sendUpdateToServer,
+      sendCreateToServer,
+      () => socket.disconnect(true),
+      dispatch
+    );
     window.game = game;
     sendCreateToServer(
       {
         type: 'player',
-        position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO(),
+        position: Vector.random(MAP_WIDTH,
+          MAP_HEIGHT).toPOJO(),
         health: 100,
         name
       },
