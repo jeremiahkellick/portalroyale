@@ -8,9 +8,9 @@ class HitpointRenderer extends Renderer {
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 
     let color ;
-    if ( multiplier < .2 ) {
+    if ( multiplier <= .2 ) {
       color = "#FF6347cc";
-    } else if ( multiplier < .5 ) {
+    } else if ( multiplier <= .5 ) {
       color = "#FFD700cc";
     } else {
       color = "#ffffffcc";
@@ -20,25 +20,16 @@ class HitpointRenderer extends Renderer {
     const height = 5;
     const x = 25;
     const y = 25;
+    const radius = 5;
 
-    ctx.beginPath();
-    ctx.rect( x, y, x + width, y + height);
-    ctx.fillStyle = '#BEBEBE55';
+    this.drawRoundedRect( ctx, x - 5, y - 5, x + width +10, y + height + 10, radius);
+    ctx.fillStyle = '#00000055';
     ctx.fill();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#00000022';
-    ctx.stroke();
-    ctx.closePath();
 
-
-    ctx.beginPath();
-    ctx.rect( x, y, x + (width * multiplier), y + height);
-    ctx.fillStyle = color ;
+    this.drawRoundedRect( ctx, x, y, x + (width * multiplier), y + height, radius-2);
+    ctx.fillStyle = color;
     ctx.fill();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#00000022';
-    ctx.stroke();
-    ctx.closePath();
+
   }
 }
 
