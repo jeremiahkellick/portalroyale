@@ -2,6 +2,9 @@ import Syncronizer from './syncronizer';
 import Time from './time';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 import Camera from './game_components/camera';
+import getId from './get_id';
+import GameObject from './game_objects/game_object';
+import PlayersAliveRenderer from './renderers/players_alive_renderer';
 
 class Game {
   constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
@@ -13,6 +16,10 @@ class Game {
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
     this.gameObjects = {};
+    const playerCountId = getId();
+    const playerCount = new GameObject(playerCountId);
+    playerCount.addComponent(new PlayersAliveRenderer(10));
+    this.gameObjects[playerCountId] = playerCount;
     setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
     setInterval(this.update.bind(this), 1000 / 60);

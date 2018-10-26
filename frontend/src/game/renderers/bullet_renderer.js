@@ -8,8 +8,11 @@ class BulletRenderer extends Renderer {
     this.rotation = rotation;
   }
 
-  draw(ctx, transform, offset) {
+  draw(ctx, offset) {
     const bulletMovement = this.gameObject.getComponent(BulletMovement);
+
+    const transform = this.transform();
+    if (transform === undefined) return;
 
     const { x, y } = transform.position.minus(offset);
 
