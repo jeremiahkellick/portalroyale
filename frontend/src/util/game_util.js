@@ -5,7 +5,8 @@ import rootCreator from '../game/game_objects/root_creator';
 import { MAP_WIDTH, MAP_HEIGHT } from '../game/util';
 import Vector from '../game/vector';
 
-export const initializeGame = name => {
+export const initializeGame = ( name, dispatch ) => {
+
   const socket = io();
   const ctx = document.getElementById("canvas").getContext("2d");
   let game = undefined;
@@ -35,12 +36,20 @@ export const initializeGame = name => {
 
   socket.on('connect', () => {
     getId.base = socket.id;
-    game = new Game(ctx, socket.id, sendUpdateToServer, sendCreateToServer);
+    game = new Game(
+      ctx,
+      socket.id,
+      sendUpdateToServer,
+      sendCreateToServer,
+      () => socket.disconnect(true),
+      dispatch
+    );
     window.game = game;
     sendCreateToServer(
       {
         type: 'player',
-        position: Vector.random(MAP_WIDTH, MAP_HEIGHT).toPOJO(),
+        position: Vector.random(MAP_WIDTH,
+          MAP_HEIGHT).toPOJO(),
         health: 100,
         name
       },
@@ -71,10 +80,9 @@ export const initializeGame = name => {
   socket.on('destroy', objectIds => {
     if (objectIds) {
       objectIds.forEach(id => {
-        game.destroy(id);
+        if (game.gameObjects[id] !== undefined) game.gameObjects[id].destroy();
       });
     }
   });
 
 }
-

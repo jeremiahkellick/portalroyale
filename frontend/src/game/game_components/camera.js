@@ -1,7 +1,7 @@
 import { MAP_WIDTH, MAP_HEIGHT } from '../util';
 import Game from '../game';
 import Component from './component';
-import Transform from './transform';
+import Transform from '../game_components/transform';
 import Renderer from '../renderers/renderer';
 import Vector from '../vector';
 
@@ -15,11 +15,20 @@ class Camera extends Component {
     if (Camera.camera === this) Camera.camera = undefined;
   }
 
+  transform() {
+    this.transformRef = this.transformRef
+                        || this.gameObject.getComponent(Transform);
+    return this.transformRef;
+  }
+
   offset() {
     const canvas = document.getElementById("canvas");
     const [ CANVAS_WIDTH, CANVAS_HEIGHT ] = [ canvas.width, canvas.height];
 
-    const offset = this.playerTransform.position.minus(
+    const transform = this.transform();
+    if (transform === undefined) return;
+
+    const offset = transform.position.minus(
       new Vector(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2)
     );
 
@@ -39,9 +48,7 @@ class Camera extends Component {
   }
 
   draw(ctx) {
-    this.playerTransform = this.playerTransform
-                           || this.gameObject.getComponent(Transform);
-    if (this.playerTransform === undefined) return;
+    if (this.transform() === undefined) return;
 
     const canvas = document.getElementById("canvas");
 
@@ -52,24 +59,19 @@ class Camera extends Component {
     this.drawGridlines(ctx, offset);
 
     const gameObjects = Object.values(Game.game.gameObjects);
+
     let objRenderers = [];
     gameObjects.forEach( obj => {
-      const transform = obj.getComponent(Transform);
       const renderers = obj.getComponents(Renderer);
       renderers.forEach( renderer => {
-        if (renderer !== undefined && transform !== undefined ) {
-          objRenderers.push({
-            renderer,
-            transform
-          });
-        }
+        if (renderer !== undefined) objRenderers.push(renderer);
       });
     });
 
-    objRenderers = objRenderers.sort( (a, b) => a.renderer.sort - b.renderer.sort );
+    objRenderers = objRenderers.sort((a, b) => a.sort - b.sort);
 
-    objRenderers.forEach( ({renderer, transform }) => {
-      renderer.draw(ctx, transform, offset);
+    objRenderers.forEach(renderer => {
+      renderer.draw(ctx, offset);
     });
 
   }

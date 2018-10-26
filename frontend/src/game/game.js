@@ -2,21 +2,63 @@ import Syncronizer from './syncronizer';
 import Time from './time';
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 import Camera from './game_components/camera';
+import { gameOver  } from '../actions/game_actions';
+import getId from './get_id';
+import GameObject from './game_objects/game_object';
+import PlayersAliveRenderer from './renderers/players_alive_renderer';
+import ObjectTracker from './game_components/object_tracker';
+import { receivePlayers } from '../actions/player_actions';
 
 class Game {
-  constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
+  constructor(
+    ctx,
+    clientId,
+    updateServerCallback,
+    createOnServerCallback,
+    gameOverCallback,
+    dispatch
+  ) {
     Game.game = this;
+    this.over = false;
     this.ctx = ctx;
-    ctx.font = 'bold 16px Roboto';
-    ctx.textAlign = "center";
     this.clientId = clientId;
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
+    this.gameOverCallback = gameOverCallback;
     this.gameObjects = {};
-    setInterval(this.sendUpdateToServer.bind(this), 100);
+    this.dispatch = dispatch;
+    const playerCountId = getId();
+    const playerCount = new GameObject(playerCountId);
+    playerCount.addComponent(new PlayersAliveRenderer(10));
+    this.gameObjects[playerCountId] = playerCount;
+    ObjectTracker.onChange('players', players =>
+      this.dispatch(receivePlayers(players))
+    );
+    this.started = false;
+    this.unsubscribe = window.store.subscribe(() => {
+      if (window.store.getState().game.started) {
+        this.unsubscribe();
+        this.start();
+      }
+    });
+  }
+
+  start() {
+    this.started = true;
+    this.networkInterval = setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
-    setInterval(this.update.bind(this), 1000 / 60);
+    this.updateInterval = setInterval(this.update.bind(this), 1000 / 60);
     window.requestAnimationFrame(this.draw.bind(this));
+  }
+
+  endGame() {
+    this.over = true;
+    Object.values(this.gameObjects).forEach(gameObject => gameObject.destroy());
+    clearInterval(this.networkInterval);
+    clearInterval(this.updateInterval);
+    Game.game = null;
+    this.gameOverCallback();
+   this.dispatch(gameOver());
   }
 
   sendUpdateToServer() {
@@ -51,7 +93,9 @@ class Game {
     packet.actions.forEach(action => {
       if (action.sender !== this.clientId) {
         const syncronizer = Syncronizer.find(action.syncronizerId);
-        if (syncronizer !== undefined) syncronizer.component.handleAction(action);
+        if (syncronizer !== undefined) {
+          syncronizer.component.handleAction(action);
+        }
       }
     });
   }
@@ -66,6 +110,7 @@ class Game {
   }
 
   draw() {
+    if (this.over) return;
     this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     if (Camera.camera !== undefined) Camera.camera.draw(this.ctx);
     window.requestAnimationFrame(this.draw.bind(this));

@@ -3,7 +3,9 @@ import Hitpoint from '../game_components/hitpoint'
 
 class LootCrateRenderer extends Renderer {
   
-  draw(ctx, transform, offset ) {
+  draw(ctx, offset ) {
+    const transform = this.transform();
+    if (transform === undefined) return;
 
     const hitpoint = transform.gameObject.getComponent(Hitpoint);
     let m;

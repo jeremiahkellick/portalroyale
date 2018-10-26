@@ -129,6 +129,9 @@ const handleAction = (action, options) => {
       options.health -= action.damage;
       if (options.health <= 0) delete objectCreationOptions[options.id];
       break;
+    case 'HEAL':
+      options.health = Math.min(options.health + action.amount, 100);
+      break;
     default:
   }
 };

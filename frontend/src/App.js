@@ -1,19 +1,22 @@
 import React from 'react';
 import Canvas from './components/canvas';
 import Homepage from './components/homepage'
-import {Switch, Router} from 'react-router-dom';
+import Lobby from './components/lobby';
 import { connect } from 'react-redux';
 
-const App = ({name}) => (
+const App = ({ name, gameOver, started }) => (
 
   <div className="App">
-    { name ? null : <Homepage /> }
+    { name && !gameOver ? null : <Homepage /> }
+    { name && !started ? <Lobby /> : null }
     <Canvas />
   </div>
 );
 
-const mapStateToProps = ({ ui: { game: { name } } }) => ({
-  name
+const mapStateToProps = ({ game: { name, gameOver, started } }) => ({
+  name,
+  gameOver,
+  started
 });
 
-export default connect( mapStateToProps, null )( App );
+export default connect(mapStateToProps)(App);

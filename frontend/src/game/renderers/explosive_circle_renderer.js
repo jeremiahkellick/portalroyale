@@ -3,9 +3,11 @@ import Hitpoint from '../game_components/hitpoint'
 
 class ExplosiveCircleRenderer extends Renderer {
 
-  draw(ctx, transform, offset ) {
-
-    const hitpoint = transform.gameObject.getComponent(Hitpoint);
+  draw(ctx, offset ) {
+    const transform = this.transform();
+    if (transform === undefined) return;
+    
+    const hitpoint = this.gameObject.getComponent(Hitpoint);
     let multiplier;
     if (hitpoint) {
       multiplier = (hitpoint.health === 0 ? 0 : hitpoint.health/100 * 0.3 + 0.7);

@@ -4,6 +4,7 @@ class GameObject {
   constructor(id) {
     this.id = id;
     this.components = [];
+    this.destroyed = false;
   }
 
   addComponent(component) {
@@ -24,8 +25,10 @@ class GameObject {
   }
 
   destroy() {
+    if (this.destroyed) return;
     this.components.forEach(component => component.onDestroy());
     Game.game.destroy(this.id);
+    this.destroyed = true;
   }
 }
 

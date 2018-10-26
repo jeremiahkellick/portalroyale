@@ -1,15 +1,20 @@
 import React from 'react';
-import EnterGame from './enter_game';
+import EnterGameContainer from './enter_game_container';
 
-const Homepage = () => (
+import { connect } from 'react-redux';
+
+const Homepage = ({ name, gameOver }) => (
   <div className="homepage">
     <header className="App-header">
       <h1>portfol.io</h1>
     </header>
-    <EnterGame />
+    <EnterGameContainer />
   </div>
 );
 
+const mapStateToProps = ({ game: { name, gameOver } } ) => ({
+  name,
+  gameOver
+});
 
-
-export default Homepage;
+export default connect( mapStateToProps, null )( Homepage );

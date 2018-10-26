@@ -15,7 +15,8 @@ import Hitpoint from '../game_components/hitpoint';
 import Inventory from '../game_components/inventory';
 import Circle from '../shapes/circle';
 import NameRenderer from '../renderers/name_renderer';
-
+import GameOver from '../game_components/game_over';
+import ObjectTracker from '../game_components/object_tracker';
 
 const createPlayer = ({ id, owned, position, health, name }) => {
   const radius = 22;
@@ -29,6 +30,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
   player.addComponent(new CircleRenderer(radius, '#f6cb88', 1));
   player.addComponent(new Movement());
   player.addComponent(new Collider(new Circle(radius), 'player'));
+  player.addComponent(new ObjectTracker('players', { id, name }));
 
   if (owned) {
     player.addComponent(new Input());
@@ -37,8 +39,9 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new Inventory());
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
+    player.addComponent(new GameOver());
   } else {
-    player.addComponent(new NameRenderer(name, 9));
+    player.addComponent(new NameRenderer(name, 2));
   }
 
   return player;
