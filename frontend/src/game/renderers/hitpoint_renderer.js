@@ -22,17 +22,14 @@ class HitpointRenderer extends Renderer {
     const y = 25;
     const radius = 5;
 
-    ctx.beginPath();
     this.drawRoundedRect( ctx, x - 5, y - 5, x + width +10, y + height + 10, radius);
     ctx.fillStyle = '#00000055';
     ctx.fill();
-    ctx.closePath();
 
-    ctx.beginPath();
     this.drawRoundedRect( ctx, x, y, x + (width * multiplier), y + height, radius-2);
-    ctx.fillStyle = color ;
+    ctx.fillStyle = color;
     ctx.fill();
-    ctx.closePath();
+
   }
 }
 
