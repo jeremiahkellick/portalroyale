@@ -40,13 +40,38 @@ const randomVectorInMap = () => {
 const objectsByOwnerId = {};
 let objectCreationOptions = {};
 
+let id = getId();
 for (let i = 0; i < 10; i++) {
-  const id = getId();
+  id = getId();
   objectCreationOptions[id] = {
     id,
     type: 'tree',
     position: randomVectorInMap(),
     health: 100
+  };
+
+  id = getId();
+  objectCreationOptions[id] = {
+    id,
+    type: 'explosiveCircle',
+    position: randomVectorInMap(),
+    health: 50
+  };
+
+  id = getId();
+  objectCreationOptions[id] = {
+    id,
+    type: 'lootCrate',
+    position: randomVectorInMap(),
+    health: 50
+  };
+  
+  id = getId();
+  objectCreationOptions[id] = {
+    id,
+    type: 'medKit',
+    position: randomVectorInMap(),
+    health: 50
   };
 }
 
@@ -103,6 +128,9 @@ const handleAction = (action, options) => {
     case 'DAMAGE':
       options.health -= action.damage;
       if (options.health <= 0) delete objectCreationOptions[options.id];
+      break;
+    case 'HEAL':
+      options.health = Math.min(options.health + action.amount, 100);
       break;
     default:
   }

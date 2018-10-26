@@ -53,19 +53,13 @@ class Collider extends Component {
     else if (shape1.shape instanceof Circle && shape2.shape instanceof Rectangle) {
       return this.circleRectCollision(shape1, shape2);
     }
-    // else if (shape1 instanceof Circle && shape2 instanceof Line) {
-    //   return this.circleLineCollision(shape1, shape2);
-    // }
-    // else if (shape1 instanceof Line && shape2 instanceof Rectangle) {
-    //   return this.lineRectCollision(shape1, shape2);
-    // }
   }
 
   rectRectCollision(shape1, shape2) {
-    return shape1.pos.x < shape2.pos.x + shape2.width &&
-      shape1.pos.x + shape1.width > shape2.pos.x &&
-      shape1.pos.y < shape2.pos.y + shape2.height &&
-      shape1.pos.y + shape1.height > shape2.pos.y
+    return shape1.pos.x < shape2.pos.x + shape2.shape.width &&
+      shape1.pos.x + shape1.shape.width > shape2.pos.x &&
+      shape1.pos.y < shape2.pos.y + shape2.shape.height &&
+      shape1.pos.y + shape1.shape.height > shape2.pos.y
   }
 
   circleCircleCollision(shape1, shape2) {
@@ -76,62 +70,22 @@ class Collider extends Component {
   }
 
   circleRectCollision(circle, rect) {
-    let rectX = rect.pos.x + rect.width/2;
-    let rectY = rect.pos.y + rect.height/2;
-    let circleDistanceX = Math.abs(circle.pos.x - rectX);
-    let circleDistanceY = Math.abs(circle.pos.y - rectY);
-
-    if (circleDistanceX > (rect.width/2 + circle.radius)) return false;
-    else if (circleDistanceY > (rect.height/2 + circle.radius)) return false;
-    else if (circleDistanceX <= rect.width/2) return true;
-    else if (circleDistanceX <= rect.height/2) return true;
-    else {
-      let cornerDistanceSq = (circleDistanceX - rect.width/2) ** 2 +
-                              (circleDistanceY - rect.height/2) ** 2;
-      return cornerDistanceSq <= (circle.radius ** 2);
-    }
-  }
-
-  circleLineCollision(circle, line) {
-    let AB = new Vector(line.pos2.x - line.pos1.x, line.pos2.y - line.pos1.y);
-    let AC = new Vector(circle.pos.x - line.pos1.x, circle.pos.y - line.pos1.y);
-    let orthogonal = AC.minus(AB.times(AC.dotProduct(AB) / AB.dotProduct(AB)));
-    return orthogonal.magnitude() < circle.radius;
-  }
-
-  lineRectCollision(line, rect) {
-    const edgeLeft = this.shape1.pos.x;
-    const edgeRight = this.shape1.pos.x + this.shape1.width;
-    const edgeTop = this.shape1.pos.y + this.shape1.height;
-    const edgeBottom = this.shape1.pos.y;
-    const x0src = this.shape2.pos1.x;
-    const x1src = this.shape2.pos2.x;
-    const y0src = this.shape2.pos1.y;
-    const y1src = this.shape2.pos2.y;
-
-    let t0 = 0.0;
-    let t1 = 1.0;
-    const xdelta = x1src-x0src;
-    const ydelta = y1src-y0src;
-    let p, q, r;
-
-    for(let edge=0; edge<4; edge++) {   // Traverse through left, right, bottom, top edges.
-        if (edge === 0) {  p = -xdelta;    q = -(edgeLeft-x0src);  }
-        if (edge === 1) {  p = xdelta;     q =  (edgeRight-x0src); }
-        if (edge === 2) {  p = -ydelta;    q = -(edgeBottom-y0src);}
-        if (edge === 3) {  p = ydelta;     q =  (edgeTop-y0src);   }
-        r = q/p;
-        if(p === 0 && q<0) return false;   // Don't draw line at all. (parallel line outside)
-
-        if(p<0) {
-            if(r>t1) return false;         // Don't draw line at all.
-            else if(r>t0) t0=r;            // Line is clipped!
-        } else if(p>0) {
-            if(r<t0) return false;      // Don't draw line at all.
-            else if(r<t1) t1=r;         // Line is clipped!
-        }
-    }
-    return true;
+    let cx = Math.abs(circle.pos.x - rect.pos.x - rect.shape.width/2);
+    let xDist = rect.shape.width/2 + circle.shape.radius;
+    if (cx > xDist)
+        return false;
+    let cy = Math.abs(circle.pos.y - rect.pos.y - rect.shape.height/2);
+    let yDist = rect.shape.height/2 + circle.shape.radius;
+    if (cy > yDist)
+        return false;
+    if (cx <= rect.shape.width/2 || cy <= rect.shape.height/2)
+        return true;
+    let xCornerDist = cx - rect.shape.width/2;
+    let yCornerDist = cy - rect.shape.height/2;
+    let xCornerDistSq = xCornerDist * xCornerDist;
+    let yCornerDistSq = yCornerDist * yCornerDist;
+    let maxCornerDistSq = circle.shape.radius * circle.shape.radius;
+    return xCornerDistSq + yCornerDistSq <= maxCornerDistSq;
   }
 }
 

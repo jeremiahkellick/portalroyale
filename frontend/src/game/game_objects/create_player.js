@@ -10,7 +10,9 @@ import Movement from '../game_components/movement';
 import Camera from '../game_components/camera';
 import Shoot from '../game_components/shoot';
 import Collider from '../game_components/collider';
+import Pickup from '../game_components/pickup';
 import Hitpoint from '../game_components/hitpoint';
+import Inventory from '../game_components/inventory';
 import Circle from '../shapes/circle';
 import NameRenderer from '../renderers/name_renderer';
 import GameOver from '../game_components/game_over';
@@ -33,6 +35,8 @@ const createPlayer = ({ id, owned, position, health, name }) => {
   if (owned) {
     player.addComponent(new Input());
     player.addComponent(new Shoot());
+    player.addComponent(new Pickup());
+    player.addComponent(new Inventory());
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
     player.addComponent(new GameOver());

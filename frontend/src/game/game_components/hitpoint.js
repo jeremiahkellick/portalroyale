@@ -20,6 +20,10 @@ class Hitpoint extends Component {
     this.dispatch({ type: 'DAMAGE', damage });
   }
 
+  heal(amount) {
+    this.dispatch({ type: 'HEAL', amount });
+  }
+
   death() {
     this.onDeathFunctions.forEach( func => func() );
     this.gameObject.destroy();
@@ -31,6 +35,9 @@ class Hitpoint extends Component {
         this.health = Math.max(this.health - action.damage, 0);
         this.onDamageFunctions.forEach( func => func() );
         if (this.health === 0) this.death();
+        break;
+      case 'HEAL':
+        this.health = Math.min(this.health + action.amount, 100);
         break;
       default:
     }
