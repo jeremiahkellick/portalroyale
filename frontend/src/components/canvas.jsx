@@ -32,15 +32,15 @@ class Canvas extends React.Component {
         id="canvas"
         width={`${this.state.width}px`}
         height={`${this.state.height}px`}
-        className={ this.props.name ? "" : "hidden"} >
+        className={ this.props.started ? "" : "hidden"} >
       </canvas>
     );
   }
 }
 
 
-const mapStateToProps = ({ ui: { game: { name } } }) => ({
-  name
+const mapStateToProps = ({ ui: { game: { started } } }) => ({
+  started
 });
 
 export default connect( mapStateToProps, null )( Canvas );
