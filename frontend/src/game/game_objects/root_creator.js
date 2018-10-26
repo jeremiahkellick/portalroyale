@@ -1,6 +1,9 @@
 import createPlayer from './create_player';
 import createTree from './create_tree';
 import createBullet from './create_bullet';
+import createExplosiveCircle from './create_explosive_circle';
+import createLootCrate from './create_loot_crate';
+import createMedKit from './create_med_kit';
 
 const rootCreator = options => {
   switch (options.type) {
@@ -10,6 +13,12 @@ const rootCreator = options => {
       return createTree(options);
     case 'bullet':
       return createBullet(options);
+    case 'explosiveCircle':
+      return createExplosiveCircle(options);
+    case 'lootCrate':
+      return createLootCrate(options);
+    case 'medKit':
+      return createMedKit(options);
     default:
       return null;
   }

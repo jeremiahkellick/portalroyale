@@ -24,7 +24,7 @@ class Movement extends Component {
         this.transform.position.y += movement.y;
       }
 
-      this.transform.rotation = this.transform.getRotation();
+      this.transform.lookAt(this.input.mousePosition());
     }
   }
 }

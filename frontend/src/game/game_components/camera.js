@@ -44,7 +44,6 @@ class Camera extends Component {
     if (offset.y + CANVAS_HEIGHT > MAP_HEIGHT) {
       offset.y = MAP_HEIGHT - CANVAS_HEIGHT;
     }
-
     return offset;
   }
 

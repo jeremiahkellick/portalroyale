@@ -15,7 +15,7 @@ class Lobby extends React.Component {
         <header className="App-header">
           <h1>portfol.io</h1>
         </header>
-        <div className="enter-game">
+        <div className="lobby">
           <form onSubmit={this.handleSubmit.bind(this)}>
             <ul>
               { this.props.players.map(player =>
