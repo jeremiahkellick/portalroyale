@@ -13,7 +13,7 @@ class Inventory extends Component {
     this.usingItem = '';
     this.timer = 0;
   }
-  
+
   start() {
     this.input = this.gameObject.getComponent(Input);
     this.speed = this.gameObject.getComponent(Speed);
@@ -40,6 +40,8 @@ class Inventory extends Component {
       case 'medKit':
         const health = this.gameObject.getComponent(Hitpoint);
         if (health) health.heal(100);
+        break;
+      default:
     }
   }
 
