@@ -1,13 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Canvas from './components/canvas';
 import Homepage from './components/homepage';
 
-const App = () => (
+const App = ({ name, gameOver }) => (
 
   <div className="App">
-    <Homepage />
+    { name && !gameOver ? null : <Homepage /> }
     <Canvas />
   </div>
 );
 
-export default App;
+const mapStateToProps = ( { game: { name, gameOver }} ) => ({
+  name,
+  gameOver
+})
+
+export default connect( mapStateToProps )( App );
