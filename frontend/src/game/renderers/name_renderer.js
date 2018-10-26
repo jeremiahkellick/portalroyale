@@ -15,6 +15,8 @@ class NameRenderer extends Renderer {
     ctx.shadowColor = 'black';
     ctx.shadowOffsetX = 1;
     ctx.shadowOffsetY = 1;
+    ctx.font = 'bold 16px Roboto';
+    ctx.textAlign = "center";
     ctx.fillText(this.name, x, y + 36);
     ctx.shadowColor = 'transparent';
   }

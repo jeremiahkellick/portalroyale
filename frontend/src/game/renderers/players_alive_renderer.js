@@ -17,13 +17,13 @@ class PlayersAliveRenderer extends Renderer {
     ctx.fillStyle = 'white';
     ctx.textBaseline='middle';
     ctx.font = 'bold 24px Roboto';
+    ctx.textAlign = "center";
     ctx.fillText(
       Object.keys(ObjectTracker.get('players')).length,
       canvas.width - 60,
       44
     );
     ctx.fillText('Alive', canvas.width - 60, 76);
-    ctx.font = 'bold 16px Roboto';
     ctx.textBaseline='alphabetic';
   }
 
