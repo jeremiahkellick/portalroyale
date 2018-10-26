@@ -23,6 +23,8 @@ class Movement extends Component {
       if (!this.collider.checkAllCollisions(newYPos, true)) {
         this.transform.position.y += movement.y;
       }
+
+      this.transform.rotation = this.transform.getRotation();
     }
   }
 }

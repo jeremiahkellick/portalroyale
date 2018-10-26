@@ -3,7 +3,6 @@ import Vector from '../vector';
 import key from 'keymaster';
 import Transform from './transform';
 import Camera from './camera';
-import Game from '../game';
 
 const getMouseCanvasPosition = (canvas, event) => {
   const rect = event.currentTarget.getBoundingClientRect();
@@ -15,24 +14,31 @@ class Input extends Component {
     super();
     this.mouseWasClicked = false;
     this.handleClick = this.handleClick.bind(this);
+    this.handleMove = this.handleMove.bind(this);
     this.canvas = document.getElementById('canvas');
     this.canvas.addEventListener('mousedown', this.handleClick);
+    this.canvas.addEventListener('mousemove', this.handleMove);
+  }
+
+  start() {
+    this.transform = this.gameObject.getComponent(Transform);
   }
 
   handleClick(e) {
     e.preventDefault();
-    if (Game.game.started === false) return;
-    const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e)
-    this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
     this.mouseWasClicked = true;
+    console.log(this.transform.rotation);
+  }
+
+  handleMove(e) {
+    e.preventDefault();
+    const mouseCanvasPosition = getMouseCanvasPosition(this.canvas, e);
+    this.mousePosition = mouseCanvasPosition.plus(Camera.camera.offset());
   }
 
   onDestroy() {
     this.canvas.removeEventListener('mousedown', this.handleClick);
-  }
-
-  start() {
-    this.camera = Camera.camera.gameObject.getComponent(Transform);
+    this.canvas.removeEventListener('mousemove', this.handleMove);
   }
 
   getMovement() {
@@ -50,9 +56,10 @@ class Input extends Component {
     return returnVal;
   }
 
-  shootPosition() {
-    return this.mousePosition;
+  getMousePosition() {
+    return this.mousePosition || Vector.zero();
   }
+
 }
 
 export default Input;
