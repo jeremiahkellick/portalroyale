@@ -13,18 +13,17 @@ const createExplosiveCircle = ({ id, position, health }) => {
   const transform = new Transform(Vector.fromPOJO(position));
   explosiveCircle.addComponent(transform);
   const hitpoint = new Hitpoint(health);
-
   explosiveCircle.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
   explosiveCircle.addComponent(new ExplosiveCircleRenderer());
   explosiveCircle.addComponent(new Collider(new Circle(30)));
 
-
   const createExplosion = (transform) => {
     return () => {
       let options = {
         type: "explosion",
-        position: transform.position.toPOJO()
+        position: transform.position.toPOJO(),
+        health: 100
       };
       Game.game.sendCreateToServer( options, false );
     }

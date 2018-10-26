@@ -1,5 +1,5 @@
 import Renderer from './renderer';
-import Hitpoint from '../game_components/hitpoint'
+import Movement from '../game_components/movement';
 import { randomInt, randomFloat } from '../util';
 
 class ExplosionRenderer extends Renderer {
@@ -9,20 +9,21 @@ class ExplosionRenderer extends Renderer {
     if (transform === undefined) return;
 
     let multiplier = 1 ;
+    const movement = this.gameObject.getComponent(Movement);
 
-    // if ( hitpoint > 0 ) {
-      const { x, y } = transform.position.minus(offset);
-      const numSpikes = 24;
-      console.log("test");
+    multiplier = movement.radius/50;
 
-      ctx.translate(x, y);
+    const { x, y } = transform.position.minus(offset);
+    const numSpikes = 24;
 
-      this.drawGas( ctx, multiplier );
-      this.drawSpikes( ctx, numSpikes, multiplier);
-      this.drawExplosionLines( ctx, multiplier, 12 );
+    ctx.translate(x, y);
 
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-    // }
+    this.drawGas( ctx, multiplier );
+    this.drawSpikes( ctx, numSpikes, multiplier);
+    this.drawExplosionLines( ctx, multiplier, 12 );
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+
   }
 
   drawGas(ctx, multiplier) {
