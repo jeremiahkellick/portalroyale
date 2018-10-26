@@ -20,8 +20,15 @@ class CircleRenderer extends Renderer {
       ctx.lineWidth = this.stroke;
       ctx.stroke();
     }
+
     ctx.fillStyle = this.fillColor;
     ctx.fill();
+
+    ctx.moveTo(x+7, y-15)
+    ctx.arc( x, y-15, 7, 0, Math.PI*2, true );
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 1;
+    ctx.stroke();
     ctx.closePath();
   }
 }
