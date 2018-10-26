@@ -39,7 +39,7 @@ class Inventory extends Component {
     if (this.input) {
       const item = this.input.getItemUsed();
       const newTime = new Date();
-      if (item && (!this.usedItemTime || newTime - this.usedItemTime > 1000)) {
+      if (item && this.hasItem(item) && (!this.usedItemTime || newTime - this.usedItemTime > 1000)) {
         this.useItem(item);
         this.removeItem(item);
         this.usedItemTime = new Date();

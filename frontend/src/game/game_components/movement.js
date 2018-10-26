@@ -14,7 +14,6 @@ class Movement extends Component {
 
   update() {
     if (this.input) {
-      console.log(this.input);
       const movement = this.input.getMovement().times(300 * Time.deltaTime);
       const newXPos = this.transform.position.plus(new Vector(movement.x, 0));
       if (!this.collider.checkAllCollisions(newXPos, true)) {
