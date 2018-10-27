@@ -6,6 +6,7 @@ import Collider from '../game_components/collider';
 import Hitpoint from '../game_components/hitpoint';
 import Vector from '../vector';
 import Circle from '../shapes/circle';
+import Game from '../game';
 
 const createExplosiveCircle = ({ id, position, health }) => {
   const explosiveCircle = new GameObject(id, 5);
@@ -16,6 +17,20 @@ const createExplosiveCircle = ({ id, position, health }) => {
   new Syncronizer(id+'1', hitpoint);
   explosiveCircle.addComponent(new ExplosiveCircleRenderer());
   explosiveCircle.addComponent(new Collider(new Circle(30)));
+
+  const createExplosion = (transform) => {
+    return () => {
+      let options = {
+        type: "explosion",
+        position: transform.position.toPOJO(),
+        health: 100
+      };
+      Game.game.sendCreateToServer( options, true );
+    }
+  };
+
+  hitpoint.onDeathFunctions.push( createExplosion(transform) );
+
   return explosiveCircle;
 };
 
