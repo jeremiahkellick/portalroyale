@@ -25,7 +25,7 @@ const createExplosiveCircle = ({ id, position, health }) => {
         position: transform.position.toPOJO(),
         health: 100
       };
-      Game.game.sendCreateToServer( options, false );
+      Game.game.sendCreateToServer( options, true );
     }
   };
 
