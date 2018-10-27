@@ -1,6 +1,7 @@
 import Component from './component';
 import Input from './input';
 import Transform from './transform';
+import Inventory from './inventory';
 import Camera from './camera';
 import Game from '../game';
 
@@ -10,11 +11,12 @@ class Shoot extends Component {
     this.input = this.gameObject.getComponent(Input);
     this.camera = this.gameObject.getComponent(Camera);
     this.transform = this.requireComponent(Transform);
+    this.inventory = this.gameObject.getComponent(Inventory);
   }
 
   update() {
     if (this.input) {
-      if ( this.input.shouldShoot()) {
+      if ( this.input.shouldShoot() && !this.inventory.applyingItem()) {
         const dir = this.input.mousePosition()
                               .minus(this.transform.position)
                               .normalized();

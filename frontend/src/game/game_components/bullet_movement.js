@@ -7,7 +7,7 @@ class BulletMovement extends Movement {
   constructor(range, speed, owned = false) {
     super();
     this.range = range;
-    this.speed = speed;
+    this.bulletSpeed = speed;
     this.distanceTraveled = 0;
     this.length = 3;
     this.owned = owned;
@@ -17,7 +17,7 @@ class BulletMovement extends Movement {
   update() {
     if (this.active) {
       const oldPos = this.transform.position
-      const newPos = oldPos.plus(this.speed.times(Time.deltaTime));
+      const newPos = oldPos.plus(this.bulletSpeed.times(Time.deltaTime));
 
       if (this.distanceTraveled > this.range) {
         this.gameObject.destroy();
@@ -39,7 +39,7 @@ class BulletMovement extends Movement {
         }
       }
     } else {
-      this.length -= this.speed.magnitude() * Time.deltaTime;
+      this.length -= this.bulletSpeed.magnitude() * Time.deltaTime;
       if (this.length < 3) this.gameObject.destroy();
     }
   }
