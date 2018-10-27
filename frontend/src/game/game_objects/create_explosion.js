@@ -6,7 +6,7 @@ import Vector from '../vector';
 import Circle from '../shapes/circle';
 import ExplosionMovement from '../game_components/explosion_movement';
 
-const createExplosion = ({ id, position, health}) => {
+const createExplosion = ({ id, position }) => {
   const explosion = new GameObject(id, 9);
   const transform = new Transform(Vector.fromPOJO(position));
   explosion.addComponent(transform);

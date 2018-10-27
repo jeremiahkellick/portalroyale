@@ -7,11 +7,12 @@ class ExplosionMovement extends Movement {
     super();
     this.radius = radius || 0;
     this.maxRange = maxRange;
+    const sound = new Audio("./sounds/explosion.mp3");
+    sound.play();
   }
 
   update() {
     if ( this.radius < this.maxRange ) {
-
       const pos = this.transform.position;
       const collidedWith = this.collider.checkAllCollisions(pos);
 
@@ -21,8 +22,6 @@ class ExplosionMovement extends Movement {
           hitpoint.damage(9001);
           this.radius = this.maxRange;
         }
-        const sound = new Audio("./sounds/impact.mp3");
-        sound.play();
       }
       this.radius += 2;
       this.collider.shape.radius += 2;
