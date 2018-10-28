@@ -56,7 +56,7 @@ class Input extends Component {
   }
 
   activatePortal() {
-    return key.isPressed('space');
+    return key.isPressed('F');
   }
 
   getItemPickup() {

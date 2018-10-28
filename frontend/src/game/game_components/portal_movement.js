@@ -8,10 +8,10 @@ class PortalMovement extends Movement {
   }
 
   update() {
-    if ( this.radius <= 0 ) {
+    if ( this.radius <= 20 ) {
       this.gameObject.destroy();
     } else {
-      this.radius -= .05;
+      this.radius -= 0.05;
     }
   }
 
