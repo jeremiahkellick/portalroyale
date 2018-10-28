@@ -24,7 +24,7 @@ class Shoot extends Component {
 
         let options = {
           type: "bullet",
-          position: this.transform.position.plus(dir.times(30)).toPOJO(),
+          position: this.transform.position.plus(dir.times(66)).toPOJO(),
           directionVector: dir.toPOJO(),
           rotation,
           shouldSave: false

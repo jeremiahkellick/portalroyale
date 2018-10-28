@@ -1,9 +1,9 @@
 const sample = (array) => {
   return array[Math.floor(Math.random() * array.length)];
-}; 
+};
 
 const getId = () => {
-  let id = getId.base;
+  let id = '.';
   for (let i = 0; i < 16; i++) {
     id += sample(getId.characters);
   }
@@ -19,6 +19,5 @@ getId.characters = ('ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
                     'abcdefghijklmnopqrstuvwxyz' +
                     '0123456789-_').split('');
 getId.used = new Set();
-getId.base = '';
 
 module.exports = getId;

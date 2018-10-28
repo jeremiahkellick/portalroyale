@@ -26,9 +26,9 @@ class GameObject {
 
   destroy() {
     if (this.destroyed) return;
-    this.components.forEach(component => component.onDestroy());
-    Game.game.destroy(this.id);
     this.destroyed = true;
+    this.components.forEach(component => component.onDestroy());
+    if (Game.game) Game.game.destroy(this.id);
   }
 }
 
