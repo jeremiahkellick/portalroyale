@@ -2,7 +2,7 @@ import GameObject from './game_object';
 import Transform from '../game_components/transform';
 import TransformSyncronizer from '../transform_syncronizer';
 import Syncronizer from '../syncronizer';
-import CircleRenderer from '../renderers/circle_renderer';
+import PlayerRenderer from '../renderers/player_renderer';
 import HitpointRenderer from '../renderers/hitpoint_renderer';
 import CountdownRenderer from '../renderers/countdown_renderer';
 import Vector from '../vector';
@@ -30,7 +30,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
   const hitpoint = new Hitpoint(health);
   player.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
-  player.addComponent(new CircleRenderer(radius, '#f6cb88', 1));
+  player.addComponent(new PlayerRenderer(radius, 2));
   player.addComponent(new Movement());
   player.addComponent(new Collider(new Circle(radius), 'player'));
   player.addComponent(new Count('players'));
@@ -47,7 +47,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new GameOver());
     player.addComponent(new VictoryChecker());
   } else {
-    player.addComponent(new NameRenderer(name, 2));
+    player.addComponent(new NameRenderer(name, 3));
   }
 
   return player;
