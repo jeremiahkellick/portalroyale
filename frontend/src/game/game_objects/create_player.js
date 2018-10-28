@@ -4,6 +4,7 @@ import TransformSyncronizer from '../transform_syncronizer';
 import Syncronizer from '../syncronizer';
 import PlayerRenderer from '../renderers/player_renderer';
 import HitpointRenderer from '../renderers/hitpoint_renderer';
+import MedCountRenderer from '../renderers/med_count_renderer';
 import CountdownRenderer from '../renderers/countdown_renderer';
 import AmmoClipRenderer from '../renderers/ammo_clip_renderer';
 import Vector from '../vector';
@@ -48,6 +49,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new Speed());
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
+    player.addComponent(new MedCountRenderer(10));
     player.addComponent(new AmmoClipRenderer(10));
     player.addComponent(new CountdownRenderer(10));
     player.addComponent(new GameOver());

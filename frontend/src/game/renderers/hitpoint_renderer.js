@@ -22,7 +22,7 @@ class HitpointRenderer extends Renderer {
     const x = canvas.width * 0.5 - 150;
     const y = canvas.height - 50;
     const radius = 5;
-    
+
     this.drawRoundedRect( ctx, x - 5, y - 5, width +10, height + 10, radius);
     ctx.fillStyle = '#00000055';
     ctx.fill();

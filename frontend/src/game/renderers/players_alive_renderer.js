@@ -14,12 +14,14 @@ class PlayersAliveRenderer extends Renderer {
       10
     )
     ctx.fill();
+
     ctx.fillStyle = 'white';
     ctx.textBaseline='middle';
     ctx.font = 'bold 24px Roboto';
     ctx.textAlign = "center";
     ctx.fillText(Count.get('players'), canvas.width - 60, 44);
     ctx.fillText('Alive', canvas.width - 60, 76);
+
     ctx.textBaseline='alphabetic';
   }
 
