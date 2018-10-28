@@ -23,6 +23,10 @@ class Inventory extends Component {
     return this.inventory[item] && this.inventory[item] > 0;
   }
 
+  getItemCount(item) {
+    return this.inventory[item];
+  }
+
   addItem(item) {
     this.inventory[item] += 1;
   }

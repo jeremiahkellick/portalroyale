@@ -14,6 +14,7 @@ class PlayersAliveRenderer extends Renderer {
       10
     )
     ctx.fill();
+
     ctx.fillStyle = 'white';
     ctx.textBaseline='middle';
     ctx.font = 'bold 24px Roboto';
@@ -24,6 +25,7 @@ class PlayersAliveRenderer extends Renderer {
       44
     );
     ctx.fillText('Alive', canvas.width - 60, 76);
+
     ctx.textBaseline='alphabetic';
   }
 

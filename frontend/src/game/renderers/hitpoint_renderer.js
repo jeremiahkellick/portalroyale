@@ -4,7 +4,6 @@ import Hitpoint from '../game_components/hitpoint';
 class HitpointRenderer extends Renderer {
   draw(ctx, offset) {
     const hitpoint = this.gameObject.getComponent(Hitpoint);
-
     let multiplier = (hitpoint ? hitpoint.health/100 : 1)
 
     let color ;
