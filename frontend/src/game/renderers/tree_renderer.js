@@ -9,7 +9,7 @@ class TreeRenderer extends Renderer {
     const hitpoint = transform.gameObject.getComponent(Hitpoint);
     let multiplier;
     if (hitpoint) {
-      multiplier = (hitpoint.health === 0 ? 0 : hitpoint.health/100 * 0.6 + 0.4);
+      multiplier = (hitpoint.health === 0 ? 0 : hitpoint.health/hitpoint.maxHealth * 0.6 + 0.4);
     } else {
       multiplier = 1;
     }

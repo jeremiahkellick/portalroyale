@@ -5,11 +5,13 @@ import Syncronizer from '../syncronizer';
 import PlayerRenderer from '../renderers/player_renderer';
 import HitpointRenderer from '../renderers/hitpoint_renderer';
 import CountdownRenderer from '../renderers/countdown_renderer';
+import AmmoClipRenderer from '../renderers/ammo_clip_renderer';
 import Vector from '../vector';
 import Input from '../game_components/input';
 import Movement from '../game_components/movement';
 import Camera from '../game_components/camera';
 import Shoot from '../game_components/shoot';
+import Ammo from '../game_components/ammo';
 import Collider from '../game_components/collider';
 import Pickup from '../game_components/pickup';
 import Hitpoint from '../game_components/hitpoint';
@@ -38,6 +40,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
 
   if (owned) {
     player.addComponent(new Input());
+    player.addComponent(new Ammo(30));
     player.addComponent(new Shoot());
     player.addComponent(new Teleport());
     player.addComponent(new Pickup());
@@ -45,7 +48,8 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new Speed());
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
-    player.addComponent(new CountdownRenderer());
+    player.addComponent(new AmmoClipRenderer(10));
+    player.addComponent(new CountdownRenderer(10));
     player.addComponent(new GameOver());
     player.addComponent(new VictoryChecker());
   } else {

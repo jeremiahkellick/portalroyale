@@ -1,5 +1,6 @@
 import Component from './component';
 import Transform from './transform';
+import Hitpoint from './hitpoint';
 import Circle from '../shapes/circle';
 import Rectangle from '../shapes/rectangle';
 import Game from '../game';
@@ -15,6 +16,12 @@ class Collider extends Component {
     super();
     this.shape = shape;
     this.layer = layer;
+    this.multiplier = 1;
+  }
+
+  start() {
+    this.hitpoint = this.gameObject.getComponent(Hitpoint);
+    this.transform = this.gameObject.getComponent(Transform);
   }
 
   checkAllCollisions(newPos, ignoreMoving = false) {
@@ -86,6 +93,26 @@ class Collider extends Component {
     let maxCornerDistSq = circle.shape.radius * circle.shape.radius;
     return xCornerDistSq + yCornerDistSq <= maxCornerDistSq;
   }
+
+  // changeShapeSize(m) {
+  //   if (this.shape instanceof Circle) {
+  //     this.shape.radius *= m;
+  //   } else if (this.shape instanceof Rectangle) {
+  //     this.shape.width *= m;
+  //     this.shape.height *= m;
+  //     this
+  //   }
+  // }
+
+  // update() {
+  //   if (this.hitpoint) {
+  //     const newMultiplier = this.hitpoint.health / this.hitpoint.maxHealth;
+  //     if (newMultiplier != this.multiplier) {
+  //       this.changeShapeSize(newMultiplier/this.multiplier);
+  //       this.multiplier = newMultiplier;
+  //     }
+  //   }
+  // }
 }
 
 export default Collider;

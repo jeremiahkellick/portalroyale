@@ -12,6 +12,21 @@ const randomVectorInMap = () => {
   return { x, y };
 };
 
+const colliding = (a, b) => {
+  return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2)) < 164;
+};
+
+const getFreePosition = (existingObjects) => {
+  const position = randomVectorInMap();
+  if (existingObjects.some(object => {
+    if (!object.position) return false;
+    return colliding(position, object.position);
+  })) {
+    return getFreePosition(existingObjects);
+  }
+  return position;
+};
+
 const startGameServer = io => {
   let objectsByOwnerId, objectCreationOptions, gameInProgress, state;
   const lobby = {};
@@ -27,7 +42,7 @@ const startGameServer = io => {
       objectCreationOptions[id] = {
         id,
         type: 'tree',
-        position: randomVectorInMap(),
+        position: getFreePosition(Object.values(objectCreationOptions)),
         health: 100
       };
 
@@ -35,7 +50,7 @@ const startGameServer = io => {
       objectCreationOptions[id] = {
         id,
         type: 'explosiveCircle',
-        position: randomVectorInMap(),
+        position: getFreePosition(Object.values(objectCreationOptions)),
         health: 50
       };
 
@@ -43,7 +58,7 @@ const startGameServer = io => {
       objectCreationOptions[id] = {
         id,
         type: 'lootCrate',
-        position: randomVectorInMap(),
+        position: getFreePosition(Object.values(objectCreationOptions)),
         health: 50
       };
 
@@ -51,7 +66,7 @@ const startGameServer = io => {
       objectCreationOptions[id] = {
         id,
         type: 'medKit',
-        position: randomVectorInMap(),
+        position: getFreePosition(Object.values(objectCreationOptions)),
         health: 50
       };
     }
@@ -96,6 +111,11 @@ const startGameServer = io => {
       }
       if (options.shouldSave !== false) {
         objectCreationOptions[options.id] = options;
+      }
+      if (options.type === 'player') {
+        options.position = getFreePosition(
+          Object.values(objectCreationOptions)
+        );
       }
       io.sockets.emit('create', options);
     });
