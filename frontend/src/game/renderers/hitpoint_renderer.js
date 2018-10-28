@@ -5,7 +5,7 @@ class HitpointRenderer extends Renderer {
   draw(ctx, offset) {
     const hitpoint = this.gameObject.getComponent(Hitpoint);
 
-    let multiplier = (hitpoint ? hitpoint.health/100 : 1)
+    let multiplier = (hitpoint ? hitpoint.health/hitpoint.maxHealth : 1)
 
     let color ;
     if ( multiplier <= .2 ) {

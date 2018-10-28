@@ -6,6 +6,7 @@ class Hitpoint extends Component {
     this.onDamageFunctions = [];
     this.onDeathFunctions = [];
     this.health = health;
+    this.maxHealth = health;
   }
 
   onDamage(func) {
@@ -37,7 +38,7 @@ class Hitpoint extends Component {
         if (this.health === 0) this.death();
         break;
       case 'HEAL':
-        this.health = Math.min(this.health + action.amount, 100);
+        this.health = Math.min(this.health + action.amount, this.maxHealth);
         break;
       default:
     }
