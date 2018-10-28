@@ -1,6 +1,5 @@
 import Syncronizer from './syncronizer';
 import Time from './time';
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 import Camera from './game_components/camera';
 import { gameOver } from '../actions/game_actions';
 import { clearPlayers } from '../actions/player_actions';
@@ -109,7 +108,8 @@ class Game {
 
   draw() {
     if (this.over) return;
-    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    const canvas = document.getElementById("canvas");
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (Camera.camera !== undefined) Camera.camera.draw(this.ctx);
     window.requestAnimationFrame(this.draw.bind(this));
   }
