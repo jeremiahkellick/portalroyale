@@ -24,7 +24,7 @@ class BulletMovement extends Movement {
       } else {
         this.transform.position = newPos;
         this.distanceTraveled += oldPos.distanceTo(newPos);
-        this.length = Math.min(300, this.distanceTraveled);
+        this.length = Math.min(500, this.distanceTraveled);
         const collidedWith = this.collider.checkAllCollisions(newPos);
         if (collidedWith) {
           if (this.owned) {
