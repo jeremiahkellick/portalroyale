@@ -129,7 +129,7 @@ class Game {
     if (this.over) return;
     const canvas = document.getElementById("canvas");
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (Camera.camera !== undefined) Camera.camera.draw(this.ctx);
+    if (Camera.camera) Camera.camera.draw(this.ctx);
     window.requestAnimationFrame(this.draw.bind(this));
   }
 
