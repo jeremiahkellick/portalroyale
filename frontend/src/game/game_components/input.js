@@ -60,6 +60,11 @@ class Input extends Component {
     return null;
   }
 
+  getReload() {
+    if (key.isPressed('R')) return true;
+    return false;
+  }
+
   getItemUsed() {
     let itemUsed;
     if (key.isPressed('1')) itemUsed = 'medKit';
