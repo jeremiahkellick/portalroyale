@@ -37,8 +37,10 @@ export const initializeGame = (name, dispatch) => {
     options.sender = socket.id;
     options.id = getId();
     socket.emit('create', options);
-    const obj = create(options);
-    if (obj !== undefined) game.gameObjects[options.id] = obj;
+    if (options.createNow !== false) {
+      const obj = create(options);
+      if (obj !== undefined) game.gameObjects[options.id] = obj;
+    }
   };
 
   const createAll = allOptions => {
@@ -75,10 +77,9 @@ export const initializeGame = (name, dispatch) => {
     sendCreateToServer(
       {
         type: 'player',
-        position: Vector.random(MAP_WIDTH,
-          MAP_HEIGHT).toPOJO(),
         health: 100,
-        name
+        name,
+        createNow: false
       },
       true
     );
@@ -88,7 +89,7 @@ export const initializeGame = (name, dispatch) => {
 
   socket.on('create', options => {
     if (!game) return;
-    if (options.sender !== socket.id) {
+    if (options.createNow === false || options.sender !== socket.id) {
       const obj = create(options);
       if (obj !== undefined) game.gameObjects[options.id] = obj;
     }
