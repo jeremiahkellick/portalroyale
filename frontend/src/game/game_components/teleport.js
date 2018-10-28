@@ -36,7 +36,7 @@ class Teleport extends Component {
 
             this.transform.teleport(portalPos1.toPOJO());
             this.disable();
-            setTimeout( () => this.enable(), 100 );
+            setTimeout( () => this.enable(), 500 );
             return;
           }
 
