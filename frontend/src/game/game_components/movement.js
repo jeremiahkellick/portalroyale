@@ -18,18 +18,26 @@ class Movement extends Component {
     if (this.input) {
       const speed = (this.speed ? this.speed.speedMultiplier : 1);
       const movement = this.input.getMovement().times(300 * Time.deltaTime * speed);
+
       const newXPos = this.transform.position.plus(new Vector(movement.x, 0));
-      if (!this.collider.checkAllCollisions(newXPos, true)) {
-        this.transform.position.x += movement.x;
+      if ( !this.collider.checkMapBoundaries(newXPos)) {
+        if (!this.collider.checkAllCollisions(newXPos, true)) {
+          this.transform.position.x += movement.x;
+        }
       }
+
       const newYPos = this.transform.position.plus(new Vector(0, movement.y));
-      if (!this.collider.checkAllCollisions(newYPos, true)) {
-        this.transform.position.y += movement.y;
+      if ( !this.collider.checkMapBoundaries(newYPos) ) {
+        if (!this.collider.checkAllCollisions(newYPos, true)) {
+          this.transform.position.y += movement.y;
+        }
       }
 
       this.transform.lookAt(this.input.mousePosition());
+
     }
   }
+
 }
 
 export default Movement;

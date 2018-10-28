@@ -4,6 +4,7 @@ import Hitpoint from './hitpoint';
 import Circle from '../shapes/circle';
 import Rectangle from '../shapes/rectangle';
 import Game from '../game';
+import { MAP_WIDTH, MAP_HEIGHT } from '../util';
 
 const layers = {
   'player': new Set(['obstacle']),
@@ -92,6 +93,22 @@ class Collider extends Component {
     let yCornerDistSq = yCornerDist * yCornerDist;
     let maxCornerDistSq = circle.shape.radius * circle.shape.radius;
     return xCornerDistSq + yCornerDistSq <= maxCornerDistSq;
+  }
+
+  checkMapBoundaries( newPos ) {
+    const { x, y } = newPos;
+    let dx, dy;
+    if ( this.shape instanceof Circle ) {
+      dx = this.shape.radius;
+      dy = this.shape.radius;
+    } else if ( this.shape instanceof Rectangle ) {
+      dx = this.shape.width/2;
+      dy = this.shape.height/2;
+    }
+    return ( x - dx < 0 ) ||
+            ( y - dy < 0 ) ||
+            ( x + dx > MAP_WIDTH ) ||
+            ( y + dy > MAP_HEIGHT );
   }
 
   // changeShapeSize(m) {
