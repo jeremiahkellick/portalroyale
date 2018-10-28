@@ -18,6 +18,7 @@ import Inventory from '../game_components/inventory';
 import Circle from '../shapes/circle';
 import NameRenderer from '../renderers/name_renderer';
 import GameOver from '../game_components/game_over';
+import Teleport from '../game_components/teleport';
 import Count from '../game_components/count';
 import VictoryChecker from '../game_components/victory_checker';
 
@@ -38,6 +39,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
   if (owned) {
     player.addComponent(new Input());
     player.addComponent(new Shoot());
+    player.addComponent(new Teleport());
     player.addComponent(new Pickup());
     player.addComponent(new Inventory());
     player.addComponent(new Speed());
