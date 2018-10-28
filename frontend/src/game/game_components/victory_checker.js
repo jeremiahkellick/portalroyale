@@ -11,7 +11,6 @@ class VictoryChecker extends Component {
   }
 
   onDestroy() {
-    console.log('DESTROYED');
     this.unsubscribe();
   }
 }
