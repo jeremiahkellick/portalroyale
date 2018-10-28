@@ -8,7 +8,8 @@ import { receiveSocket, startGame } from '../actions/game_actions';
 import {
   receivePlayers,
   receivePlayer,
-  removePlayer
+  removePlayer,
+  readyPlayer,
 } from '../actions/player_actions';
 
 export const initializeGame = (name, dispatch) => {
@@ -62,6 +63,8 @@ export const initializeGame = (name, dispatch) => {
   socket.on('player left', id => dispatch(removePlayer(id)));
 
   socket.on('players index', players => dispatch(receivePlayers(players)));
+
+  socket.on('player ready', id => dispatch(readyPlayer(id)));
 
   socket.on('start', allOptions => {
     game = new Game(

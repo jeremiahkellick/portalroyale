@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { readyUp } from '../actions/game_actions';
+import { readyPlayer } from '../actions/player_actions';
+import { PacmanLoader } from 'react-spinners';
 
 class Lobby extends React.Component {
   handleSubmit(e) {
@@ -19,7 +21,15 @@ class Lobby extends React.Component {
           <form onSubmit={this.handleSubmit.bind(this)}>
             <ul>
               { this.props.players.map(player =>
-                <li key={player.id}>{player.name}</li>
+                <li key={player.id}>
+                  <span>{player.name}</span>
+                  <div>
+                    { player.ready ?
+                      <i className="fas fa-check"></i> :
+                      <PacmanLoader size={ 10 } color={ "#54722f" } />
+                    }
+                  </div>
+                </li>
               ) }
             </ul>
             {
