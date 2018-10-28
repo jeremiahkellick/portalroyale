@@ -65,7 +65,7 @@ for (let i = 0; i < 10; i++) {
     position: randomVectorInMap(),
     health: 50
   };
-  
+
   id = getId();
   objectCreationOptions[id] = {
     id,

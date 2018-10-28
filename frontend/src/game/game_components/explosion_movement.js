@@ -7,12 +7,16 @@ class ExplosionMovement extends Movement {
     super();
     this.radius = radius || 0;
     this.maxRange = maxRange;
-    const sound = new Audio("./sounds/explosion.mp3");
-    sound.play();
   }
 
   update() {
     if ( this.radius < this.maxRange ) {
+
+      if ( this.radius === 50 ) {
+        const sound = new Audio("./sounds/explosion.mp3");
+        sound.play();
+      }
+
       const pos = this.transform.position;
       const collidedWith = this.collider.checkAllCollisions(pos);
 

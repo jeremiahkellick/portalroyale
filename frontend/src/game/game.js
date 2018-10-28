@@ -7,6 +7,8 @@ import GameObject from './game_objects/game_object';
 import PlayersAliveRenderer from './renderers/players_alive_renderer';
 import ObjectTracker from './game_components/object_tracker';
 import { receivePlayers } from '../actions/player_actions';
+import Vector from './vector';
+import { MAP_WIDTH, MAP_HEIGHT } from './util';
 
 class Game {
   constructor(
@@ -57,7 +59,22 @@ class Game {
     clearInterval(this.updateInterval);
     Game.game = null;
     this.gameOverCallback();
-   this.dispatch(gameOver());
+    this.dispatch(gameOver());
+  }
+
+
+  spawnPortal()  {
+    const num = 1; //Math.floor(Math.random()*100);
+    if ( num === 1 ) {
+      let id = getId();
+      const options = {
+        id,
+        type: 'portal',
+        position1: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
+        position2: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
+      };
+      this.sendCreateToServer(options, false);
+    }
   }
 
   sendUpdateToServer() {
@@ -101,6 +118,9 @@ class Game {
 
   update() {
     Time.update();
+    if ( Object.values(this.gameObjects).filter( obj => obj.type === "portal").length === 0 ) {
+      this.spawnPortal();
+    }
     Object.values(this.gameObjects).forEach(gameObject => {
       gameObject.components.forEach(component => {
         component.handleUpdating();

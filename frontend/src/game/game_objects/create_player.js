@@ -19,6 +19,7 @@ import Circle from '../shapes/circle';
 import NameRenderer from '../renderers/name_renderer';
 import GameOver from '../game_components/game_over';
 import ObjectTracker from '../game_components/object_tracker';
+import Teleport from '../game_components/teleport';
 
 const createPlayer = ({ id, owned, position, health, name }) => {
   const radius = 22;
@@ -37,6 +38,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
   if (owned) {
     player.addComponent(new Input());
     player.addComponent(new Shoot());
+    player.addComponent(new Teleport());
     player.addComponent(new Pickup());
     player.addComponent(new Inventory());
     player.addComponent(new Speed());
