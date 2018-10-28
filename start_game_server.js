@@ -80,15 +80,17 @@ const startGameServer = io => {
       lobby[socket.id] = { name, ready: false };
       const players = {};
       Object.keys(lobby).forEach(id => {
-        players[id] = { id, name: lobby[id].name };
+        players[id] = { id, name: lobby[id].name, ready: false };
       });
       socket.emit('players index', players);
-      io.sockets.emit('player joined', { id: socket.id, name });
+      io.sockets.emit('player joined', { id: socket.id, name, ready: false});
     });
 
     socket.on('ready', () => {
-      if (lobby[socket.id] !== undefined) lobby[socket.id].ready = true;
-
+      if (lobby[socket.id] !== undefined) {
+        lobby[socket.id].ready = true;
+        io.sockets.emit('player ready', socket.id);
+      }
       if (Object.values(lobby).every(player => player.ready)
           && Object.keys(lobby).length > 1 && !gameInProgress) {
 
