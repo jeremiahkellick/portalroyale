@@ -1,6 +1,8 @@
 import Component from './component';
+import Input from './input';
+import Inventory from './inventory';
 
-const RELOAD_DURATION = 1500;
+const RELOAD_DURATION = 2000;
 
 class Ammo extends Component {
   constructor(clipSize) {
@@ -8,6 +10,20 @@ class Ammo extends Component {
     this.clipSize = clipSize;
     this.loaded = clipSize;
     this.reloadStartTime = undefined;
+    this.reloadTimer = RELOAD_DURATION/100;
+  }
+
+  start() {
+    this.input = this.gameObject.getComponent(Input);
+    this.inventory = this.gameObject.getComponent(Inventory);
+  }
+
+  emptyClip() {
+    return this.loaded === 0;
+  }
+
+  fullClip() {
+    return this.loaded === this.clipSize;
   }
 
   reloading() {
@@ -23,16 +39,28 @@ class Ammo extends Component {
     }
   }
 
-  reload() {
-    if (!this.reloading()) this.reloadStartTime = new Date();
+  startReload() {
+    this.reloadStartTime = new Date();
+    let counter = setInterval(() => {
+      this.reloadTimer -= 1;
+    }, 100);
+    setTimeout (() => {
+      clearInterval(counter);
+      this.finishReload();
+    }, RELOAD_DURATION);
+  }
+
+  finishReload() {
+    this.loaded = this.clipSize;
+    this.reloadStartTime = undefined;
+    this.reloadTimer = RELOAD_DURATION/100;
   }
 
   update() {
-    if (this.reloading()
-        && new Date() - this.reloadStartTime >= RELOAD_DURATION) {
-
-      this.loaded = this.clipSize;
-      this.reloadStartTime = undefined;
+    if ((this.emptyClip() || (this.input.getReload() && !this.fullClip())) 
+        && !this.reloading() 
+        && !this.inventory.applyingItem()) {
+      this.startReload();
     }
   }
 }

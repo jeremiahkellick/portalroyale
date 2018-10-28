@@ -32,11 +32,6 @@ class CircleRenderer extends Renderer {
     ctx.fillStyle = this.fillColor;
     ctx.fill();
 
-    ctx.moveTo( 22, 0)
-    ctx.arc( 15, 0, 7, 0, Math.PI*2, true );
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 1;
-    ctx.stroke();
     ctx.closePath();
 
     ctx.rotate(-rotation);

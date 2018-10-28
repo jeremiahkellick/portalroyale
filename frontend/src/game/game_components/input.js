@@ -55,9 +55,18 @@ class Input extends Component {
     return movement.normalized();
   }
 
+  activatePortal() {
+    return key.isPressed('F');
+  }
+
   getItemPickup() {
     if (key.isPressed('F')) return 'pickup';
     return null;
+  }
+
+  getReload() {
+    if (key.isPressed('R')) return true;
+    return false;
   }
 
   getItemUsed() {

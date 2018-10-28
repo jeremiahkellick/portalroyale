@@ -12,6 +12,9 @@ class EnterGame extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if (this.props.formType === "Game Over") {
+      this.props.resetGame();
+    }
     this.props.initializeGame(this.state.name);
   }
 
@@ -26,6 +29,7 @@ class EnterGame extends React.Component {
     return (
       <div className={ this.props.formType === "Enter Game" ? "enter-game" : "game-over"} >
         <form onSubmit={ this.handleSubmit }>
+          { this.props.won && <p>You won!</p> }
           <input
             className={ nameInputClass }
             type="text"

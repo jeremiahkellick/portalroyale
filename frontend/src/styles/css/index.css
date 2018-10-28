@@ -48,7 +48,11 @@ body {
 .lobby ul li {
   background: #afe66c;
   padding: 10px;
-  margin: 10px 0; }
+  margin: 10px 0;
+  display: grid;
+  grid-template-columns: 1fr 50px; }
+.lobby i {
+  color: #54722f; }
 
 canvas {
   background: #80af49;

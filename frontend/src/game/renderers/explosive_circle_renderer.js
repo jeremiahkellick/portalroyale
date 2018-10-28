@@ -10,7 +10,7 @@ class ExplosiveCircleRenderer extends Renderer {
     const hitpoint = this.gameObject.getComponent(Hitpoint);
     let multiplier;
     if (hitpoint) {
-      multiplier = (hitpoint.health === 0 ? 0 : hitpoint.health/100 * 0.3 + 0.7);
+      multiplier = (hitpoint.health === 0 ? 0 : hitpoint.health/hitpoint.maxHealth * 0.3 + 0.7);
     } else {
       multiplier = 1;
     }

@@ -17,14 +17,16 @@ class Transform extends Component {
                     rotation;
   }
 
-  teleport() {
-    this.dispatch({ type: 'TELEPORT' });
+  teleport(position) {
+    const sound = new Audio('./sounds/teleport.wav');
+    sound.play();
+    this.dispatch({ type: 'TELEPORT', position });
   }
 
   handleAction(action) {
     switch (action.type) {
       case 'TELEPORT':
-        this.position = new Vector(200, 200);
+        this.position = Vector.fromPOJO(action.position);
         break;
       default:
     }

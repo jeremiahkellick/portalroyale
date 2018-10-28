@@ -1,13 +1,14 @@
 import Syncronizer from './syncronizer';
 import Time from './time';
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
 import Camera from './game_components/camera';
-import { gameOver  } from '../actions/game_actions';
+import { gameOver } from '../actions/game_actions';
+import { clearPlayers } from '../actions/player_actions';
 import getId from './get_id';
 import GameObject from './game_objects/game_object';
 import PlayersAliveRenderer from './renderers/players_alive_renderer';
-import ObjectTracker from './game_components/object_tracker';
-import { receivePlayers } from '../actions/player_actions';
+import Vector from './vector';
+import { MAP_WIDTH, MAP_HEIGHT } from './util';
+import { win } from '../actions/game_actions';
 
 class Game {
   constructor(
@@ -16,6 +17,7 @@ class Game {
     updateServerCallback,
     createOnServerCallback,
     gameOverCallback,
+    winCallback,
     dispatch
   ) {
     Game.game = this;
@@ -25,30 +27,18 @@ class Game {
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
     this.gameOverCallback = gameOverCallback;
+    this.winCallback = winCallback;
     this.gameObjects = {};
     this.dispatch = dispatch;
     const playerCountId = getId();
     const playerCount = new GameObject(playerCountId);
     playerCount.addComponent(new PlayersAliveRenderer(10));
     this.gameObjects[playerCountId] = playerCount;
-    ObjectTracker.onChange('players', players =>
-      this.dispatch(receivePlayers(players))
-    );
-    this.started = false;
-    this.unsubscribe = window.store.subscribe(() => {
-      if (window.store.getState().game.started) {
-        this.unsubscribe();
-        this.start();
-      }
-    });
-  }
-
-  start() {
-    this.started = true;
     this.networkInterval = setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
     this.updateInterval = setInterval(this.update.bind(this), 1000 / 60);
     window.requestAnimationFrame(this.draw.bind(this));
+    this.winFlag = false;
   }
 
   endGame() {
@@ -58,7 +48,30 @@ class Game {
     clearInterval(this.updateInterval);
     Game.game = null;
     this.gameOverCallback();
-   this.dispatch(gameOver());
+    this.dispatch(clearPlayers());
+    this.dispatch(gameOver());
+  }
+
+  spawnPortal()  {
+    const num = 1; //Math.floor(Math.random()*100);
+    if ( num === 1 ) {
+      let id = getId();
+      const options = {
+        id,
+        type: 'portal',
+        position1: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
+        position2: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
+      };
+      this.sendCreateToServer(options, false);
+    }
+  }
+
+  win() {
+    setTimeout(() => {
+      this.dispatch(win());
+      this.winCallback();
+      this.endGame();
+    }, 1000);
   }
 
   sendUpdateToServer() {
@@ -102,6 +115,9 @@ class Game {
 
   update() {
     Time.update();
+    if ( Object.values(this.gameObjects).filter( obj => obj.type === "portal").length === 0 ) {
+      this.spawnPortal();
+    }
     Object.values(this.gameObjects).forEach(gameObject => {
       gameObject.components.forEach(component => {
         component.handleUpdating();
@@ -111,8 +127,9 @@ class Game {
 
   draw() {
     if (this.over) return;
-    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    if (Camera.camera !== undefined) Camera.camera.draw(this.ctx);
+    const canvas = document.getElementById("canvas");
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (Camera.camera) Camera.camera.draw(this.ctx);
     window.requestAnimationFrame(this.draw.bind(this));
   }
 

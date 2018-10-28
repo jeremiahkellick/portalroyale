@@ -1,21 +1,35 @@
 import Renderer from './renderer';
 import Inventory from '../game_components/inventory';
+import Ammo from '../game_components/ammo';
 
 class countdownRenderer extends Renderer {
   draw(ctx) {
     const inventory = this.gameObject.getComponent(Inventory);
-    if (inventory === undefined || !inventory.applyingItem()) return;
+    const ammo = this.gameObject.getComponent(Ammo);
+    let timer, timerStart, text;
+
+
+    if (inventory && inventory.applyingItem()) {
+      timer = inventory.timer;
+      timerStart = 50;
+      text = 'Healing'
+    } else if (ammo && ammo.reloading()) {
+      timer = ammo.reloadTimer;
+      timerStart = 20;
+      text = 'Reloading'
+    } else {
+      return;
+    }
 
     const canvas = document.getElementById("canvas");
-    let timer = inventory.timer;
     let timerString = timer < 10 ? '0' + timer.toString() : timer.toString();
 
     ctx.fillStyle = '#61726177';
     this.drawRoundedRect(
       ctx,
-      canvas.width * 0.5-50,
+      canvas.width * 0.5-65,
       canvas.height * 0.4-20,
-      100,
+      130,
       40,
       10
     )
@@ -24,7 +38,7 @@ class countdownRenderer extends Renderer {
     ctx.textBaseline='middle';
     ctx.font = 'bold 24px Roboto';
     ctx.textAlign = "center";
-    ctx.fillText('Healing', canvas.width * 0.5, canvas.height * 0.4);
+    ctx.fillText(text, canvas.width * 0.5, canvas.height * 0.4);
     ctx.textBaseline='alphabetic';
 
     ctx.beginPath();
@@ -34,24 +48,12 @@ class countdownRenderer extends Renderer {
     ctx.closePath();
 
     ctx.beginPath();
-    ctx.arc(canvas.width*0.5, canvas.height*0.3-10, 35, -Math.PI/2, (-timer/25 - 0.5)*Math.PI);
+    ctx.arc(canvas.width*0.5, canvas.height*0.3-10, 35, -Math.PI/2, (-timer/(timerStart/2) - 0.5)*Math.PI);
     ctx.strokeStyle='white';
     ctx.lineWidth=4;
     ctx.stroke();
     ctx.fillStyle = 'white';
     ctx.fillText(timerString[0]+'.'+timerString[1], canvas.width * 0.5, canvas.height * 0.3-2);
-    ctx.closePath();
-  }
-
-  drawRoundedRect(ctx, x, y, width, height, radius) {
-    if (width < 2 * radius) radius = width / 2;
-    if (height < 2 * radius) radius = height / 2;
-    ctx.beginPath();
-    ctx.moveTo(x + radius, y);
-    ctx.arcTo(x + width, y, x+width, y + height, radius);
-    ctx.arcTo(x + width, y + height, x, y + height, radius);
-    ctx.arcTo(x, y + height, x, y, radius);
-    ctx.arcTo(x, y, x + width, y, radius);
     ctx.closePath();
   }
 }

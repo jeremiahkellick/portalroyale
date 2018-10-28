@@ -13,9 +13,9 @@ const createBullet = ({ id, position, directionVector, rotation, owned }) => {
   const transform = new Transform(  position );
   bullet.addComponent(transform);
   bullet.addComponent(new Collider(new Circle(5), 'bullet'));
-  bullet.addComponent(new BulletRenderer(rotation, 2));
+  bullet.addComponent(new BulletRenderer(rotation, 1));
   bullet.addComponent(
-    new BulletMovement(1200, directionVector.normalized().times(900), owned)
+    new BulletMovement(1800, directionVector.normalized().times(2000), owned)
   );
   return bullet;
 };

@@ -10,7 +10,7 @@ class LootCrateRenderer extends Renderer {
     const hitpoint = transform.gameObject.getComponent(Hitpoint);
     let m;
     if (hitpoint) {
-      m = (hitpoint.health === 0 ? 0 : hitpoint.health/100 * 0.5 + 0.5);
+      m = (hitpoint.health === 0 ? 0 : hitpoint.health/hitpoint.maxHealth * 0.5 + 0.5);
     } else {
       m = 1;
     }

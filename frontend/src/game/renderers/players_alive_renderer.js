@@ -1,5 +1,5 @@
 import Renderer from './renderer';
-import ObjectTracker from '../game_components/object_tracker';
+import Count from '../game_components/count';
 
 class PlayersAliveRenderer extends Renderer {
   draw(ctx) {
@@ -19,11 +19,7 @@ class PlayersAliveRenderer extends Renderer {
     ctx.textBaseline='middle';
     ctx.font = 'bold 24px Roboto';
     ctx.textAlign = "center";
-    ctx.fillText(
-      Object.keys(ObjectTracker.get('players')).length,
-      canvas.width - 60,
-      44
-    );
+    ctx.fillText(Count.get('players'), canvas.width - 60, 44);
     ctx.fillText('Alive', canvas.width - 60, 76);
 
     ctx.textBaseline='alphabetic';
