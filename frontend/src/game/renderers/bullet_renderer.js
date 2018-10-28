@@ -16,7 +16,7 @@ class BulletRenderer extends Renderer {
 
     const { x, y } = transform.position.minus(offset);
 
-    let stretch = 300;
+    let stretch = 500;
     if (bulletMovement) {
       stretch = bulletMovement.length;
     }
@@ -36,7 +36,7 @@ class BulletRenderer extends Renderer {
     ctx.strokeStyle = "#00000000";
     ctx.lineWidth = 0;
 
-    ctx.fillRect(-stretch, 0, stretch, 3);
+    ctx.fillRect(-stretch, -1.5, stretch, 3);
     ctx.closePath();
 
     ctx.rotate(-rotation);
