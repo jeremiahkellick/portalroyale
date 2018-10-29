@@ -2,7 +2,7 @@
 
 _A multi-player battle royale shooter game_
 
-[Live Site](#)
+[Live Site](http://portalroyale.herokuapp.com/#/)
 
 ## Background and Overview
 
