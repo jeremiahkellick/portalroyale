@@ -16,7 +16,7 @@ const createExplosiveCircle = ({ id, position, health }) => {
   explosiveCircle.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
   explosiveCircle.addComponent(new ExplosiveCircleRenderer());
-  explosiveCircle.addComponent(new Collider(new Circle(30)));
+  explosiveCircle.addComponent(new Collider(new Circle(30), 0.7, 'obstacle'));
 
   const createExplosion = (transform) => {
     return () => {

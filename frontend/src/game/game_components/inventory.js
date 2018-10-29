@@ -19,6 +19,7 @@ class Inventory extends Component {
     this.input = this.gameObject.getComponent(Input);
     this.speed = this.gameObject.getComponent(Speed);
     this.ammo = this.gameObject.getComponent(Ammo);
+    this.hitpoint = this.gameObject.getComponent(Hitpoint);
   }
 
   hasItem(item) {
@@ -37,6 +38,19 @@ class Inventory extends Component {
     if (this.hasItem(item)) this.inventory[item] -= 1;
   }
 
+  dropItems() {
+    Object.keys(this.inventory).forEach( item => {
+      while (this.inventory[item] > 0) {
+        console.log(item);
+        this.removeItem(item);
+      }
+    })
+  }
+
+  dropItem(item) {
+    
+  }
+
   applyingItem() {
     return this.usingItem !== '';
   }
@@ -44,7 +58,7 @@ class Inventory extends Component {
   useItem(item) {
     switch(item) {
       case 'medKit':
-        const health = this.gameObject.getComponent(Hitpoint);
+        const health = this.hitpoint;
         if (health) health.heal(100);
         break;
       default:

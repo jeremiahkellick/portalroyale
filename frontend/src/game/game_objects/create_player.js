@@ -36,7 +36,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
   new Syncronizer(id+'1', hitpoint);
   player.addComponent(new PlayerRenderer(radius, 2));
   player.addComponent(new Movement());
-  player.addComponent(new Collider(new Circle(radius), 'player'));
+  player.addComponent(new Collider(new Circle(radius), 1, 'player'));
   player.addComponent(new Count('players'));
 
   if (owned) {
