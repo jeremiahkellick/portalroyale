@@ -1,17 +1,22 @@
 import React from 'react';
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from './game/util'; 
+import Canvas from './components/canvas';
+import Homepage from './components/homepage'
+import Lobby from './components/lobby';
+import { connect } from 'react-redux';
 
-const App = props => (
+const App = ({ name, gameOver, started }) => (
+
   <div className="App">
-    <header className="App-header">
-      <h1>portfol.io</h1>
-      <canvas
-        id="canvas"
-        width={`${CANVAS_WIDTH}px`}
-        height={`${CANVAS_HEIGHT}px`}>
-      </canvas>
-    </header>
+    { name && !gameOver ? null : <Homepage /> }
+    { name && !started ? <Lobby /> : null }
+    <Canvas />
   </div>
 );
 
-export default App;
+const mapStateToProps = ({ game: { name, gameOver, started } }) => ({
+  name,
+  gameOver,
+  started
+});
+
+export default connect(mapStateToProps)(App);

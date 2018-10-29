@@ -1,20 +1,82 @@
 import Syncronizer from './syncronizer';
 import Time from './time';
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from './util';
+import Camera from './game_components/camera';
+import { gameOver } from '../actions/game_actions';
+import { clearPlayers } from '../actions/player_actions';
+import getId from './get_id';
+import GameObject from './game_objects/game_object';
+import PlayersAliveRenderer from './renderers/players_alive_renderer';
+import Vector from './vector';
+import { MAP_WIDTH, MAP_HEIGHT } from './util';
+import { win } from '../actions/game_actions';
 
 class Game {
-  constructor(ctx, clientId, updateServerCallback, createOnServerCallback) {
+  constructor(
+    ctx,
+    clientId,
+    updateServerCallback,
+    createOnServerCallback,
+    gameOverCallback,
+    winCallback,
+    dispatch
+  ) {
     Game.game = this;
+    this.over = false;
     this.ctx = ctx;
     this.clientId = clientId;
     this.updateServerCallback = updateServerCallback;
     this.createOnServerCallback = createOnServerCallback;
+    this.gameOverCallback = gameOverCallback;
+    this.winCallback = winCallback;
     this.gameObjects = {};
-    setInterval(this.sendUpdateToServer.bind(this), 100);
+    this.dispatch = dispatch;
+    const playerCount = new GameObject(getId());
+    playerCount.addComponent(new PlayersAliveRenderer(10));
+    this.add(playerCount);
+    this.networkInterval = setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
-    window.requestAnimationFrame(this.update.bind(this));
+    this.updateInterval = setInterval(this.update.bind(this), 1000 / 60);
+    window.requestAnimationFrame(this.draw.bind(this));
+    this.winFlag = false;
   }
-  
+
+  add(gameObject) {
+    this.gameObjects[gameObject.id] = gameObject;
+  }
+
+  endGame() {
+    this.over = true;
+    Object.values(this.gameObjects).forEach(gameObject => gameObject.destroy());
+    clearInterval(this.networkInterval);
+    clearInterval(this.updateInterval);
+    Game.game = null;
+    this.gameOverCallback();
+    this.dispatch(clearPlayers());
+    this.dispatch(gameOver());
+  }
+
+  spawnPortal()  {
+    const num = 1; //Math.floor(Math.random()*100);
+    if ( num === 1 ) {
+      let id = getId();
+      const options = {
+        id,
+        type: 'portal',
+        position1: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
+        position2: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
+      };
+      this.sendCreateToServer(options, false);
+    }
+  }
+
+  win() {
+    setTimeout(() => {
+      this.dispatch(win());
+      this.winCallback();
+      this.endGame();
+    }, 1000);
+  }
+
   sendUpdateToServer() {
     const packet = {};
 
@@ -30,7 +92,7 @@ class Game {
         action.sender = this.clientId;
         packet.actions.push(action);
       });
-      syncronizer.actions = [];
+      syncronizer.clearActions();
     });
 
     this.updateServerCallback(packet);
@@ -47,20 +109,31 @@ class Game {
     packet.actions.forEach(action => {
       if (action.sender !== this.clientId) {
         const syncronizer = Syncronizer.find(action.syncronizerId);
-        if (syncronizer !== undefined) syncronizer.component.handleAction(action);
+        if (syncronizer !== undefined) {
+          syncronizer.component.handleAction(action);
+        }
       }
     });
   }
 
   update() {
     Time.update();
-    this.ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    if ( Object.values(this.gameObjects).filter( obj => obj.type === "portal").length === 0 ) {
+      this.spawnPortal();
+    }
     Object.values(this.gameObjects).forEach(gameObject => {
       gameObject.components.forEach(component => {
         component.handleUpdating();
       });
     });
-    window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  draw() {
+    if (this.over) return;
+    const canvas = document.getElementById("canvas");
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (Camera.camera) Camera.camera.draw(this.ctx);
+    window.requestAnimationFrame(this.draw.bind(this));
   }
 
   sendCreateToServer(options, shouldOwn = false) {
