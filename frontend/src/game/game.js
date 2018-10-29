@@ -30,15 +30,18 @@ class Game {
     this.winCallback = winCallback;
     this.gameObjects = {};
     this.dispatch = dispatch;
-    const playerCountId = getId();
-    const playerCount = new GameObject(playerCountId);
+    const playerCount = new GameObject(getId());
     playerCount.addComponent(new PlayersAliveRenderer(10));
-    this.gameObjects[playerCountId] = playerCount;
+    this.add(playerCount);
     this.networkInterval = setInterval(this.sendUpdateToServer.bind(this), 100);
     Time.update();
     this.updateInterval = setInterval(this.update.bind(this), 1000 / 60);
     window.requestAnimationFrame(this.draw.bind(this));
     this.winFlag = false;
+  }
+
+  add(gameObject) {
+    this.gameObjects[gameObject.id] = gameObject;
   }
 
   endGame() {

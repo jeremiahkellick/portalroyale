@@ -40,7 +40,7 @@ export const initializeGame = (name, dispatch) => {
     socket.emit('create', options);
     if (options.createNow !== false) {
       const obj = create(options);
-      if (obj !== undefined) game.gameObjects[options.id] = obj;
+      if (obj !== undefined) game.add(obj);
     }
   };
 
@@ -48,7 +48,7 @@ export const initializeGame = (name, dispatch) => {
     allOptions.forEach(options => {
       if (options.sender !== socket.id) {
         const obj = create(options);
-        if (obj !== undefined) game.gameObjects[options.id] = obj;
+        if (obj !== undefined) game.add(obj);
       }
     });
   };
@@ -94,7 +94,7 @@ export const initializeGame = (name, dispatch) => {
     if (!game) return;
     if (options.createNow === false || options.sender !== socket.id) {
       const obj = create(options);
-      if (obj !== undefined) game.gameObjects[options.id] = obj;
+      if (obj !== undefined) game.add(obj);
     }
   });
 
