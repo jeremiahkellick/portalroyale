@@ -118,6 +118,18 @@ const startGameServer = io => {
         options.position = getFreePosition(
           Object.values(objectCreationOptions)
         );
+      } else if ( options.type === 'portal') {
+        options.position1 = getFreePosition(
+          Object.values(objectCreationOptions)
+        );
+        options.position2 = getFreePosition(
+          Object.values(objectCreationOptions)
+        );
+        while (colliding(options.position1, options.position2)) {
+          options.position2 = getFreePosition(
+            Object.values(objectCreationOptions)
+          );
+        };
       }
       io.sockets.emit('create', options);
     });

@@ -61,9 +61,7 @@ class Game {
       let id = getId();
       const options = {
         id,
-        type: 'portal',
-        position1: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
-        position2: Vector.random( MAP_WIDTH, MAP_HEIGHT ).toPOJO(),
+        type: 'portal'
       };
       this.sendCreateToServer(options, false);
     }
