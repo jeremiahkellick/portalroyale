@@ -12,7 +12,7 @@ const createMedKit = ({ id, position }) => {
   const medKit = new GameObject(id, 7);
   const transform = new Transform(Vector.fromPOJO(position));
   medKit.addComponent(transform);
-  medKit.addComponent(new MedKitRenderer());
+  medKit.addComponent(new MedKitRenderer(1));
   const item = new Item(new Circle(radius));
   medKit.addComponent(item);
   new Syncronizer(id+'1', item);

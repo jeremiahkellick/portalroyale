@@ -15,7 +15,7 @@ const createTree = ({ id, position, health }) => {
   tree.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
   tree.addComponent(new TreeRenderer(5));
-  tree.addComponent(new Collider(new Circle(30), 'obstacle'));
+  tree.addComponent(new Collider(new Circle(30), 0.4, 'obstacle'));
   return tree;
 };
 

@@ -13,9 +13,10 @@ const layers = {
 }
 
 class Collider extends Component {
-  constructor(shape, layer) {
+  constructor(shape, scale, layer) {
     super();
     this.shape = shape;
+    this.scale = scale;
     this.layer = layer;
     this.multiplier = 1;
   }
@@ -111,25 +112,27 @@ class Collider extends Component {
             ( y + dy > MAP_HEIGHT );
   }
 
-  // changeShapeSize(m) {
-  //   if (this.shape instanceof Circle) {
-  //     this.shape.radius *= m;
-  //   } else if (this.shape instanceof Rectangle) {
-  //     this.shape.width *= m;
-  //     this.shape.height *= m;
-  //     this
-  //   }
-  // }
+  changeShapeSize(m) {
+    if (this.shape instanceof Circle) {
+      this.shape.radius *= m;
+    } else if (this.shape instanceof Rectangle) {
+      this.transform.position.x -= (m-1)/2*this.shape.width;
+      this.transform.position.y -= (m-1)/2*this.shape.height;
+      this.shape.width *= m;
+      this.shape.height *= m;
+    }
+  }
 
-  // update() {
-  //   if (this.hitpoint) {
-  //     const newMultiplier = this.hitpoint.health / this.hitpoint.maxHealth;
-  //     if (newMultiplier != this.multiplier) {
-  //       this.changeShapeSize(newMultiplier/this.multiplier);
-  //       this.multiplier = newMultiplier;
-  //     }
-  //   }
-  // }
+  update() {
+    if (this.hitpoint) {
+      const percentHealth = this.hitpoint.health / this.hitpoint.maxHealth;
+      const newMultiplier = this.scale ? this.scale + (1 - this.scale) * percentHealth : 1;
+      if (newMultiplier != this.multiplier) {
+        this.changeShapeSize(newMultiplier/this.multiplier);
+        this.multiplier = newMultiplier;
+      }
+    }
+  }
 }
 
 export default Collider;

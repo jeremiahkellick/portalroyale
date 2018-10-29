@@ -23,7 +23,7 @@ class Pickup extends Component {
             const inventory = this.gameObject.getComponent(Inventory);
             if (inventory) {
               inventory.addItem('medKit');
-              item.destroy();
+              item.pickUp();
             }
           }
         }

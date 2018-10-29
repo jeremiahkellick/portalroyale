@@ -15,7 +15,7 @@ const createLootCrate = ({ id, position, health }) => {
   lootCrate.addComponent(hitpoint);
   new Syncronizer(id+'1', hitpoint);
   lootCrate.addComponent(new LootCrateRenderer());
-  lootCrate.addComponent(new Collider(new Rectangle(100, 100)));
+  lootCrate.addComponent(new Collider(new Rectangle(100, 100), 0.5, 'obstacle'));
   return lootCrate;
 };
 

@@ -1,4 +1,5 @@
 import Component from './component';
+import Inventory from './inventory';
 
 class Hitpoint extends Component {
   constructor(health) {
@@ -7,6 +8,10 @@ class Hitpoint extends Component {
     this.onDeathFunctions = [];
     this.health = health;
     this.maxHealth = health;
+  }
+
+  start() {
+    this.inventory = this.gameObject.getComponent(Inventory);
   }
 
   onDamage(func) {
@@ -26,8 +31,8 @@ class Hitpoint extends Component {
   }
 
   death() {
-    this.onDeathFunctions.forEach( func => func() );
     this.gameObject.destroy();
+    this.onDeathFunctions.forEach( func => func() );
   }
 
   handleAction(action) {

@@ -16,7 +16,7 @@ class Item extends Component {
     return this.shape.radius >= distance;
   }
 
-  destroy() {
+  pickUp() {
     this.dispatch({ type: 'DESTROY'});
   }
 
