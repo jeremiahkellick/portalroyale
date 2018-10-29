@@ -18,7 +18,7 @@ class Shoot extends Component {
 
   update() {
     if (this.input) {
-      if ( this.input.shouldShoot() && !this.inventory.applyingItem() 
+      if ( this.input.shouldShoot() && !this.inventory.applyingItem()
           && !this.ammo.emptyClip() && !this.ammo.reloading()) {
         const dir = this.input.mousePosition()
                               .minus(this.transform.position)
@@ -27,7 +27,7 @@ class Shoot extends Component {
         this.ammo.use();
         let options = {
           type: "bullet",
-          position: this.transform.position.plus(dir.times(66)).toPOJO(),
+          position: this.transform.position.plus(dir.times(23)).toPOJO(),
           directionVector: dir.toPOJO(),
           rotation,
           shouldSave: false

@@ -9,7 +9,7 @@ class BulletMovement extends Movement {
     this.range = range;
     this.bulletSpeed = speed;
     this.distanceTraveled = 0;
-    this.length = 3;
+    this.length = 0;
     this.owned = owned;
     this.active = true;
   }
@@ -24,7 +24,7 @@ class BulletMovement extends Movement {
       } else {
         this.transform.position = newPos;
         this.distanceTraveled += oldPos.distanceTo(newPos);
-        this.length = Math.min(500, this.distanceTraveled);
+        this.length = Math.min(500, Math.max(0, this.distanceTraveled - 43));
         const collidedWith = this.collider.checkAllCollisions(newPos);
         if (collidedWith) {
           if (this.owned) {
