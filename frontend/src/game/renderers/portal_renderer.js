@@ -3,11 +3,6 @@ import Movement from '../game_components/movement';
 import Transform from '../game_components/transform';
 
 class PortalRenderer extends Renderer {
-
-  constructor(sort) {
-    super(sort);
-  }
-
   draw(ctx, offset ) {
     const transforms = this.gameObject.getComponents(Transform);
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { readyUp } from '../actions/game_actions';
-import { readyPlayer } from '../actions/player_actions';
 import { PacmanLoader } from 'react-spinners';
 
 class Lobby extends React.Component {

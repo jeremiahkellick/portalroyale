@@ -2,8 +2,6 @@ import io from 'socket.io-client';
 import Game from '../game/game';
 import getId from '../game/get_id';
 import rootCreator from '../game/game_objects/root_creator';
-import { MAP_WIDTH, MAP_HEIGHT } from '../game/util';
-import Vector from '../game/vector';
 import { receiveSocket, startGame } from '../actions/game_actions';
 import {
   receivePlayers,

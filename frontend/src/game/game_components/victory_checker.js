@@ -5,9 +5,13 @@ import Game from '../game';
 class VictoryChecker extends Component {
   constructor() {
     super();
-    Count.onDecrease('players', count => {
-      if (count === 1 && !this.gameObject.destroyed) Game.game.win();
+    this.unsubscribe = Count.onDecrease('players', count => {
+      if (count === 1 && Game.game && !Game.game.over) Game.game.win();
     });
+  }
+
+  onDestroy() {
+    this.unsubscribe();
   }
 }
 

@@ -17,13 +17,14 @@ class Count extends Component {
 
   static onDecrease(key, func) {
     Count.ensureKey(key);
-    Count.onDecreaseFunctions[key].push(func);
+    Count.onDecreaseFunctions[key].add(func);
+    return () => Count.onDecreaseFunctions[key].delete(func);
   }
 
   static ensureKey(key) {
     if (Count.counts[key] === undefined) {
       Count.counts[key] = 0;
-      Count.onDecreaseFunctions[key] = [];
+      Count.onDecreaseFunctions[key] = new Set();
     }
   }
 
