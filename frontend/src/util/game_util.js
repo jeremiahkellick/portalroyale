@@ -38,7 +38,7 @@ export const initializeGame = (name, dispatch) => {
     socket.emit('create', options);
     if (options.createNow !== false) {
       const obj = create(options);
-      if (obj !== undefined) game.add(obj);
+      if (obj !== undefined) game.add(obj)
     }
   };
 

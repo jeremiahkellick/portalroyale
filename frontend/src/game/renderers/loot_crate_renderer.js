@@ -18,18 +18,18 @@ class LootCrateRenderer extends Renderer {
     const { x, y } = transform.position.minus(offset);
 
     this.drawRectangle(ctx, transform, offset, x, y, m, 100, 100, '#613200');
-    this.drawRectangle(ctx, transform, offset, x+15, y+15, m, 70, 70, '#312004');
+    this.drawRectangle(ctx, transform, offset, x+15*m, y+15*m, m, 70, 70, '#312004');
     const [ w, h ] = [ 70, 70];
     if (m !== 0) {
       ctx.beginPath();
       ctx.fillStyle = '#632A00';
-      ctx.moveTo(x+30+(w-w*m)/2, y+15+(h-h*m)/2);
-      ctx.lineTo(x+15+(w+w*m)/2, y+(h+h*m)/2);
-      ctx.lineTo(x+15+(w+w*m)/2, y+15+(h+h*m)/2);
-      ctx.lineTo(x+(w+w*m)/2, y+15+(h+h*m)/2);
-      ctx.lineTo(x+15+(w-w*m)/2, y+30+(h-h*m)/2);
-      ctx.lineTo(x+15+(w-w*m)/2, y+15+(h-h*m)/2);
-      ctx.lineTo(x+30+(w-w*m)/2, y+15+(h-h*m)/2);
+      ctx.moveTo(x+30*m, y+15*m);
+      ctx.lineTo(x+15*m+w*m, y+h*m);
+      ctx.lineTo(x+15*m+w*m, y+15*m+h*m);
+      ctx.lineTo(x+w*m, y+15*m+h*m);
+      ctx.lineTo(x+15*m, y+30*m);
+      ctx.lineTo(x+15*m, y+15*m);
+      ctx.lineTo(x+30*m, y+15*m);
       ctx.fill();
       ctx.strokeStyle = '#000000'; 
       ctx.lineWidth = 4*m;
@@ -38,13 +38,13 @@ class LootCrateRenderer extends Renderer {
 
       ctx.beginPath();
       ctx.fillStyle = '#632A00';
-      ctx.moveTo(x+(w+w*m)/2, y+15+(h-h*m)/2);
-      ctx.lineTo(x+15+(w+w*m)/2, y+15+(h-h*m)/2);
-      ctx.lineTo(x+15+(w+w*m)/2, y+30+(h-h*m)/2);
-      ctx.lineTo(x+30+(w-w*m)/2, y+15+(h+h*m)/2);
-      ctx.lineTo(x+15+(w-w*m)/2, y+15+(h+h*m)/2);
-      ctx.lineTo(x+15+(w-w*m)/2, y+(h+h*m)/2);
-      ctx.lineTo(x+(w+w*m)/2, y+15+(h-h*m)/2);
+      ctx.moveTo(x+w*m, y+15*m);
+      ctx.lineTo(x+15*m+w*m, y+15*m);
+      ctx.lineTo(x+15*m+w*m, y+30*m);
+      ctx.lineTo(x+30*m, y+15*m+h*m);
+      ctx.lineTo(x+15*m, y+15*m+h*m);
+      ctx.lineTo(x+15*m, y+h*m);
+      ctx.lineTo(x+w*m, y+15*m);
       ctx.fill();
       ctx.strokeStyle = '#000000'; 
       ctx.lineWidth = 4*m;
@@ -55,7 +55,8 @@ class LootCrateRenderer extends Renderer {
 
   drawRectangle(ctx, transform, offset, x, y, m, w, h, fillStyle) {
     ctx.beginPath();
-    ctx.rect( x + ((w - w*m) / 2), y + ((h - h*m) / 2), w*m, h*m);
+    // ctx.rect( x + ((w - w*m) / 2), y + ((h - h*m) / 2), w*m, h*m);
+    ctx.rect ( x, y, w*m, h*m);
     ctx.fillStyle = fillStyle;
     ctx.fill();
     ctx.strokeStyle = '#000000'; 

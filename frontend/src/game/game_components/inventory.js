@@ -1,5 +1,6 @@
 import Component from './component';
 import Hitpoint from './hitpoint';
+import Transform from './transform';
 import Input from './input';
 import Speed from './speed';
 import Ammo from './ammo';
@@ -19,6 +20,8 @@ class Inventory extends Component {
     this.input = this.gameObject.getComponent(Input);
     this.speed = this.gameObject.getComponent(Speed);
     this.ammo = this.gameObject.getComponent(Ammo);
+    this.hitpoint = this.gameObject.getComponent(Hitpoint);
+    this.transform = this.gameObject.getComponent(Transform);
   }
 
   hasItem(item) {
@@ -44,7 +47,7 @@ class Inventory extends Component {
   useItem(item) {
     switch(item) {
       case 'medKit':
-        const health = this.gameObject.getComponent(Hitpoint);
+        const health = this.hitpoint;
         if (health) health.heal(100);
         break;
       default:
