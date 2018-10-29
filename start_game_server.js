@@ -7,8 +7,8 @@ const randomInt = (min, max) => {
 };
 
 const randomVectorInMap = () => {
-  const x = randomInt(0, 2500);
-  const y = randomInt(0, 2500);
+  const x = randomInt(23, 2454);
+  const y = randomInt(23, 2454);
   return { x, y };
 };
 
