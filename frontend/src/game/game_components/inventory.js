@@ -1,5 +1,6 @@
 import Component from './component';
 import Hitpoint from './hitpoint';
+import Transform from './transform';
 import Input from './input';
 import Speed from './speed';
 import Ammo from './ammo';
@@ -20,6 +21,7 @@ class Inventory extends Component {
     this.speed = this.gameObject.getComponent(Speed);
     this.ammo = this.gameObject.getComponent(Ammo);
     this.hitpoint = this.gameObject.getComponent(Hitpoint);
+    this.transform = this.gameObject.getComponent(Transform);
   }
 
   hasItem(item) {
@@ -36,19 +38,6 @@ class Inventory extends Component {
 
   removeItem(item) {
     if (this.hasItem(item)) this.inventory[item] -= 1;
-  }
-
-  dropItems() {
-    Object.keys(this.inventory).forEach( item => {
-      while (this.inventory[item] > 0) {
-        console.log(item);
-        this.removeItem(item);
-      }
-    })
-  }
-
-  dropItem(item) {
-    
   }
 
   applyingItem() {

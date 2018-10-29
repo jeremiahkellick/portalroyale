@@ -24,6 +24,7 @@ import GameOver from '../game_components/game_over';
 import Teleport from '../game_components/teleport';
 import Count from '../game_components/count';
 import VictoryChecker from '../game_components/victory_checker';
+import Game from '../game';
 
 const createPlayer = ({ id, owned, position, health, name }) => {
   const radius = 22;
@@ -45,7 +46,8 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new Shoot());
     player.addComponent(new Teleport());
     player.addComponent(new Pickup());
-    player.addComponent(new Inventory());
+    const inventory = new Inventory();
+    player.addComponent(inventory);
     player.addComponent(new Speed());
     player.addComponent(new Camera());
     player.addComponent(new HitpointRenderer(10));
@@ -54,6 +56,21 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     player.addComponent(new CountdownRenderer(10));
     player.addComponent(new GameOver());
     player.addComponent(new VictoryChecker());
+
+    const createMedKit = (transform, inventory) => {
+      return () => {
+        let options;
+        for (let i = 0; i < inventory.inventory['medKit']; i ++ ) {
+          options = {
+            type: 'medKit',
+            position: transform.position.plus(Vector.random(50,50)).toPOJO(),
+            health: 100
+          };
+          Game.game.sendCreateToServer( options, true );
+        }
+      }
+    };
+    hitpoint.onDeathFunctions.push( createMedKit(transform, inventory) );
   } else {
     player.addComponent(new NameRenderer(name, 3));
   }
