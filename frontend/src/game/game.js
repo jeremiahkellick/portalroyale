@@ -6,8 +6,6 @@ import { clearPlayers } from '../actions/player_actions';
 import getId from './get_id';
 import GameObject from './game_objects/game_object';
 import PlayersAliveRenderer from './renderers/players_alive_renderer';
-import Vector from './vector';
-import { MAP_WIDTH, MAP_HEIGHT } from './util';
 import { win } from '../actions/game_actions';
 
 class Game {
@@ -53,18 +51,6 @@ class Game {
     this.gameOverCallback();
     this.dispatch(clearPlayers());
     this.dispatch(gameOver());
-  }
-
-  spawnPortal()  {
-    const num = 1; //Math.floor(Math.random()*100);
-    if ( num === 1 ) {
-      let id = getId();
-      const options = {
-        id,
-        type: 'portal'
-      };
-      this.sendCreateToServer(options, false);
-    }
   }
 
   win() {
@@ -116,9 +102,6 @@ class Game {
 
   update() {
     Time.update();
-    if ( Object.values(this.gameObjects).filter( obj => obj.type === "portal").length === 0 ) {
-      this.spawnPortal();
-    }
     Object.values(this.gameObjects).forEach(gameObject => {
       gameObject.components.forEach(component => {
         component.handleUpdating();
