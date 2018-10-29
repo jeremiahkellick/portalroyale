@@ -1,4 +1,5 @@
 import Movement from './movement';
+import Time from '../time';
 
 class PortalMovement extends Movement {
 
@@ -11,7 +12,7 @@ class PortalMovement extends Movement {
     if ( this.radius <= 20 ) {
       this.gameObject.destroy();
     } else {
-      this.radius -= 0.05;
+      this.radius -= 3 * Time.deltaTime;
     }
   }
 

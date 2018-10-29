@@ -1,5 +1,6 @@
 import Movement from './movement';
 import Hitpoint from '../game_components/hitpoint';
+import Time from '../time';
 
 class ExplosionMovement extends Movement {
 
@@ -27,8 +28,8 @@ class ExplosionMovement extends Movement {
           this.radius = this.maxRange;
         }
       }
-      this.radius += 2;
-      this.collider.shape.radius += 2;
+      this.radius += 120 * Time.deltaTime;
+      this.collider.shape.radius += 120 * Time.deltaTime;
     } else {
       this.gameObject.destroy();
     }

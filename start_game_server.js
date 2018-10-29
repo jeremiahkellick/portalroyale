@@ -86,11 +86,7 @@ const startGameServer = io => {
       io.sockets.emit('player joined', { id: socket.id, name, ready: false});
     });
 
-    socket.on('ready', () => {
-      if (lobby[socket.id] !== undefined) {
-        lobby[socket.id].ready = true;
-        io.sockets.emit('player ready', socket.id);
-      }
+    const startIfEveryonesReady = () => {
       if (Object.values(lobby).every(player => player.ready)
           && Object.keys(lobby).length > 1 && !gameInProgress) {
 
@@ -102,6 +98,14 @@ const startGameServer = io => {
           }
         });
       }
+    };
+
+    socket.on('ready', () => {
+      if (lobby[socket.id] !== undefined) {
+        lobby[socket.id].ready = true;
+        io.sockets.emit('player ready', socket.id);
+      }
+      startIfEveryonesReady();
     });
 
     socket.on('create', options => {
@@ -118,18 +122,6 @@ const startGameServer = io => {
         options.position = getFreePosition(
           Object.values(objectCreationOptions)
         );
-      } else if ( options.type === 'portal') {
-        options.position1 = getFreePosition(
-          Object.values(objectCreationOptions)
-        );
-        options.position2 = getFreePosition(
-          Object.values(objectCreationOptions)
-        );
-        while (colliding(options.position1, options.position2)) {
-          options.position2 = getFreePosition(
-            Object.values(objectCreationOptions)
-          );
-        };
       }
       io.sockets.emit('create', options);
     });
@@ -153,6 +145,7 @@ const startGameServer = io => {
         io.sockets.emit('player left', socket.id);
         const playerIds = Object.keys(lobby);
         if (playerIds.length === 0) restartGame();
+        startIfEveryonesReady();
       }
 
       if (objectsByOwnerId[socket.id] !== undefined &&
@@ -172,6 +165,24 @@ const startGameServer = io => {
     io.sockets.emit('state', state);
     clearState();
   }, 100);
+
+  setInterval(() => {
+    if (gameInProgress) {
+      const options = { id: getId(), type: 'portal' };
+      options.position1 = getFreePosition(
+        Object.values(objectCreationOptions)
+      );
+      options.position2 = getFreePosition(
+        Object.values(objectCreationOptions)
+      );
+      while (colliding(options.position1, options.position2)) {
+        options.position2 = getFreePosition(
+          Object.values(objectCreationOptions)
+        );
+      }
+      io.sockets.emit('create', options);
+    }
+  }, 14000);
 
   const handleAction = (action, options) => {
     switch (action.type) {
