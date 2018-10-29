@@ -31,8 +31,8 @@ class Hitpoint extends Component {
   }
 
   death() {
-    this.gameObject.destroy();
     this.onDeathFunctions.forEach( func => func() );
+    this.gameObject.destroy();
   }
 
   handleAction(action) {
