@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const Homepage = ({ name, gameOver }) => (
   <div className="homepage">
     <header className="App-header">
-      <h1>portfol.io</h1>
+      <h1>Portal Royale</h1>
     </header>
     <EnterGameContainer />
   </div>

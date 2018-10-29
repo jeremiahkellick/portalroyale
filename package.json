@@ -1,14 +1,18 @@
 {
-  "name": "portfol.io",
+  "name": "portalroyale",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "engines": {
+    "node": "8.12.0"
+  },
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
     "frontend-install": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\""
+    "dev": "concurrently \"npm run server\" \"npm run frontend\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +21,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
+    "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
     "jwt-decode": "^2.2.0",
