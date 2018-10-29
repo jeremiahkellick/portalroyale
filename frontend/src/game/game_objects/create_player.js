@@ -63,10 +63,9 @@ const createPlayer = ({ id, owned, position, health, name }) => {
         for (let i = 0; i < inventory.inventory['medKit']; i ++ ) {
           options = {
             type: 'medKit',
-            position: transform.position.plus(Vector.random(50,50)).toPOJO(),
-            health: 100
+            position: transform.position.plus(Vector.random(50,50)).toPOJO()
           };
-          Game.game.sendCreateToServer( options, true );
+          Game.game.sendCreateToServer(options);
         }
       }
     };

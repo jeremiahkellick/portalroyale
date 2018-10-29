@@ -7,8 +7,8 @@ const randomInt = (min, max) => {
 };
 
 const randomVectorInMap = () => {
-  const x = randomInt(0, 2500);
-  const y = randomInt(0, 2500);
+  const x = randomInt(23, 2454);
+  const y = randomInt(23, 2454);
   return { x, y };
 };
 
@@ -80,7 +80,7 @@ const startGameServer = io => {
       lobby[socket.id] = { name, ready: false };
       const players = {};
       Object.keys(lobby).forEach(id => {
-        players[id] = { id, name: lobby[id].name, ready: false };
+        players[id] = { id, name: lobby[id].name, ready: lobby[id].ready };
       });
       socket.emit('players index', players);
       io.sockets.emit('player joined', { id: socket.id, name, ready: false});

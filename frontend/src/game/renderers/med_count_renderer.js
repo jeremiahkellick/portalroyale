@@ -1,6 +1,4 @@
 import Renderer from './renderer';
-// import ObjectTracker from '../game_components/object_tracker';
-import Hitpoint from '../game_components/hitpoint';
 import Inventory from '../game_components/inventory';
 
 class MedCountRenderer extends Renderer {

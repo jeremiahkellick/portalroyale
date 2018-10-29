@@ -2,8 +2,6 @@ import io from 'socket.io-client';
 import Game from '../game/game';
 import getId from '../game/get_id';
 import rootCreator from '../game/game_objects/root_creator';
-import { MAP_WIDTH, MAP_HEIGHT } from '../game/util';
-import Vector from '../game/vector';
 import { receiveSocket, startGame } from '../actions/game_actions';
 import {
   receivePlayers,
@@ -40,7 +38,7 @@ export const initializeGame = (name, dispatch) => {
     socket.emit('create', options);
     if (options.createNow !== false) {
       const obj = create(options);
-      if (obj !== undefined) game.gameObjects[options.id] = obj;
+      if (obj !== undefined) game.add(obj)
     }
   };
 
@@ -48,7 +46,7 @@ export const initializeGame = (name, dispatch) => {
     allOptions.forEach(options => {
       if (options.sender !== socket.id) {
         const obj = create(options);
-        if (obj !== undefined) game.gameObjects[options.id] = obj;
+        if (obj !== undefined) game.add(obj);
       }
     });
   };
@@ -94,7 +92,7 @@ export const initializeGame = (name, dispatch) => {
     if (!game) return;
     if (options.createNow === false || options.sender !== socket.id) {
       const obj = create(options);
-      if (obj !== undefined) game.gameObjects[options.id] = obj;
+      if (obj !== undefined) game.add(obj);
     }
   });
 

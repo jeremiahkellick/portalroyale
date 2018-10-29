@@ -1,15 +1,15 @@
-# Portfol.io
+# Portal Royale
 
 _A multi-player battle royale shooter game_
 
-[Live Site](#)
+[Live Site](http://portalroyale.herokuapp.com/#/)
 
 ## Background and Overview
 
-Portfol.io is a multi-player battle royale shooter game that is modeled after [surviv.io](http://surviv.io/). 
+Portal Royale is a multi-player battle royale shooter game that is modeled after [surviv.io](http://surviv.io/).
 
 
-## Functionality and MVP 
+## Functionality and MVP
 
 - [ ] Player vs player game
 - [ ] Multiple game instances
@@ -65,7 +65,7 @@ Portfol.io is a multi-player battle royale shooter game that is modeled after [s
   * unpack(data)
 
 
-## Things Accomplished Over the Weekend 
+## Things Accomplished Over the Weekend
 
 * Project Skeleton
 * User Authentication
@@ -81,8 +81,8 @@ Portfol.io is a multi-player battle royale shooter game that is modeled after [s
   * Jing: UI Frontend React Component setup
   * Danny: collision detection
 
-* Day 2 - Oct 23, 2018		
-  * Jeremiah: Game component set up 
+* Day 2 - Oct 23, 2018
+  * Jeremiah: Game component set up
   * AJ: User show page
   * Jing: UI Frontend React Component setup
   * Danny: collision detection
@@ -104,9 +104,9 @@ Portfol.io is a multi-player battle royale shooter game that is modeled after [s
   * AJ: Invite Code generation
   * Jing: Game Components
   * Danny: Map generation
-  
+
 * Day 6 - Oct 27, 2018
-  * Jeremiah: Keymap 
+  * Jeremiah: Keymap
   * AJ: User show page
   * Jing: UI
   * Danny: Map Panning

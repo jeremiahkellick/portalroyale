@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { readyUp } from '../actions/game_actions';
-import { readyPlayer } from '../actions/player_actions';
 import { PacmanLoader } from 'react-spinners';
 
 class Lobby extends React.Component {
@@ -15,7 +14,7 @@ class Lobby extends React.Component {
     return (
       <div>
         <header className="App-header">
-          <h1>portfol.io</h1>
+          <h1>Portal Royale</h1>
         </header>
         <div className="lobby">
           <form onSubmit={this.handleSubmit.bind(this)}>
