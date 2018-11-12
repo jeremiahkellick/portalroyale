@@ -1,10 +1,9 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const NavBar = ({ location: { pathname } }) => {
+const NavBar = () => {
   return (
     <div className="nav-bar">
-      <div>{ pathname }</div>
       <ul>
         <li>
           <NavLink activeClassName="selected" className="nav-links" exact to="/">Play!</NavLink>
@@ -23,5 +22,4 @@ const NavBar = ({ location: { pathname } }) => {
   );
 };
 
-
-export default withRouter( NavBar );
+export default NavBar;
