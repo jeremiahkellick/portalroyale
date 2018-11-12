@@ -9,7 +9,8 @@ import { MAP_WIDTH, MAP_HEIGHT } from '../util';
 const layers = {
   'player': new Set(['obstacle']),
   'bullet': new Set(['obstacle', 'player']),
-  'obstacle': new Set(['obstacle', 'player', 'bullet'])
+  'obstacle': new Set(['obstacle', 'player', 'bullet']),
+  'explosion': new Set(['obstacle', 'player', 'bullet'])
 }
 
 class Collider extends Component {

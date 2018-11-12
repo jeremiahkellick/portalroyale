@@ -12,7 +12,7 @@ const createExplosion = ({ id, position, owned }) => {
   explosion.addComponent(transform);
   explosion.addComponent(new ExplosionMovement(10, 150, owned));
   explosion.addComponent(new ExplosionRenderer());
-  explosion.addComponent(new Collider(new Circle(30)));
+  explosion.addComponent(new Collider(new Circle(30), 1, 'explosion'));
 
   const sound = new Audio("./sounds/explosion.mp3");
   sound.play();
