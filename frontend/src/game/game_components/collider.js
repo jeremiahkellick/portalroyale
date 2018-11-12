@@ -9,7 +9,8 @@ import { MAP_WIDTH, MAP_HEIGHT } from '../util';
 const layers = {
   'player': new Set(['obstacle']),
   'bullet': new Set(['obstacle', 'player']),
-  'obstacle': new Set(['obstacle', 'player', 'bullet'])
+  'obstacle': new Set(['obstacle', 'player', 'bullet']),
+  'explosion': new Set(['obstacle', 'player', 'bullet'])
 }
 
 class Collider extends Component {
@@ -127,7 +128,7 @@ class Collider extends Component {
     if (this.hitpoint) {
       const percentHealth = this.hitpoint.health / this.hitpoint.maxHealth;
       const newMultiplier = this.scale ? this.scale + (1 - this.scale) * percentHealth : 1;
-      if (newMultiplier != this.multiplier) {
+      if (newMultiplier !== this.multiplier) {
         this.changeShapeSize(newMultiplier/this.multiplier);
         this.multiplier = newMultiplier;
       }

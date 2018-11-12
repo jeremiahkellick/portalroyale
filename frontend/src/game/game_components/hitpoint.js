@@ -6,6 +6,7 @@ class Hitpoint extends Component {
     super();
     this.onDamageFunctions = [];
     this.onDeathFunctions = [];
+    this.onLocalDeathFunctions = [];
     this.health = health;
     this.maxHealth = health;
   }
@@ -22,12 +23,23 @@ class Hitpoint extends Component {
     this.onDeathFunctions.push(func);
   }
 
+  onLocalDeath(func) {
+    this.onLocalDeathFunctions.push(func);
+  }
+
   damage(damage) {
+    if (damage >= this.health) {
+      this.localDeath();
+    }
     this.dispatch({ type: 'DAMAGE', damage });
   }
 
   heal(amount) {
     this.dispatch({ type: 'HEAL', amount });
+  }
+
+  localDeath() {
+    this.onLocalDeathFunctions.forEach( func => func() );
   }
 
   death() {
