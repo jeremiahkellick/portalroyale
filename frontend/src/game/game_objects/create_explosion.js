@@ -6,13 +6,16 @@ import Vector from '../vector';
 import Circle from '../shapes/circle';
 import ExplosionMovement from '../game_components/explosion_movement';
 
-const createExplosion = ({ id, position }) => {
+const createExplosion = ({ id, position, owned }) => {
   const explosion = new GameObject(id, 9);
   const transform = new Transform(Vector.fromPOJO(position));
   explosion.addComponent(transform);
-  explosion.addComponent(new ExplosionMovement(50, 100));
+  explosion.addComponent(new ExplosionMovement(10, 150, owned));
   explosion.addComponent(new ExplosionRenderer());
   explosion.addComponent(new Collider(new Circle(30)));
+
+  const sound = new Audio("./sounds/explosion.mp3");
+  sound.play();
 
   return explosion;
 };
