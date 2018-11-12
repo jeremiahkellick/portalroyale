@@ -1,17 +1,20 @@
 import { connect } from 'react-redux';
 import { initializeGame, resetGame } from '../actions/game_actions';
 import EnterGame from './enter_game';
+import { clearStats } from '../actions/stats_actions';
 
-const mapStateToProps = ( { game: { name, gameOver, won } } ) => ({
+const mapStateToProps = ( { game: { name, gameOver, won }, stats } ) => ({
   formType: gameOver ? "Game Over" : "Enter Game",
   submitText: gameOver ? "Play Again" : "Play",
   name: name || "",
-  won
+  won,
+  stats
 })
 
 const mapDispatchToProps = dispatch => ({
   resetGame: () => dispatch(resetGame()),
-  initializeGame: (name) => dispatch(initializeGame(name))
+  initializeGame: (name) => dispatch(initializeGame(name)),
+  clearStats: () => dispatch(clearStats())
 });
 
 export default connect( mapStateToProps, mapDispatchToProps )( EnterGame );

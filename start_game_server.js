@@ -129,6 +129,10 @@ const startGameServer = io => {
     socket.on('state', packet => {
       state.data = Object.assign(state.data, packet.data);
       packet.actions.forEach(action => {
+        if (lobby[socket.id] && lobby[socket.id].name) {
+          action.senderName = lobby[socket.id].name;
+        }
+
         const syncronizerId = action.syncronizerId;
         const objectId = syncronizerId.slice(0, syncronizerId.length - 1);
         const options = objectCreationOptions[objectId];

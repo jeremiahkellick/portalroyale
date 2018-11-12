@@ -4,7 +4,6 @@ export let CANVAS_HEIGHT = Math.max(document.documentElement.clientHeight, windo
 export const MAP_WIDTH = 2500;
 export const MAP_HEIGHT = 2500;
 
-
 export const sample = (array) => {
   return array[Math.floor(Math.random() * array.length)];
 };
@@ -19,3 +18,6 @@ export const randomFloat = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
+export const capitalize = string => {
+  return string[0].toUpperCase() + string.slice(1, string.length);
+};
