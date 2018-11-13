@@ -6,6 +6,7 @@ class Hitpoint extends Component {
     super();
     this.onDamageFunctions = [];
     this.onDeathFunctions = [];
+    this.onLocalDeathFunctions = [];
     this.health = health;
     this.maxHealth = health;
   }
@@ -22,7 +23,14 @@ class Hitpoint extends Component {
     this.onDeathFunctions.push(func);
   }
 
+  onLocalDeath(func) {
+    this.onLocalDeathFunctions.push(func);
+  }
+
   damage(damage) {
+    if (damage >= this.health) {
+      this.localDeath();
+    }
     this.dispatch({ type: 'DAMAGE', damage });
   }
 
@@ -30,8 +38,12 @@ class Hitpoint extends Component {
     this.dispatch({ type: 'HEAL', amount });
   }
 
-  death() {
-    this.onDeathFunctions.forEach( func => func() );
+  localDeath() {
+    this.onLocalDeathFunctions.forEach( func => func() );
+  }
+
+  death(senderName) {
+    this.onDeathFunctions.forEach( func => func(senderName) );
     this.gameObject.destroy();
   }
 
@@ -40,7 +52,7 @@ class Hitpoint extends Component {
       case 'DAMAGE':
         this.health = Math.max(this.health - action.damage, 0);
         this.onDamageFunctions.forEach( func => func() );
-        if (this.health === 0) this.death();
+        if (this.health === 0) this.death(action.senderName);
         break;
       case 'HEAL':
         this.health = Math.min(this.health + action.amount, this.maxHealth);

@@ -1,0 +1,37 @@
+.nav-bar {
+
+  ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-bottom: 2px solid #5b773e;
+    box-sizing: border-box;
+  }
+
+  .nav-links {
+    position: relative;
+    bottom: -2px;
+    text-align: center;
+    display: block;
+    margin: 0 10px;
+    width: 150px;
+    padding: 10px 0 5px 0;
+    background: #9ccf61;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #3a472d;
+    border: 2px solid #575757;
+
+    &:hover {
+      background: #b8d795;
+    }
+  }
+
+}
+
+.nav-bar .selected {
+  background: #b8d795;
+  border-bottom: 2px solid #b8d795;
+}

@@ -13,9 +13,7 @@ class Lobby extends React.Component {
   render() {
     return (
       <div>
-        <header className="App-header">
-          <h1>Portal Royale</h1>
-        </header>
+        <h1>Lobby</h1>
         <div className="lobby">
           <form onSubmit={this.handleSubmit.bind(this)}>
             <ul>
