@@ -3,10 +3,13 @@ import Time from './time';
 import Camera from './game_components/camera';
 import { gameOver } from '../actions/game_actions';
 import { clearPlayers } from '../actions/player_actions';
+import { receiveStats } from '../actions/stats_actions';
+import { nullStats } from '../reducers/stats_reducer';
 import getId from './get_id';
 import GameObject from './game_objects/game_object';
 import PlayersAliveRenderer from './renderers/players_alive_renderer';
 import { win } from '../actions/game_actions';
+import Count from './game_components/count';
 
 class Game {
   constructor(
@@ -36,6 +39,7 @@ class Game {
     this.updateInterval = setInterval(this.update.bind(this), 1000 / 60);
     window.requestAnimationFrame(this.draw.bind(this));
     this.winFlag = false;
+    this.stats = nullStats();
   }
 
   add(gameObject) {
@@ -44,11 +48,13 @@ class Game {
 
   endGame() {
     this.over = true;
+    this.stats.rank = Count.get('players');
     Object.values(this.gameObjects).forEach(gameObject => gameObject.destroy());
     clearInterval(this.networkInterval);
     clearInterval(this.updateInterval);
     Game.game = null;
     this.gameOverCallback();
+    this.dispatch(receiveStats(this.stats));
     this.dispatch(clearPlayers());
     this.dispatch(gameOver());
   }

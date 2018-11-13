@@ -6,7 +6,10 @@ class GameOver extends Component {
 
   start() {
     this.hitpoint = this.requireComponent(Hitpoint);
-    this.hitpoint.onDeath( () => Game.game.endGame() );
+    this.hitpoint.onDeath(senderName => {
+      if (senderName) Game.game.stats.killedBy = senderName;
+      Game.game.endGame();
+    });
   }
 
 }

@@ -25,6 +25,7 @@ import Teleport from '../game_components/teleport';
 import Count from '../game_components/count';
 import VictoryChecker from '../game_components/victory_checker';
 import Game from '../game';
+import KillCounter from '../game_components/kill_counter';
 
 const createPlayer = ({ id, owned, position, health, name }) => {
   const radius = 22;
@@ -71,6 +72,7 @@ const createPlayer = ({ id, owned, position, health, name }) => {
     };
     hitpoint.onDeathFunctions.push( createMedKit(transform, inventory) );
   } else {
+    player.addComponent(new KillCounter());
     player.addComponent(new NameRenderer(name, 3));
   }
 
