@@ -127,7 +127,7 @@ class Collider extends Component {
     if (this.hitpoint) {
       const percentHealth = this.hitpoint.health / this.hitpoint.maxHealth;
       const newMultiplier = this.scale ? this.scale + (1 - this.scale) * percentHealth : 1;
-      if (newMultiplier != this.multiplier) {
+      if (newMultiplier !== this.multiplier) {
         this.changeShapeSize(newMultiplier/this.multiplier);
         this.multiplier = newMultiplier;
       }
