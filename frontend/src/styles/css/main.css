@@ -142,14 +142,9 @@ canvas {
   font-weight: bold;
   color: #3a472d;
   border: 2px solid #575757; }
-  .nav-bar .nav-links:hover, .nav-bar .nav-links .selected {
-    background: #b8d795;
-    color: #3a472d;
-    border-top: 2px solid #575757;
-    border-left: 2px solid #575757;
-    border-right: 2px solid #575757;
-    border-bottom: 2px solid #b8d795; }
+  .nav-bar .nav-links:hover {
+    background: #b8d795; }
 
 .nav-bar .selected {
-  border-bottom: 2px solid #b8d795;
-  background: #b8d795; }
+  background: #b8d795;
+  border-bottom: 2px solid #b8d795; }
