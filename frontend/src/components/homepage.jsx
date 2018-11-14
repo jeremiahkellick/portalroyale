@@ -1,11 +1,12 @@
 import React from 'react';
 import EnterGameContainer from './enter_game_container';
+import GameOverContainer from './game_over_container';
 
 import { connect } from 'react-redux';
 
 const Homepage = ({ name, gameOver }) => (
   <div className="homepage">
-    <EnterGameContainer />
+    { gameOver ? <GameOverContainer /> : <EnterGameContainer /> }
   </div>
 );
 
