@@ -24,7 +24,7 @@ body {
 }
 
 .enter-game, .game-over, .lobby {
-  background: #63676377;
+  background: #839781;
   padding: 10px 20px;
   margin: 20px;
   box-shadow: #6a8f3f;
@@ -47,14 +47,25 @@ body {
   }
 
   input[type="submit"], button {
-    background: #8cbf51;
+    background: #8ec054;
     text-align: center;
     border: 1px solid #6a8f3f;
-    &:hover {
-      background: #96bf63;
-    }
     width: 100%;
+    border-radius: 3px;
+
+    &:hover {
+      background: #aed381;
+    }
   }
+}
+
+
+.enter-game form {
+  border-bottom: 0.5px solid black;
+}
+
+.enter-game button {
+  margin-top: 15px;
 }
 
 .lobby, .game-over {

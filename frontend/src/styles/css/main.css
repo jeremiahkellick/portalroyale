@@ -71,7 +71,7 @@ body {
   min-width: 800px; }
 
 .enter-game, .game-over, .lobby {
-  background: #63676377;
+  background: #839781;
   padding: 10px 20px;
   margin: 20px;
   box-shadow: #6a8f3f;
@@ -89,12 +89,19 @@ body {
     padding: 10px 5px;
     box-sizing: border-box; }
   .enter-game input[type="submit"], .enter-game button, .game-over input[type="submit"], .game-over button, .lobby input[type="submit"], .lobby button {
-    background: #8cbf51;
+    background: #8ec054;
     text-align: center;
     border: 1px solid #6a8f3f;
-    width: 100%; }
+    width: 100%;
+    border-radius: 3px; }
     .enter-game input[type="submit"]:hover, .enter-game button:hover, .game-over input[type="submit"]:hover, .game-over button:hover, .lobby input[type="submit"]:hover, .lobby button:hover {
-      background: #96bf63; }
+      background: #aed381; }
+
+.enter-game form {
+  border-bottom: 0.5px solid black; }
+
+.enter-game button {
+  margin-top: 15px; }
 
 .lobby, .game-over {
   width: 250px; }
@@ -124,7 +131,7 @@ canvas {
   color: #3a472d;
   margin: auto;
   margin-bottom: 15px;
-  background-image: linear-gradient(#b8d795 0%, #8dbd57 80%, #6c9939 100%); }
+  background-image: linear-gradient(#b2e47e, #8ec054); }
 
 .nav-bar ul {
   display: flex;
