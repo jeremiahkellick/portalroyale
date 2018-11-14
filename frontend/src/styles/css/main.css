@@ -86,7 +86,8 @@ body {
     font-size: 20px;
     margin: 10px 0;
     background: white;
-    padding: 10px 5px; }
+    padding: 10px 5px;
+    box-sizing: border-box; }
   .enter-game input[type="submit"], .enter-game button, .game-over input[type="submit"], .game-over button, .lobby input[type="submit"], .lobby button {
     background: #8cbf51;
     text-align: center;
