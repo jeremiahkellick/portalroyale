@@ -82,16 +82,19 @@ body {
     font-size: 20px;
     text-align: center;
     padding: 10px 0; }
-    .enter-game form input, .game-over form input, .lobby form input {
-      margin: 10px 0;
-      background: white;
-      padding: 10px 5px; }
-    .enter-game form input[type="submit"], .game-over form input[type="submit"], .lobby form input[type="submit"] {
-      background: #8cbf51;
-      text-align: center;
-      border: 1px solid #6a8f3f; }
-      .enter-game form input[type="submit"]:hover, .game-over form input[type="submit"]:hover, .lobby form input[type="submit"]:hover {
-        background: #96bf63; }
+  .enter-game input, .enter-game button, .game-over input, .game-over button, .lobby input, .lobby button {
+    font-size: 20px;
+    margin: 10px 0;
+    background: white;
+    padding: 10px 5px;
+    box-sizing: border-box; }
+  .enter-game input[type="submit"], .enter-game button, .game-over input[type="submit"], .game-over button, .lobby input[type="submit"], .lobby button {
+    background: #8cbf51;
+    text-align: center;
+    border: 1px solid #6a8f3f;
+    width: 100%; }
+    .enter-game input[type="submit"]:hover, .enter-game button:hover, .game-over input[type="submit"]:hover, .game-over button:hover, .lobby input[type="submit"]:hover, .lobby button:hover {
+      background: #96bf63; }
 
 .lobby, .game-over {
   width: 250px; }
@@ -145,17 +148,12 @@ canvas {
   font-weight: bold;
   color: #3a472d;
   border: 2px solid #575757; }
-  .nav-bar .nav-links:hover, .nav-bar .nav-links .selected {
-    background: #b8d795;
-    color: #3a472d;
-    border-top: 2px solid #575757;
-    border-left: 2px solid #575757;
-    border-right: 2px solid #575757;
-    border-bottom: 2px solid #b8d795; }
+  .nav-bar .nav-links:hover {
+    background: #b8d795; }
 
 .nav-bar .selected {
-  border-bottom: 2px solid #b8d795;
-  background: #b8d795; }
+  background: #b8d795;
+  border-bottom: 2px solid #b8d795; }
 
 .about {
   margin-top: 15px; }

@@ -24,20 +24,14 @@
     color: #3a472d;
     border: 2px solid #575757;
 
-    &:hover, .selected {
+    &:hover {
       background: #b8d795;
-      // color: #d3f0b4;
-      color: #3a472d;
-      border-top: 2px solid #575757;
-      border-left: 2px solid #575757;
-      border-right: 2px solid #575757;
-      border-bottom: 2px solid #b8d795;
     }
   }
 
 }
 
 .nav-bar .selected {
-  border-bottom: 2px solid #b8d795;
   background: #b8d795;
+  border-bottom: 2px solid #b8d795;
 }

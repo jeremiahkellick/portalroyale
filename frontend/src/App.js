@@ -12,6 +12,7 @@ const App = ({ name, gameOver, started }) => (
   <div className="App">
     <Route path="/" component={ name ? null : Header } />
     <Route exact path="/" component={ name && !gameOver ? null : Homepage } />
+    <Route exact path="/lobby" component={ Lobby } />
     <Route exact path="/" component={ name && !started ? Lobby : null } />
     <Route exact path="/" component={ Canvas } />
     <Route exact path="/about" component={ About } />
