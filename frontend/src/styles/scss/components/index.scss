@@ -36,21 +36,23 @@ body {
     font-size: 20px;
     text-align: center;
     padding: 10px 0;
+  }
 
-    input {
-      margin: 10px 0;
-      background: white;
-      padding: 10px 5px;
-    }
+  input, button {
+    font-size: 20px;
+    margin: 10px 0;
+    background: white;
+    padding: 10px 5px;
+  }
 
-    input[type="submit"] {
-      background: #8cbf51;
-      text-align: center;
-      border: 1px solid #6a8f3f;
-      &:hover {
-        background: #96bf63;
-      }
+  input[type="submit"], button {
+    background: #8cbf51;
+    text-align: center;
+    border: 1px solid #6a8f3f;
+    &:hover {
+      background: #96bf63;
     }
+    width: 100%;
   }
 }
 

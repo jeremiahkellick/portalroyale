@@ -13,7 +13,7 @@ const mapStateToProps = ( { game: { name, gameOver, won }, stats } ) => ({
 
 const mapDispatchToProps = dispatch => ({
   resetGame: () => dispatch(resetGame()),
-  initializeGame: (name) => dispatch(initializeGame(name)),
+  initializeGame: (name, online) => dispatch(initializeGame(name, online)),
   clearStats: () => dispatch(clearStats())
 });
 

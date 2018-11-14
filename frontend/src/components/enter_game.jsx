@@ -10,6 +10,7 @@ class EnterGame extends React.Component {
       name: this.props.name
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleSubmit(e) {
@@ -18,7 +19,12 @@ class EnterGame extends React.Component {
       this.props.clearStats();
       this.props.resetGame();
     }
-    this.props.initializeGame(this.state.name);
+    this.props.initializeGame(this.state.name, true);
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    this.props.initializeGame(this.state.name, false);
   }
 
   update(prop) {
@@ -39,7 +45,7 @@ class EnterGame extends React.Component {
   }
 
   render() {
-    const nameInputClass = this.props.formType === "Enter Game" ? "" : "hidden"
+    const nameInputClass = this.props.formType === "Enter Game" ? "" : "hidden";
     return (
       <div className={ this.props.formType === "Enter Game" ? "enter-game" : "game-over"} >
         <form onSubmit={ this.handleSubmit }>
@@ -58,6 +64,8 @@ class EnterGame extends React.Component {
             value={ this.state.name } />
           <input type="submit" value={ this.props.submitText } />
         </form>
+        {this.props.formType === "Enter Game" &&
+          <button onClick={this.handleDemo}>Demo</button>}
       </div>
     );
   }
