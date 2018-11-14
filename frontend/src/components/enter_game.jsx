@@ -8,11 +8,17 @@ class EnterGame extends React.Component {
       name: this.props.name
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.initializeGame(this.state.name);
+    this.props.initializeGame(this.state.name, true);
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    this.props.initializeGame(this.state.name, false);
   }
 
   update(prop) {
@@ -32,6 +38,8 @@ class EnterGame extends React.Component {
           <input className="button" type="submit" value="Play" />
           <button className="button">Demo</button>
         </form>
+        {this.props.formType === "Enter Game" &&
+          <button onClick={this.handleDemo}>Demo</button>}
       </div>
     );
   }
