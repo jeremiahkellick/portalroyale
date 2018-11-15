@@ -58,8 +58,7 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: realtive; }
+  align-items: center; }
 
 .App-header {
   margin: 10px 0;
@@ -67,14 +66,17 @@ body {
   font-size: 30px;
   text-align: center; }
 
-.hompage {
-  min-width: 800px; }
+.homepage {
+  min-width: 800px;
+  width: 100%;
+  margin: auto; }
 
 .enter-game, .game-over, .lobby {
+  width: 250px;
+  margin: 20px auto;
   font-size: 18px;
   background: #839781;
   padding: 10px 20px;
-  margin: 20px;
   box-shadow: #6a8f3f;
   border-radius: 3px; }
   .enter-game form, .game-over form, .lobby form {
@@ -95,6 +97,11 @@ body {
     border-radius: 3px; }
     .enter-game input[type="submit"]:hover, .enter-game button:hover, .game-over input[type="submit"]:hover, .game-over button:hover, .lobby input[type="submit"]:hover, .lobby button:hover {
       background: #aed381; }
+  .enter-game .gray, .game-over .gray, .lobby .gray {
+    background: #b37856;
+    border-color: #915939; }
+    .enter-game .gray:hover, .game-over .gray:hover, .lobby .gray:hover {
+      background: #dba789; }
 
 .enter-game {
   text-align: center; }
@@ -139,34 +146,33 @@ canvas {
   width: 100%;
   font-weight: bold;
   color: #3a472d;
-  margin: auto;
-  margin-bottom: 15px;
-  background-image: linear-gradient(#b2e47e, #8ec054); }
-
-.nav-bar ul {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  background-image: linear-gradient(#b2e47e, #8ec054);
+  box-sizing: border-box;
   border-bottom: 2px solid #5b773e;
-  box-sizing: border-box; }
+  margin: 0; }
 
-.nav-bar .nav-links {
+.nav-bar {
   position: relative;
-  bottom: -2px;
-  text-align: center;
-  display: block;
-  margin: 0 10px;
-  width: 150px;
-  padding: 10px 0 5px 0;
-  background: #9ccf61;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #3a472d;
-  border: 2px solid #575757; }
-  .nav-bar .nav-links:hover {
-    background: #b8d795; }
+  bottom: -2px; }
+  .nav-bar ul {
+    display: flex;
+    justify-content: center;
+    width: 100%; }
+  .nav-bar .nav-links {
+    text-align: center;
+    display: block;
+    margin: 0 10px;
+    width: 150px;
+    padding: 10px 0 5px 0;
+    background: #9ccf61;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #3a472d;
+    border: 2px solid #575757; }
+    .nav-bar .nav-links:hover {
+      background: #b8d795; }
 
 .nav-bar .selected {
   background: #b8d795;

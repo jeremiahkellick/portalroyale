@@ -5,17 +5,19 @@ import Lobby from './components/lobby';
 import { connect } from 'react-redux';
 import Header from './components/header';
 import About from './components/about';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 
-const App = ({ name, gameOver, started }) => (
+
+const App = ({ name, gameOver }) => (
 
   <div className="App">
-    <Route path="/" component={ name ? null : Header } />
-    <Route exact path="/" component={ name && !gameOver ? null : Homepage } />
-    <Route exact path="/lobby" component={ Lobby } />
-    <Route exact path="/" component={ name && !started ? Lobby : null } />
-    <Route exact path="/" component={ Canvas } />
-    <Route exact path="/about" component={ About } />
+    <Route path="/" component={  Header } />
+    <Switch>
+      <Route exact path="/" component={ Homepage } />
+      <Route exact path="/lobby" component={ Lobby } />
+      <Route exact path="/about" component={ About } />
+    </Switch>
+    <Route path="/" component={ Canvas } />
   </div>
 );
 

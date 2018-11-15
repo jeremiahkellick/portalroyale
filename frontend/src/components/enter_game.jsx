@@ -14,6 +14,7 @@ class EnterGame extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.initializeGame(this.state.name, true);
+    this.props.history.push("/lobby");
   }
 
   handleDemo(e) {
@@ -35,10 +36,10 @@ class EnterGame extends React.Component {
             type="text"
             onChange={ this.update("name") }
             value={ this.state.name } />
-          <input className="button" type="submit" value="Play" />
+          <input type="submit" value="Play" />
           <span>or</span>
         </form>
-        <button className="button" onClick={this.handleDemo}>Demo</button>
+        <button onClick={this.handleDemo}>Demo</button>
       </div>
     );
   }

@@ -17,6 +17,7 @@ class GameOver extends React.Component {
     this.props.clearStats();
     this.props.resetGame();
     this.props.initializeGame(this.state.name, true);
+    this.props.history.push("/lobby");
   }
 
   update(prop) {

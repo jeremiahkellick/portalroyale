@@ -9,7 +9,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: realtive;
 }
 
 .App-header {
@@ -19,15 +18,18 @@ body {
   text-align: center;
 }
 
-.hompage {
+.homepage {
   min-width: 800px;
+  width: 100%;
+  margin: auto;
 }
 
 .enter-game, .game-over, .lobby {
+  width: 250px;
+  margin: 20px auto;
   font-size: 18px;
   background: #839781;
   padding: 10px 20px;
-  margin: 20px;
   box-shadow: #6a8f3f;
   border-radius: 3px;
 
@@ -56,7 +58,17 @@ body {
       background: #aed381;
     }
   }
+
+  .gray {
+    background: rgb(179, 120, 86);
+    border-color: rgb(145, 89, 57);
+
+    &:hover {
+      background: rgb(219, 167, 137);
+    }
+  }
 }
+
 
 .enter-game {
   text-align: center;

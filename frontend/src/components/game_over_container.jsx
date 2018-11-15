@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { initializeGame, resetGame } from '../actions/game_actions';
 import GameOver from './game_over';
 import { clearStats } from '../actions/stats_actions';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = ( { game: { name, gameOver, won }, stats } ) => ({
   formType: gameOver ? "Game Over" : "Enter Game",
@@ -17,4 +18,4 @@ const mapDispatchToProps = dispatch => ({
   clearStats: () => dispatch(clearStats())
 });
 
-export default connect( mapStateToProps, mapDispatchToProps )( GameOver );
+export default withRouter(connect( mapStateToProps, mapDispatchToProps )( GameOver ));
