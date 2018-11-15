@@ -24,6 +24,7 @@ body {
 }
 
 .enter-game, .game-over, .lobby {
+  font-size: 18px;
   background: #839781;
   padding: 10px 20px;
   margin: 20px;
@@ -33,13 +34,11 @@ body {
   form {
     display: flex;
     flex-direction: column;
-    font-size: 20px;
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0 10px 0;
   }
 
   input, button {
-    font-size: 20px;
     margin: 10px 0;
     background: white;
     padding: 10px 5px;
@@ -59,14 +58,29 @@ body {
   }
 }
 
+.enter-game {
+  text-align: center;
 
-.enter-game form {
-  border-bottom: 0.5px solid black;
+  form {
+    border-bottom: 0.5px solid black;
+    position: relative;
+  }
+  button {
+    margin-top: 15px;
+  }
+
+  span {
+    position: absolute;
+    font-size: 16px;
+    background: #839781;
+    margin: auto;
+    padding: 0 10px;
+    bottom: -.5em;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 }
 
-.enter-game button {
-  margin-top: 15px;
-}
 
 .lobby, .game-over {
   width: 250px;

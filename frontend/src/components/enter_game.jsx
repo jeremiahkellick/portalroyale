@@ -36,6 +36,7 @@ class EnterGame extends React.Component {
             onChange={ this.update("name") }
             value={ this.state.name } />
           <input className="button" type="submit" value="Play" />
+          <span>or</span>
         </form>
         <button className="button" onClick={this.handleDemo}>Demo</button>
       </div>
