@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { readyUp, resetGame } from '../actions/game_actions';
+import { readyUp, disconnect, resetGame  } from '../actions/game_actions';
+import { clearPlayers } from '../actions/player_actions';
 import { PacmanLoader } from 'react-spinners';
 import { withRouter } from 'react-router-dom';
 
@@ -14,7 +15,9 @@ class Lobby extends React.Component {
 
   handleCancel(e) {
     e.preventDefault();
+    this.props.socket.disconnect();
     this.props.resetGame();
+    this.props.clearPlayers();
     this.props.history.push("/");
   }
 
@@ -65,7 +68,9 @@ const mapStateToProps = ({ game, players }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  disconnect: () => dispatch(disconnect()),
   resetGame: () => dispatch(resetGame()),
+  clearPlayers: () => dispatch(clearPlayers()),
   readyUp: () => dispatch(readyUp()),
 });
 
