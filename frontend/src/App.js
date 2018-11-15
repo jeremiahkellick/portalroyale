@@ -2,13 +2,12 @@ import React from 'react';
 import Canvas from './components/canvas';
 import Homepage from './components/homepage'
 import Lobby from './components/lobby';
-import { connect } from 'react-redux';
 import Header from './components/header';
 import About from './components/about';
 import { Route, withRouter, Switch } from 'react-router-dom';
 
 
-const App = ({ name, gameOver }) => (
+const App = () => (
 
   <div className="App">
     <Route path="/" component={  Header } />
@@ -21,10 +20,4 @@ const App = ({ name, gameOver }) => (
   </div>
 );
 
-const mapStateToProps = ({ game: { name, gameOver, started } }) => ({
-  name,
-  gameOver,
-  started
-});
-
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(App);
