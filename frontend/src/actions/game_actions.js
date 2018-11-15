@@ -27,6 +27,6 @@ export const startGame = () => ({ type: START_GAME });
 
 export const resetGame = () => ({ type: RESET_GAME });
 
-export const disconnect = () => dispatch => {
-  dispatch(resetGame());
+export const disconnect = () => {
+
 }

@@ -4,6 +4,7 @@ import Homepage from './components/homepage'
 import Lobby from './components/lobby';
 import Header from './components/header';
 import About from './components/about';
+import Leaderboard from './components/leaderboard';
 import { Route, withRouter, Switch } from 'react-router-dom';
 
 
@@ -15,6 +16,7 @@ const App = () => (
       <Route exact path="/" component={ Homepage } />
       <Route exact path="/lobby" component={ Lobby } />
       <Route exact path="/about" component={ About } />
+      <Route exact path="/leaderboard" component={ Leaderboard } />
     </Switch>
     <Route path="/" component={ Canvas } />
   </div>

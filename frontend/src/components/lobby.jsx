@@ -22,7 +22,7 @@ class Lobby extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if ( nextProps.players.reduce( (a, p) => p.ready && a , true) ) {
+    if ( nextProps.players.reduce( (a, p) => p.ready && a , true) && nextProps.players.length > 1 ) {
       this.props.history.push("/");
     }
   }
