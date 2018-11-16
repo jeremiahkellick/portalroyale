@@ -31,7 +31,8 @@ const gameReducer = ( state = { gameOver: false }, action ) => {
       return Object.assign({}, state, {
         started: false,
         gameOver: false,
-        won: false
+        won: false,
+        ready: false
       });
     default:
       return state;

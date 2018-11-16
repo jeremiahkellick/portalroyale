@@ -26,3 +26,7 @@ export const initializeGame = (name, online) => dispatch => {
 export const startGame = () => ({ type: START_GAME });
 
 export const resetGame = () => ({ type: RESET_GAME });
+
+export const disconnect = () => {
+
+}

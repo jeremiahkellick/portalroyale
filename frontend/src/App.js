@@ -2,26 +2,24 @@ import React from 'react';
 import Canvas from './components/canvas';
 import Homepage from './components/homepage'
 import Lobby from './components/lobby';
-import { connect } from 'react-redux';
 import Header from './components/header';
 import About from './components/about';
-import { Route, withRouter } from 'react-router-dom';
+import Leaderboard from './components/leaderboard';
+import { Route, withRouter, Switch } from 'react-router-dom';
 
-const App = ({ name, gameOver, started }) => (
+
+const App = () => (
 
   <div className="App">
-    <Route path="/" component={ name ? null : Header } />
-    <Route exact path="/" component={ name && !gameOver ? null : Homepage } />
-    <Route exact path="/" component={ name && !started ? Lobby : null } />
-    <Route exact path="/" component={ Canvas } />
-    <Route exact path="/about" component={ About } />
+    <Route path="/" component={  Header } />
+    <Switch>
+      <Route exact path="/" component={ Homepage } />
+      <Route exact path="/lobby" component={ Lobby } />
+      <Route exact path="/about" component={ About } />
+      <Route exact path="/leaderboard" component={ Leaderboard } />
+    </Switch>
+    <Route path="/" component={ Canvas } />
   </div>
 );
 
-const mapStateToProps = ({ game: { name, gameOver, started } }) => ({
-  name,
-  gameOver,
-  started
-});
-
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(App);

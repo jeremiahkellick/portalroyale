@@ -9,7 +9,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: realtive;
 }
 
 .App-header {
@@ -19,42 +18,81 @@ body {
   text-align: center;
 }
 
-.hompage {
+.homepage {
   min-width: 800px;
+  width: 100%;
+  margin: auto;
 }
 
 .enter-game, .game-over, .lobby {
-  background: #63676377;
+  width: 250px;
+  margin: 20px auto;
+  font-size: 18px;
+  background: #839781;
   padding: 10px 20px;
-  margin: 20px;
   box-shadow: #6a8f3f;
   border-radius: 3px;
 
   form {
     display: flex;
     flex-direction: column;
-    font-size: 20px;
     text-align: center;
-    padding: 10px 0;
+    padding: 5px 0 10px 0;
   }
 
   input, button {
-    font-size: 20px;
     margin: 10px 0;
     background: white;
     padding: 10px 5px;
+    box-sizing: border-box;
   }
 
   input[type="submit"], button {
-    background: #8cbf51;
+    background: #8ec054;
     text-align: center;
     border: 1px solid #6a8f3f;
-    &:hover {
-      background: #96bf63;
-    }
     width: 100%;
+    border-radius: 3px;
+
+    &:hover {
+      background: #aed381;
+    }
+  }
+
+  .gray {
+    background: rgb(179, 120, 86);
+    border-color: rgb(145, 89, 57);
+
+    &:hover {
+      background: rgb(219, 167, 137);
+    }
   }
 }
+
+
+.enter-game {
+  text-align: center;
+
+  form {
+    border-bottom: 0.5px solid black;
+    position: relative;
+  }
+  button {
+    margin-top: 15px;
+  }
+
+  span {
+    position: absolute;
+    font-size: 16px;
+    background: #839781;
+    margin: auto;
+    padding: 0 10px;
+    bottom: -.5em;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+
 
 .lobby, .game-over {
   width: 250px;
