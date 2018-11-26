@@ -18,11 +18,15 @@ export const gameOver = () => ({ type: GAME_OVER });
 
 export const win = () => ({ type: WIN });
 
-export const initializeGame = name => dispatch => {
-  GameUtil.initializeGame(name, dispatch);
+export const initializeGame = (name, online) => dispatch => {
+  GameUtil.initializeGame(name, online, dispatch);
   dispatch(enterLobby(name));
 }
 
 export const startGame = () => ({ type: START_GAME });
 
 export const resetGame = () => ({ type: RESET_GAME });
+
+export const disconnect = () => {
+
+}

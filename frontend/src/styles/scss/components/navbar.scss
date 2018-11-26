@@ -1,16 +1,15 @@
 .nav-bar {
 
+  position: relative;
+  bottom: -2px;
+
   ul {
     display: flex;
     justify-content: center;
     width: 100%;
-    border-bottom: 2px solid #5b773e;
-    box-sizing: border-box;
   }
 
   .nav-links {
-    position: relative;
-    bottom: -2px;
     text-align: center;
     display: block;
     margin: 0 10px;

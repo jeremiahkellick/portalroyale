@@ -13,3 +13,4 @@ export const removePlayer = id => ({ type: REMOVE_PLAYER, id });
 export const clearPlayers = () => ({ type: CLEAR_PLAYERS });
 
 export const readyPlayer = id => ({ type: READY_PLAYER, id});
+
