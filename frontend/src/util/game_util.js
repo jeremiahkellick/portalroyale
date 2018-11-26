@@ -84,6 +84,7 @@ export const initializeGame = (name, dispatch) => {
       },
       true
     );
+    game.stats.name = name;
     createAll(allOptions);
     dispatch(startGame());
   });

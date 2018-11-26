@@ -148,3 +148,12 @@ canvas {
 .nav-bar .selected {
   background: #b8d795;
   border-bottom: 2px solid #b8d795; }
+
+.leaderboard h1 {
+  font-size: 36px;
+  font-weight: 700; }
+
+.leaderboard tr {
+  box-sizing: border-box;
+  border: 1px solid black;
+  display: flex; }
