@@ -12,27 +12,24 @@ class Table extends React.Component {
         const leaderboard = this.props.leaderboard;
         let counter = 0;
         return (
-            <div className="leaderboard">
-                <h1>LEADERBOARD</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>RANK</td>
-                            <td>PLAYER</td>
-                            <td>KILLS</td>
-                            <td>DAMAGES</td>
-                        </tr>
-                    </thead>
+            <div className='container'>
+                <table className='table'>
+
+                    <tr className='leaderboard-title'>
+                        <td className='column-rank'>RANK</td>
+                        <td className='player-column'>PLAYER</td>
+                        <td className='column-stat'>KILLS</td>
+                        <td className='column-stat'>DAMAGES</td>
+                    </tr>
                     {leaderboard.map (el => 
-                        <tbody>
-                            <tr>
-                                <td>{counter += 1}</td>
-                                <td>{el.name}</td>
-                                <td>{el.kills}</td>
-                                <td>{el.damage_dealt}</td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td>#{counter += 1}</td>
+                            <td className='player-name player-column'>{el.name.slice(1, -1)}</td>
+                            <td>{el.kills}</td>
+                            <td>{el.damage_dealt}</td>
+                        </tr>
                     )}
+
                 </table>
             </div>
         );

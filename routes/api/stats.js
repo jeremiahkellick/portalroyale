@@ -7,7 +7,7 @@ const validateStatsInput = require('../../validation/stat');
 
 
 
-router.get('/test', (req, res) => res.json({ msg: 'Stats Works' }));
+// router.get('/test', (req, res) => res.json({ msg: 'Stats Works' }));
 
 
 router.get(
