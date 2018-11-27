@@ -15,7 +15,8 @@ router.get(
     (req, res) => {
       const errors = {};
       Stat.find()
-        .limit(50)
+        .find({"kills": {$gte: 1}})
+        .limit(25)
         .sort({kills: -1})
         .then(lbs => res.json(lbs))
         .catch(err => res.status(404).json(err));
