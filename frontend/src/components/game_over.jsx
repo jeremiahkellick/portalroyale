@@ -12,6 +12,12 @@ class GameOver extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const name = this.props.name;
+    const kills = this.props.stats.kills;
+    this.props.createStat({name, kills});
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.clearStats();

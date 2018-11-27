@@ -21,24 +21,25 @@ export const fetchStats = () => dispatch => {
     );
 };
 
-export const fetchStat = id => dispatch => {
-  axios
-    .get(`/api/stats/${id}`)
-    .then(res =>
-      dispatch({
-        type: RECEIVE_LEADERBOARD,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: RECEIVE_LEADERBOARD,
-        payload: null
-      })
-    );
-};
+// export const fetchStat = id => dispatch => {
+//   axios
+//     .get(`/api/stats/${id}`)
+//     .then(res =>
+//       dispatch({
+//         type: RECEIVE_LEADERBOARD,
+//         payload: res.data
+//       })
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: RECEIVE_LEADERBOARD,
+//         payload: null
+//       })
+//     );
+// };
 
 export const createStat = statData => dispatch => {
+  console.log(statData);
   dispatch(clearErrors());
   axios
     .post('/api/stats', statData)
@@ -51,7 +52,7 @@ export const createStat = statData => dispatch => {
     .catch(err =>
       dispatch({
         type: RECEIVE_ERRORS,
-        payload: err.response.data
+        payload: err
       })
     );
 };

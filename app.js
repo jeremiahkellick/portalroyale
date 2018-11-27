@@ -23,9 +23,9 @@ mongoose.connect(db,{ useNewUrlParser: true })
         .then(() => console.log('Connected to MongoDB successfully'))
         .catch(err => console.log(err));
 
-
 app.use('/api/users', users);
 app.use('/api/stats', stats);
+
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
