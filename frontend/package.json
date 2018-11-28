@@ -6,7 +6,6 @@
   "dependencies": {
     "keymaster": "^1.6.2",
     "node-sass": "^4.10.0",
-    "nodemon": "^1.18.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
@@ -34,5 +33,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
 }
