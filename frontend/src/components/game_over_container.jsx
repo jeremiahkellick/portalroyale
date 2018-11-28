@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { initializeGame, resetGame } from '../actions/game_actions';
+import { createStat } from '../actions/leaderboard_actions';
 import GameOver from './game_over';
 import { clearStats } from '../actions/stats_actions';
 import { withRouter } from 'react-router-dom';
@@ -15,7 +16,8 @@ const mapStateToProps = ( { game: { name, gameOver, won }, stats } ) => ({
 const mapDispatchToProps = dispatch => ({
   resetGame: () => dispatch(resetGame()),
   initializeGame: (name, online) => dispatch(initializeGame(name, online)),
-  clearStats: () => dispatch(clearStats())
+  clearStats: () => dispatch(clearStats()),
+  createStat: (stat) => dispatch(createStat(stat))
 });
 
 export default withRouter(connect( mapStateToProps, mapDispatchToProps )( GameOver ));
