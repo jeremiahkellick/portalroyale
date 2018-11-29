@@ -142,6 +142,9 @@ canvas {
 .hidden {
   display: none; }
 
+.tutorial-video {
+  width: 800px; }
+
 .header {
   width: 100%;
   font-weight: bold;
@@ -179,7 +182,23 @@ canvas {
   border-bottom: 2px solid #b8d795; }
 
 .about {
-  margin-top: 15px; }
+  margin-top: 15px;
+  text-align: center; }
+
+.video {
+  background-color: black;
+  display: block;
+  padding: 15px 25px; }
+
+.tutorial {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #3a472d; }
+  .tutorial h1 {
+    font-weight: bold;
+    font-size: 20px; }
+  .tutorial > p {
+    margin: 5px 0; }
 
 .leaderboard {
   margin-top: 15px; }
