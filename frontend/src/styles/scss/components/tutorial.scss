@@ -6,8 +6,69 @@
   h1 {
     font-weight: bold;
     font-size: 20px;
+    margin-bottom: 10px;
   }
-  > p {
-    margin: 5px 0;
+  > div {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+  span {
+
+    display: inline-block;
+    padding: 0 5px;
+  }
+}
+
+.key {
+  font-weight: 600;
+  display: inline-block;
+  padding: 1px;
+  background: white;
+
+  border-radius: 4px;
+  border: 1px solid #3a472d;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 7px;
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    border: 1px solid #3a472d;
+  }
+}
+
+.mouse {
+  display: inline-block;
+  background-color: white;
+  width: 20px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #3a472d;
+  position: relative;
+
+  .left-button, .right-button {
+    position: absolute;
+    height: 12px;
+    width: 10px;
+    border-bottom: 1px solid #3a472d;
+    box-sizing: border-box;
+  }
+
+  .left-button {
+    left: 0;
+    border-top-left-radius: 10px;
+    border-right: 1px solid #3a472d;
+    background: red;
+  }
+
+  .right-button {
+    right: 0;
+    border-top-right-radius: 10px;
+  }
+
 }
