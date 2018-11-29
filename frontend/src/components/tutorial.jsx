@@ -16,10 +16,9 @@ const Tutorial = () => (
         <div className="right-button"></div>
       </div>
       <span>to Shoot</span></div>
-    <div><span>divress</span><div className="key"><div>F</div></div><span>to divick udiv items</span></div>
-    <div><span>divress</span><div className="key"><div>1</div></div><span>to use Healthdivacks</span></div>
+    <div><span>Press</span><div className="key"><div>F</div></div><span>to pick up items</span></div>
+    <div><span>Press</span><div className="key"><div>1</div></div><span>to use Healthpacks</span></div>
   </div>
-
 );
 
 export default Tutorial;
