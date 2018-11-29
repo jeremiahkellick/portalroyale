@@ -35,7 +35,8 @@ class EnterGame extends React.Component {
           <input
             type="text"
             onChange={ this.update("name") }
-            value={ this.state.name } />
+            value={ this.state.name }
+            placeholder="Enter name..." />
           <input type="submit" value="Play" />
           <span>or</span>
         </form>
