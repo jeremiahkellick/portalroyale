@@ -1,0 +1,13 @@
+.tutorial {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color:#3a472d;
+
+  h1 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+  > p {
+    margin: 5px 0;
+  }
+}
