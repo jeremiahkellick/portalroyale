@@ -12,7 +12,8 @@ class TransformSyncronizer extends Syncronizer {
   update() {
     if (!this.owned) {
       if (this.lerpStart !== null) {
-        const factor = (new Date() - this.updateReceivedAt) / 100;
+        let factor = (new Date() - this.updateReceivedAt) / 100;
+        if (factor > 1) factor = 1;
         this.component.position = Vector.lerp(
           this.lerpStart,
           this.lerpEnd,

@@ -33,7 +33,7 @@ class Movement extends Component {
         }
       }
 
-      if (!document.hidden) this.transform.lookAt(this.input.mousePosition());
+      this.transform.lookAt(this.input.mousePosition());
 
     }
   }
