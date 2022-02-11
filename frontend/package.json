@@ -5,7 +5,7 @@
   "proxy": "http://localhost:5000",
   "dependencies": {
     "keymaster": "^1.6.2",
-    "node-sass": "^4.10.0",
+    "node-sass": "^7.0.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
